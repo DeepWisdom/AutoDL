@@ -1,5 +1,5 @@
 # AutoDL2019 Solution
-Solution for [AutoDL Challenge@NeurIPS 2019](https://autodl.chalearn.org/neurips2019), competition rules can be found at [AutoDL2019 Competition](https://autodl.lri.fr/competitions/162).
+Solution for [AutoDL Challenge@NeurIPS](https://autodl.chalearn.org/neurips2019), competition rules can be found at [AutoDL Competition](https://autodl.lri.fr/competitions/162).
 
 
 # Usage
