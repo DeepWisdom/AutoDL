@@ -1,5 +1,5 @@
 # AutoDL Challenge 1'st Solution
-![alt text](https://github.com/DeepWisdom/AutoDL/blob/master/autodl_logo.png "title")
+![img](https://github.com/DeepWisdom/AutoDL/blob/master/autodl_logo.png)
 
 **1st** solution for [AutoDL Challenge@NeurIPS](https://autodl.chalearn.org/neurips2019), competition rules can be found at [AutoDL Competition](https://autodl.lri.fr/competitions/162).
 
@@ -79,7 +79,7 @@ HTML page in `AutoDL_scoring_output/`.
 Details can be seen in [AutoDL Challenge official starting_kit](https://github.com/zhengying-liu/autodl_starting_kit_stable).
 
 # Contact us
-[![alt text](https://github.com/DeepWisdom/AutoDL/blob/master/deepwisdom-logo-white.svg "title")](http://fuzhi.ai/)
+[![img](https://github.com/DeepWisdom/AutoDL/blob/master/deepwisdom-logo-white.svg "title")](http://fuzhi.ai/)
 
 # License
 [Apache License 2.0](https://github.com/DeepWisdom/AutoDL/blob/master/LICENSE)
