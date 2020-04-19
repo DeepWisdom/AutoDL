@@ -79,7 +79,7 @@ HTML page in `AutoDL_scoring_output/`.
 Details can be seen in [AutoDL Challenge official starting_kit](https://github.com/zhengying-liu/autodl_starting_kit_stable).
 
 # Contact us
-[![alt text](./deepwisdom-logo-white.svg "title")](http://fuzhi.ai/)
+[![alt text](https://github.com/DeepWisdom/AutoDL/blob/master/deepwisdom-logo-white.svg "title")](http://fuzhi.ai/)
 
 # License
 [Apache License 2.0](https://github.com/DeepWisdom/AutoDL/blob/master/LICENSE)
