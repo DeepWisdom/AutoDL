@@ -1,5 +1,6 @@
 # AutoDL Challenge 1'st Solution
-![alt text](./autodl_logo.png "title")
+![alt text](https://github.com/DeepWisdom/AutoDL/blob/master/autodl_logo.png "title")
+
 **1st** solution for [AutoDL Challenge@NeurIPS](https://autodl.chalearn.org/neurips2019), competition rules can be found at [AutoDL Competition](https://autodl.lri.fr/competitions/162).
 
 
