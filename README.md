@@ -1,12 +1,19 @@
 # AutoDL Challenge 1'st Solution
 <img src="https://github.com/DeepWisdom/AutoDL/raw/master/autodl_logo.png" width="30%">
 
+
 **1st** solution for [AutoDL Challenge@NeurIPS](https://autodl.chalearn.org/neurips2019), competition rules can be found at [AutoDL Competition](https://autodl.lri.fr/competitions/162).
 
 
 # Task
 Automated Deep Learning without ANY human intervention:
 - Generic algorithms for multi-label classification problems in different modalities: image, video, speech, text and tabular data.
+
+- Feedback leaderboard
+![img](./feedback-lb.png)
+
+- Final-phase leaderboard visualization
+![img](./final-lb-visual.png)
 
 # Public Datasets
 ## Optional: Download public datasets
