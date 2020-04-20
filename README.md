@@ -9,7 +9,7 @@
 Automated Deep Learning without ANY human intervention:
 - Generic algorithms for multi-label classification problems in different modalities: image, video, speech, text and tabular data.
 
-- Feedback leaderboard
+- Feedback-phase leaderboard
 ![img](./feedback-lb.png)
 
 - Final-phase leaderboard visualization
