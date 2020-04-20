@@ -5,7 +5,8 @@
 
 
 # Task
-Generic algorithms for multi-label classification problems in different modalities : image, video, speech, text and tabular data.
+Automated Deep Learning without ANY human intervention:
+- Generic algorithms for multi-label classification problems in different modalities: image, video, speech, text and tabular data.
 
 # Public Datasets
 ## Optional: Download public datasets
