@@ -1,6 +1,10 @@
 # AutoDL Challenge 1'st Solution
 <img src="https://github.com/DeepWisdom/AutoDL/raw/master/autodl_logo.png" width="30%">
 
+![img](./autodl_logo_full.png)
+
+<img src="https://github.com/DeepWisdom/AutoDL/raw/master/autodl_logo_full.png" width="80%">
+
 
 **1st** solution for [AutoDL Challenge@NeurIPS](https://autodl.chalearn.org/neurips2019), competition rules can be found at [AutoDL Competition](https://autodl.lri.fr/competitions/162).
 
