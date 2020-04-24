@@ -1,59 +1,57 @@
-English | [简体中文](./README_CN.md)
+[English](./README.md) | 简体中文
 
-# AutoDL Challenge 1'st Solution
+# AutoDL Challenge 冠军方案
 
 ![img](./autodl_logo_full.png)
 
-**1st** solution for [AutoDL Challenge@NeurIPS](https://autodl.chalearn.org/neurips2019), competition rules can be found at [AutoDL Competition](https://autodl.lri.fr/competitions/162).
+[AutoDL Challenge@NeurIPS](https://autodl.chalearn.org/neurips2019) 冠军方案, 竞赛细节参见 [AutoDL Competition](https://autodl.lri.fr/competitions/162).
 
-**Generic** algorithms for **multi-label** classification problems in **different modalities**: image, video, speech, text and tabular data.
+自动进行多模态(图像、视频、语音、文本、表格数据)的多标签分类的通用算法。
 
-## Table of Contents
+## 目录
 <!-- TOC -->
 
-- [AutoDL Challenge 1'st Solution](#autodl-challenge-1st-solution)
-  - [Table of Contents](#table-of-contents)
-  - [Features](#features)
-  - [Task and Evaluation](#task-and-evaluation)
-  - [Public Datasets](#public-datasets)
-    - [Optional: Download public datasets](#optional-download-public-datasets)
-    - [Public datasets sample info](#public-datasets-sample-info)
-  - [Usage for local development and testing](#usage-for-local-development-and-testing)
-  - [Contributing](#contributing)
-  - [Contact us](#contact-us)
-  - [License](#license)
+- [AutoDL Challenge 冠军方案](#autodl-challenge-冠军方案)
+    - [目录](#目录)
+    - [任务及评估](#任务及评估)
+    - [特性](#特性)
+    - [公共数据集](#公共数据集)
+        - [(可选) 下载数据集](#可选-下载数据集)
+        - [公共数据集信息](#公共数据集信息)
+    - [本地开发测试说明](#本地开发测试说明)
+    - [贡献代码](#贡献代码)
+    - [联系我们](#联系我们)
+    - [开源协议](#开源协议)
 
 <!-- /TOC -->
 
 
 
-## Features
-- **Full-AutoML/AutoDL**: Fully automated Deep Learning without ANY human intervention covering the whole pipelines.
-- **Generic & Universal**: Supporting ANY modality(image, video, speech, text, tabular) data, and **ANY** classification problems including binary-class, multi-class and multi-label problems.
-- **SOTA**: Winner solution of AutoDL challenge, involving both tranditional machine learning models and deep learning model backbones. 
-- **Out-of-the-Box**: You can use the solution out-of-the-box.
-- **Fast**: You can train your model in **ten seconds** at the soonest to get highly competitive performance.
-- **Real-time**: You can get the performance feedback(AUC score) in real time.
-
-
-
-## Task and Evaluation
-Automated deep learning without any human intervention:
-- Generic algorithms for multi-label classification problems in different modalities: image, video, speech, text and tabular data.
-
-- Feedback-phase leaderboard
+## 任务及评估
+无任何人工干预的自动深度学习。
+- 自动进行多模态(图像、视频、语音、文本、表格数据)的多标签分类的通用算法。
+- 预赛榜单 
 ![img](./feedback-lb.png)
 
-- Final-phase leaderboard visualization
+- 决赛榜单可视化
 ![img](./final-lb-visual.png)
 
-## Public Datasets
-### Optional: Download public datasets
+## 特性 
+- **全自动深度学习/机器学习**: Fully automated Deep Learning without ANY human intervention covering the whole pipelines.
+- **通用性**: 支持**任意**模态，包括图像、视频、音频、文本和结构化表格数据，支持**任意分类问题**，包括二分类、多分类和多标签分类。
+- **先进性**: AutoDL竞赛获得压倒性优势的冠军方案, 包含对传统机器学习模型和最新深度学习模型支持。
+- **开箱即用**: 只需准备数据，然后点 *Run*!
+- **极速**: 最快只需十秒即可获得极具竞争力的模型性能。
+- **实时反馈**: 无需等待即可获得模型实时效果反馈。
+
+
+## 公共数据集
+### (可选) 下载数据集
 ```bash
 python download_public_datasets.py
 ```
 
-### Public datasets sample info 
+### 公共数据集信息
 | #   | Name     | Type    | Domain   | Size   | Source      | Data (w/o test labels) | Test labels       |
 | --- | -------- | ------- | -------- | ------ | ----------- | ---------------------- | ----------------- |
 | 1   | Munster  | Image   | HWR      | 18 MB  | MNIST       | munster.data           | munster.solution  |
@@ -82,17 +80,16 @@ python download_public_datasets.py
 | 24  | Madeline | Tabular | --       | 2.6 MB | --          | madeline.data          | madeline.solution |
 
 
-
-## Usage for local development and testing
-1. Git clone the repo
+## 本地开发测试说明
+1. clone仓库 
 ```
 cd <path_to_your_directory>
 git clone https://github.com/DeepWisdom/AutoDL.git
 ```
-2. Prepare pretrained models.
-Download model [speech_model.h5](https://github.com/DeepWisdom/AutoDL/releases/download/opensource/thin_resnet34.h5) and put it to `AutoDL_sample_code_submission/at_speech/pretrained_models/` directory.
+2. 预训练模型准备
+下载模型 [speech_model.h5](https://github.com/DeepWisdom/AutoDL/releases/download/opensource/thin_resnet34.h5) 放至 `AutoDL_sample_code_submission/at_speech/pretrained_models/` 目录。
 
-3. Optional: run in the exact same environment as on the challenge platform with docker. 
+3. 可选：使用与竞赛同步的docker环境 
     - CPU
     ```
     cd path/to/autodl/
@@ -102,29 +99,28 @@ Download model [speech_model.h5](https://github.com/DeepWisdom/AutoDL/releases/d
     ```
     nvidia-docker run -it -v "$(pwd):/app/codalab" -p 8888:8888 evariste/autodl:gpu-latest
     ```
-4. Prepare sample datasets, using the toy data in `AutoDL_sample_data` or download new datasets.
+4. 数据集准备：使用 `AutoDL_sample_data` 中样例数据集，或批量下载竞赛公开数据集。
 
-5. Run local test
+5. 进行本地测试
 ```
 python run_local_test.py
 ```
-The full usage is
+本地测试完整使用。
 ```
 python run_local_test.py -dataset_dir='AutoDL_sample_data/miniciao' -code_dir='AutoDL_sample_code_submission'
 ```
-Then you can view the real-time feedback with a learning curve by opening the
-HTML page in `AutoDL_scoring_output/`.
+您可在 `AutoDL_scoring_output/` 目录中查看实时学习曲线反馈的HTML页面。
+
+细节可参考 [AutoDL Challenge official starting_kit](https://github.com/zhengying-liu/autodl_starting_kit_stable).
 
 
-Details can be seen in [AutoDL Challenge official starting_kit](https://github.com/zhengying-liu/autodl_starting_kit_stable).
+## 贡献代码 
 
+请毫不犹豫参加贡献 [Open an issue](https://github.com/DeepWisdom/AutoDL/issues/new) 或提交 PRs。
 
-## Contributing
+## 联系我们 
 
-Feel free to dive in! [Open an issue](https://github.com/DeepWisdom/AutoDL/issues/new) or submit PRs.
-
-## Contact us
 [![img](https://github.com/DeepWisdom/AutoDL/blob/master/deepwisdom-logo-white.svg "title")](http://fuzhi.ai/)
 
-## License
+## 开源协议 
 [Apache License 2.0](https://github.com/DeepWisdom/AutoDL/blob/master/LICENSE)
