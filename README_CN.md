@@ -37,7 +37,7 @@
 ![img](./final-lb-visual.png)
 
 ## 特性 
-- **全自动深度学习/机器学习**: Fully automated Deep Learning without ANY human intervention covering the whole pipelines.
+- **全自动深度学习/机器学习**: 全自动深度学习/机器学习框架，全流程无需人工干预。
 - **通用性**: 支持**任意**模态，包括图像、视频、音频、文本和结构化表格数据，支持**任意分类问题**，包括二分类、多分类和多标签分类。
 - **先进性**: AutoDL竞赛获得压倒性优势的冠军方案, 包含对传统机器学习模型和最新深度学习模型支持。
 - **开箱即用**: 只需准备数据，然后点 *Run*!
