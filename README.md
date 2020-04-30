@@ -127,7 +127,7 @@ python run_local_test.py -dataset_dir='AutoDL_sample_data/miniciao' -code_dir='A
 
 扫二维码加入AutoDL社区!
 
-<img src="./WechatIMG15.png" width = "200" height = "200" alt="AutoDL社区" align=center />
+<img src="./WechatIMG15.png" width = "300" height = "400" alt="AutoDL社区" align=center />
 
 ## 开源协议 
 [Apache License 2.0](https://github.com/DeepWisdom/AutoDL/blob/master/LICENSE)
