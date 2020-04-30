@@ -128,7 +128,7 @@ Feel free to dive in! [Open an issue](https://github.com/DeepWisdom/AutoDL/issue
 
 Scan QR code and join AutoDL community!
 
-<img src="./WechatIMG15.png" width = "300" height = "400" alt="AutoDL社区" align=center />
+<img src="./WechatIMG15.png" width = "300" height = "400" alt="AutoDL Community" align=center />
 
 
 ## License
