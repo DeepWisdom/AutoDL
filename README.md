@@ -1,8 +1,8 @@
-[English](./README_ENG.md) | 简体中文
+[English](./README_EN.md) | 简体中文
 
 # NeurIPS AutoDL Challenge 冠军方案
 
-![img](./autodl_logo_full.png)
+![img](assets/autodl_logo_full.png)
 
 [AutoDL Challenge@NeurIPS](https://autodl.chalearn.org/neurips2019) 冠军方案，竞赛细节参见 [AutoDL Competition](https://autodl.lri.fr/competitions/162)。
 
@@ -16,27 +16,30 @@ AutoDL聚焦于自动进行任意模态（图像、视频、语音、文本、�
 ## 目录
 <!-- TOC -->
 
-- [NeurIPS AutoDL Challenge 冠军方案](#autodl-challenge-冠军方案)
-    - [目录](#目录)
-    - [任务及评估](#任务及评估)
-    - [特性](#特性)
-    - [公共数据集](#公共数据集)
-        - [(可选) 下载数据集](#可选-下载数据集)
-        - [公共数据集信息](#公共数据集信息)
-    - [本地开发测试说明](#本地开发测试说明)
-    - [贡献代码](#贡献代码)
-    - [联系我们](#联系我们)
-    - [开源协议](#开源协议)
+- [NeurIPS AutoDL Challenge 冠军方案](#neurips-autodl-challenge-%e5%86%a0%e5%86%9b%e6%96%b9%e6%a1%88)
+    - [动机](#%e5%8a%a8%e6%9c%ba)
+    - [解法](#%e8%a7%a3%e6%b3%95)
+  - [目录](#%e7%9b%ae%e5%bd%95)
+  - [效果展示](#%e6%95%88%e6%9e%9c%e5%b1%95%e7%a4%ba)
+  - [特性](#%e7%89%b9%e6%80%a7)
+  - [公共数据集](#%e5%85%ac%e5%85%b1%e6%95%b0%e6%8d%ae%e9%9b%86)
+    - [(可选) 下载数据集](#%e5%8f%af%e9%80%89-%e4%b8%8b%e8%bd%bd%e6%95%b0%e6%8d%ae%e9%9b%86)
+    - [公共数据集信息](#%e5%85%ac%e5%85%b1%e6%95%b0%e6%8d%ae%e9%9b%86%e4%bf%a1%e6%81%af)
+  - [本地开发测试说明](#%e6%9c%ac%e5%9c%b0%e5%bc%80%e5%8f%91%e6%b5%8b%e8%af%95%e8%af%b4%e6%98%8e)
+  - [贡献代码](#%e8%b4%a1%e7%8c%ae%e4%bb%a3%e7%a0%81)
+  - [联系我们](#%e8%81%94%e7%b3%bb%e6%88%91%e4%bb%ac)
+  - [加入社区](#%e5%8a%a0%e5%85%a5%e7%a4%be%e5%8c%ba)
+  - [开源协议](#%e5%bc%80%e6%ba%90%e5%8d%8f%e8%ae%ae)
 
 <!-- /TOC -->
 
 
 ## 效果展示
 - **预赛榜单（DeepWisdom总分第一，平均排名1.2，在5个数据集中取得了4项第一）**
-![img](./feedback-lb.png)
+![img](assets/feedback-lb.png)
 
 - **决赛榜单（DeepWisdom总分第一，平均排名1.8，在10个数据集中取得了7项第一）**
-![img](./final-lb-visual.png)
+![img](assets/final-lb-visual.png)
 
 ## 特性 
 - **全自动**: 全自动深度学习/机器学习框架，全流程无需人工干预。
@@ -122,12 +125,11 @@ python run_local_test.py -dataset_dir='AutoDL_sample_data/miniciao' -code_dir='A
 
 ## 联系我们 
 
-[![img](https://github.com/DeepWisdom/AutoDL/blob/master/deepwisdom-logo-white.svg "title")](http://fuzhi.ai/)
+[![img](https://github.com/DeepWisdom/AutoDL/blob/master/assets/deepwisdom-logo-white.svg "title")](http://fuzhi.ai/)
 
 ## 加入社区
 
-扫二维码即可加入我们的AutoDL社区，一起建设AutoDL生态，迈向AI的下一步！  
-<img src="./WechatIMG15.png" width = "300" height = "400" alt="AutoDL社区" align=center />
+<img src="./assets/WechatIMG15.png" width = "500" height = "200" alt="AutoDL社区" align=center />
 
 ## 开源协议 
 [Apache License 2.0](https://github.com/DeepWisdom/AutoDL/blob/master/LICENSE)
