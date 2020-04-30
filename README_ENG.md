@@ -126,5 +126,10 @@ Feel free to dive in! [Open an issue](https://github.com/DeepWisdom/AutoDL/issue
 ## Contact us
 [![img](https://github.com/DeepWisdom/AutoDL/blob/master/deepwisdom-logo-white.svg "title")](http://fuzhi.ai/)
 
+Scan QR code and join AutoDL community!
+
+<img src="./WechatIMG15.png" width = "300" height = "400" alt="AutoDL社区" align=center />
+
+
 ## License
 [Apache License 2.0](https://github.com/DeepWisdom/AutoDL/blob/master/LICENSE)
