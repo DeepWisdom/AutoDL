@@ -122,5 +122,10 @@ python run_local_test.py -dataset_dir='AutoDL_sample_data/miniciao' -code_dir='A
 
 [![img](https://github.com/DeepWisdom/AutoDL/blob/master/deepwisdom-logo-white.svg "title")](http://fuzhi.ai/)
 
+扫二维码加入AutoDL社区!
+[![img](https://github.com/DeepWisdom/AutoDL/blob/master/WechatIMG15.png "title")](http://fuzhi.ai/)
+
+
+
 ## 开源协议 
 [Apache License 2.0](https://github.com/DeepWisdom/AutoDL/blob/master/LICENSE)
