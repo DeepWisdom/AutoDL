@@ -1,17 +1,19 @@
 [English](./README_ENG.md) | 简体中文
 
-# AutoDL Challenge 冠军方案
+# NeurIPS AutoDL Challenge 冠军方案
 
 ![img](./autodl_logo_full.png)
 
-[AutoDL Challenge@NeurIPS](https://autodl.chalearn.org/neurips2019) 冠军方案, 竞赛细节参见 [AutoDL Competition](https://autodl.lri.fr/competitions/162).
+[AutoDL Challenge@NeurIPS](https://autodl.chalearn.org/neurips2019) 冠军方案，竞赛细节参见 [AutoDL Competition](https://autodl.lri.fr/competitions/162)。
 
-自动进行多模态(图像、视频、语音、文本、表格数据)的多标签分类的通用算法。
+现实世界有一系列常见且棘手的问题，如资源（CPU/内存）受限、样本不平衡、特征需定制、模型需选型、网络结构细节需调优、预训练领域敏感、超参数敏感等等。这些问题如何高效解决？
+
+AutoDL聚焦于自动进行任意模态（图像、视频、语音、文本、表格数据）多标签分类的通用算法，用一套标准算法流解决现实世界的复杂分类问题，最短10秒就可以做出一个不错的分类器。本工程在不同领域的24个离线数据集、15个线上数据集都获得了极为优异的成绩，击败了众多世界顶级对手。
 
 ## 目录
 <!-- TOC -->
 
-- [AutoDL Challenge 冠军方案](#autodl-challenge-冠军方案)
+- [NeurIPS AutoDL Challenge 冠军方案](#autodl-challenge-冠军方案)
     - [目录](#目录)
     - [任务及评估](#任务及评估)
     - [特性](#特性)
@@ -26,14 +28,15 @@
 <!-- /TOC -->
 
 
-
-## 任务及评估
+## 任务定义及评估
 无任何人工干预的自动深度学习。
 - 自动进行多模态(图像、视频、语音、文本、表格数据)的多标签分类的通用算法。
-- 预赛榜单 
+
+### 榜单展示
+- **预赛榜单（DeepWisdom总分第一，平均排名1.2，在5个数据集中取得了4项第一）**
 ![img](./feedback-lb.png)
 
-- 决赛榜单可视化
+- **决赛榜单（DeepWisdom总分第一，平均排名1.8，在10个数据集中取得了7项第一）**
 ![img](./final-lb-visual.png)
 
 ## 特性 
@@ -124,8 +127,6 @@ python run_local_test.py -dataset_dir='AutoDL_sample_data/miniciao' -code_dir='A
 
 扫二维码加入AutoDL社区!
 [![img](https://github.com/DeepWisdom/AutoDL/blob/master/WechatIMG15.png "title")](http://fuzhi.ai/)
-
-
 
 ## 开源协议 
 [Apache License 2.0](https://github.com/DeepWisdom/AutoDL/blob/master/LICENSE)
