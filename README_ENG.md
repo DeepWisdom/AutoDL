@@ -1,4 +1,4 @@
-English | [简体中文](./README_CN.md)
+English | [简体中文](./README.md)
 
 # AutoDL Challenge 1'st Solution
 
