@@ -124,7 +124,9 @@ python run_local_test.py -dataset_dir='AutoDL_sample_data/miniciao' -code_dir='A
 
 [![img](https://github.com/DeepWisdom/AutoDL/blob/master/deepwisdom-logo-white.svg "title")](http://fuzhi.ai/)
 
-扫二维码加入我们的AutoDL社区，一起来建设AutoDL生态，迈向AI的下一步！
+## 加入社区
+
+扫二维码即可加入我们的AutoDL社区，一起建设AutoDL生态，迈向AI的下一步！  
 <img src="./WechatIMG15.png" width = "300" height = "400" alt="AutoDL社区" align=center />
 
 ## 开源协议 
