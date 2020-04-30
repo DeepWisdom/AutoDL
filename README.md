@@ -1,4 +1,4 @@
-[English](./README.md) | 简体中文
+[English](./README_ENG.md) | 简体中文
 
 # AutoDL Challenge 冠军方案
 
