@@ -17,13 +17,13 @@ AutoDL聚焦于自动进行任意模态（图像、视频、语音、文本、�
 <!-- TOC -->
 
 - [NeurIPS AutoDL Challenge 冠军方案](#neurips-autodl-challenge-%e5%86%a0%e5%86%9b%e6%96%b9%e6%a1%88)
-  - [效果](#%e6%95%88%e6%9e%9c%e5%b1%95%e7%a4%ba)
-  - [特性](#%e7%89%b9%e6%80%a7)
-  - [使用说明](#%e6%9c%ac%e5%9c%b0%e5%bc%80%e5%8f%91%e6%b5%8b%e8%af%95%e8%af%b4%e6%98%8e)
-  - [可用数据集](#%e5%85%ac%e5%85%b1%e6%95%b0%e6%8d%ae%e9%9b%86)
-  - [贡献代码](#%e8%b4%a1%e7%8c%ae%e4%bb%a3%e7%a0%81)
-  - [加入社区](#%e5%8a%a0%e5%85%a5%e7%a4%be%e5%8c%ba)
-  - [开源协议](#%e5%bc%80%e6%ba%90%e5%8d%8f%e8%ae%ae)
+  - [效果](#效果)
+  - [特性](#特性)
+  - [使用说明](#使用说明)
+  - [可用数据集](#可用数据集)
+  - [贡献代码](#贡献代码)
+  - [加入社区](#加入社区)
+  - [开源协议](#开源协议)
 
 <!-- /TOC -->
 
@@ -78,7 +78,7 @@ python run_local_test.py -dataset_dir='AutoDL_sample_data/miniciao' -code_dir='A
 细节可参考 [AutoDL Challenge official starting_kit](https://github.com/zhengying-liu/autodl_starting_kit_stable).
 
 
-## 数据集
+## 可用数据集
 ### (可选) 下载数据集
 ```bash
 python download_public_datasets.py
