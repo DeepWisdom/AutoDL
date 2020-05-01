@@ -5,7 +5,10 @@ English | [简体中文](./README.md)
 [![GitHub issues](https://img.shields.io/github/issues/DeepWisdom/AutoDL)](https://github.com/DeepWisdom/AutoDL/issues)
 [![GitHub forks](https://img.shields.io/github/forks/DeepWisdom/AutoDL)](https://github.com/DeepWisdom/AutoDL/network)
 [![GitHub stars](https://img.shields.io/github/stars/DeepWisdom/AutoDL)](https://github.com/DeepWisdom/AutoDL/stargazers)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/deepwisdom/AutoDL)
 [![GitHub license](https://img.shields.io/github/license/DeepWisdom/AutoDL)](https://github.com/DeepWisdom/AutoDL/blob/master/LICENSE)
+![img](https://img.shields.io/badge/python-3.5-brightgreen)
+[![img](https://img.shields.io/badge/chat-wechat-green)](https://github.com/DeepWisdom/AutoDL#%E5%8A%A0%E5%85%A5%E7%A4%BE%E5%8C%BA)
 </p>
 
 # NeurIPS AutoDL Challenge 1'st Solution
