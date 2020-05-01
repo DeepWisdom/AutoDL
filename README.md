@@ -17,23 +17,18 @@ AutoDL聚焦于自动进行任意模态（图像、视频、语音、文本、�
 <!-- TOC -->
 
 - [NeurIPS AutoDL Challenge 冠军方案](#neurips-autodl-challenge-%e5%86%a0%e5%86%9b%e6%96%b9%e6%a1%88)
-  - [AutoDL是什么？](AutoDL是什么？)
-  - [目录](#%e7%9b%ae%e5%bd%95)
-  - [效果展示](#%e6%95%88%e6%9e%9c%e5%b1%95%e7%a4%ba)
+  - [效果](#%e6%95%88%e6%9e%9c%e5%b1%95%e7%a4%ba)
   - [特性](#%e7%89%b9%e6%80%a7)
-  - [公共数据集](#%e5%85%ac%e5%85%b1%e6%95%b0%e6%8d%ae%e9%9b%86)
-    - [(可选) 下载数据集](#%e5%8f%af%e9%80%89-%e4%b8%8b%e8%bd%bd%e6%95%b0%e6%8d%ae%e9%9b%86)
-    - [公共数据集信息](#%e5%85%ac%e5%85%b1%e6%95%b0%e6%8d%ae%e9%9b%86%e4%bf%a1%e6%81%af)
-  - [本地开发测试说明](#%e6%9c%ac%e5%9c%b0%e5%bc%80%e5%8f%91%e6%b5%8b%e8%af%95%e8%af%b4%e6%98%8e)
+  - [使用说明](#%e6%9c%ac%e5%9c%b0%e5%bc%80%e5%8f%91%e6%b5%8b%e8%af%95%e8%af%b4%e6%98%8e)
+  - [可用数据集](#%e5%85%ac%e5%85%b1%e6%95%b0%e6%8d%ae%e9%9b%86)
   - [贡献代码](#%e8%b4%a1%e7%8c%ae%e4%bb%a3%e7%a0%81)
-  - [联系我们](#%e8%81%94%e7%b3%bb%e6%88%91%e4%bb%ac)
   - [加入社区](#%e5%8a%a0%e5%85%a5%e7%a4%be%e5%8c%ba)
   - [开源协议](#%e5%bc%80%e6%ba%90%e5%8d%8f%e8%ae%ae)
 
 <!-- /TOC -->
 
 
-## 效果展示
+## 效果
 - **预赛榜单（DeepWisdom总分第一，平均排名1.2，在5个数据集中取得了4项第一）**
 ![img](assets/feedback-lb.png)
 
@@ -49,7 +44,41 @@ AutoDL聚焦于自动进行任意模态（图像、视频、语音、文本、�
 - 🚀 **实时反馈**: 结果实时刷新（秒级），无需等待即可获得模型实时效果反馈。
 
 
-## 公共数据集
+## 使用说明
+1. clone仓库 
+```
+cd <path_to_your_directory>
+git clone https://github.com/DeepWisdom/AutoDL.git
+```
+2. 预训练模型准备
+下载模型 [speech_model.h5](https://github.com/DeepWisdom/AutoDL/releases/download/opensource/thin_resnet34.h5) 放至 `AutoDL_sample_code_submission/at_speech/pretrained_models/` 目录。
+
+3. 可选：使用与竞赛同步的docker环境 
+    - CPU
+    ```
+    cd path/to/autodl/
+    docker run -it -v "$(pwd):/app/codalab" -p 8888:8888 evariste/autodl:cpu-latest
+    ```
+    - GPU
+    ```
+    nvidia-docker run -it -v "$(pwd):/app/codalab" -p 8888:8888 evariste/autodl:gpu-latest
+    ```
+4. 数据集准备：使用 `AutoDL_sample_data` 中样例数据集，或批量下载竞赛公开数据集。
+
+5. 进行本地测试
+```
+python run_local_test.py
+```
+本地测试完整使用。
+```
+python run_local_test.py -dataset_dir='AutoDL_sample_data/miniciao' -code_dir='AutoDL_sample_code_submission'
+```
+您可在 `AutoDL_scoring_output/` 目录中查看实时学习曲线反馈的HTML页面。
+
+细节可参考 [AutoDL Challenge official starting_kit](https://github.com/zhengying-liu/autodl_starting_kit_stable).
+
+
+## 数据集
 ### (可选) 下载数据集
 ```bash
 python download_public_datasets.py
@@ -84,47 +113,9 @@ python download_public_datasets.py
 | 24  | Madeline | Tabular | --       | 2.6 MB | --          | madeline.data          | madeline.solution |
 
 
-## 本地开发测试说明
-1. clone仓库 
-```
-cd <path_to_your_directory>
-git clone https://github.com/DeepWisdom/AutoDL.git
-```
-2. 预训练模型准备
-下载模型 [speech_model.h5](https://github.com/DeepWisdom/AutoDL/releases/download/opensource/thin_resnet34.h5) 放至 `AutoDL_sample_code_submission/at_speech/pretrained_models/` 目录。
-
-3. 可选：使用与竞赛同步的docker环境 
-    - CPU
-    ```
-    cd path/to/autodl/
-    docker run -it -v "$(pwd):/app/codalab" -p 8888:8888 evariste/autodl:cpu-latest
-    ```
-    - GPU
-    ```
-    nvidia-docker run -it -v "$(pwd):/app/codalab" -p 8888:8888 evariste/autodl:gpu-latest
-    ```
-4. 数据集准备：使用 `AutoDL_sample_data` 中样例数据集，或批量下载竞赛公开数据集。
-
-5. 进行本地测试
-```
-python run_local_test.py
-```
-本地测试完整使用。
-```
-python run_local_test.py -dataset_dir='AutoDL_sample_data/miniciao' -code_dir='AutoDL_sample_code_submission'
-```
-您可在 `AutoDL_scoring_output/` 目录中查看实时学习曲线反馈的HTML页面。
-
-细节可参考 [AutoDL Challenge official starting_kit](https://github.com/zhengying-liu/autodl_starting_kit_stable).
-
-
 ## 贡献代码 
 
 请毫不犹豫参加贡献 [Open an issue](https://github.com/DeepWisdom/AutoDL/issues/new) 或提交 PRs。
-
-## 联系我们 
-
-[![img](https://github.com/DeepWisdom/AutoDL/blob/master/assets/deepwisdom-logo-white.svg "title")](http://fuzhi.ai/)
 
 ## 加入社区
 
