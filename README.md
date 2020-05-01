@@ -1,5 +1,15 @@
 [English](./README_EN.md) | 简体中文
 
+<p align="center">
+
+[![GitHub issues](https://img.shields.io/github/issues/DeepWisdom/AutoDL)](https://github.com/DeepWisdom/AutoDL/issues)
+[![GitHub forks](https://img.shields.io/github/forks/DeepWisdom/AutoDL)](https://github.com/DeepWisdom/AutoDL/network)
+[![GitHub stars](https://img.shields.io/github/stars/DeepWisdom/AutoDL)](https://github.com/DeepWisdom/AutoDL/stargazers)
+[![GitHub license](https://img.shields.io/github/license/DeepWisdom/AutoDL)](https://github.com/DeepWisdom/AutoDL/blob/master/LICENSE)
+</p>
+
+
+
 # NeurIPS AutoDL Challenge 冠军方案
 
 ![img](assets/autodl_logo_full.png)

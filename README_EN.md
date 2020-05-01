@@ -1,5 +1,13 @@
 English | [简体中文](./README.md)
 
+<p align="center">
+
+[![GitHub issues](https://img.shields.io/github/issues/DeepWisdom/AutoDL)](https://github.com/DeepWisdom/AutoDL/issues)
+[![GitHub forks](https://img.shields.io/github/forks/DeepWisdom/AutoDL)](https://github.com/DeepWisdom/AutoDL/network)
+[![GitHub stars](https://img.shields.io/github/stars/DeepWisdom/AutoDL)](https://github.com/DeepWisdom/AutoDL/stargazers)
+[![GitHub license](https://img.shields.io/github/license/DeepWisdom/AutoDL)](https://github.com/DeepWisdom/AutoDL/blob/master/LICENSE)
+</p>
+
 # NeurIPS AutoDL Challenge 1'st Solution
 
 ![img](assets/autodl_logo_full.png)
@@ -12,8 +20,6 @@ There exists a series of common and tough problems in the real world, such as li
 
 ### Solution 
 AutoDL concentrates on developing generic algorithms for multi-label classification problems in ANY modalities: image, video, speech, text and tabular data without ANY human intervention.  **Ten seconds** at the soonest, our solution achieved SOTA performances on all the 24 offline datasets and 15 online datasets, beating a number of top players in the world.
-
-
 
 
 ## Table of Contents
