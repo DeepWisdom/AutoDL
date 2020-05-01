@@ -54,7 +54,6 @@ AutoDL concentrates on developing generic algorithms for multi-label classificat
 - **Feedback-phase leaderboard: DeepWisdom Top 1, average rank 1.2, won 4 out of 5 datasets.**
 ![img](assets/feedback-lb.png)
 
-- 
 - **Final-phase leaderboard visualization: DeepWisdom Top 1, average rank 1.2, won 7 out of 10 datasets.**
 ![img](assets/final-lb-visual.png)
 
