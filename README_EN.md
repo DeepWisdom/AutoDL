@@ -7,11 +7,11 @@ English | [简体中文](./README.md)
 **1st** solution for [AutoDL Challenge@NeurIPS](https://autodl.chalearn.org/neurips2019), competition rules can be found at [AutoDL Competition](https://autodl.lri.fr/competitions/162).
 
 ### Motivation 
-There exists a series of common and tough problems in the real world, such as limited resources (CPU/ memory), skwed data, hand-craft features, model selection, network architecture details tuning, sensitivity of pre-trained models, sensitivity of hyperparameters, and so on. How to solve them once efficiently?
+There exists a series of common and tough problems in the real world, such as limited resources (CPU/ memory), skewed data, hand-craft features, model selection, network architecture details tuning, sensitivity of pre-trained models, sensitivity of hyperparameters and so on. How to solve them wholly and efficiently?
 
 
 ### Solution 
-AutoDL concentrates on developing generic algorithms for multi-label classification problems in ANY modalities: image, video, speech, text and tabular data without ANY human intervention. Our solution got SOTA performances on all the 24 offline datasets and 15 online datasets, beating a number of top players in the world.
+AutoDL concentrates on developing generic algorithms for multi-label classification problems in ANY modalities: image, video, speech, text and tabular data without ANY human intervention.  **Ten seconds** at the soonest, our solution achieved SOTA performances on all the 24 offline datasets and 15 online datasets, beating a number of top players in the world.
 
 
 
