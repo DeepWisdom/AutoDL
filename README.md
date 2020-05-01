@@ -82,6 +82,8 @@ python run_local_test.py -dataset_dir='AutoDL_sample_data/miniciao' -code_dir='A
 
 细节可参考 [AutoDL Challenge official starting_kit](https://github.com/zhengying-liu/autodl_starting_kit_stable).
 
+### 使用效果示例（横轴为对数时间轴，纵轴为AUC）
+![img](assets/AutoDL-performance-example.png)
 
 ## 可用数据集
 ### (可选) 下载数据集
