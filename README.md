@@ -83,7 +83,10 @@ python run_local_test.py -dataset_dir='AutoDL_sample_data/miniciao' -code_dir='A
 细节可参考 [AutoDL Challenge official starting_kit](https://github.com/zhengying-liu/autodl_starting_kit_stable).
 
 ### 使用效果示例（横轴为对数时间轴，纵轴为AUC）
+
 ![img](assets/AutoDL-performance-example.png)
+
+可以看出，在五个不同模态的数据集下，AutoDL算法流都获得了极为出色的全时期效果，可以在极短的时间内达到极高的精度。
 
 ## 可用数据集
 ### (可选) 下载数据集
