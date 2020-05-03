@@ -53,15 +53,23 @@ AutoDL聚焦于自动进行任意模态（图像、视频、语音、文本、�
 
 
 ## 使用说明
-1. clone仓库 
-```
-cd <path_to_your_directory>
-git clone https://github.com/DeepWisdom/AutoDL.git
-```
-2. 预训练模型准备
+
+1. 基础环境
+    ```shell script
+    python>=3.5
+    CUDA 10
+    cuDNN 7.5
+    ```
+
+2. clone仓库 
+    ```
+    cd <path_to_your_directory>
+    git clone https://github.com/DeepWisdom/AutoDL.git
+    ```
+3. 预训练模型准备
 下载模型 [speech_model.h5](https://github.com/DeepWisdom/AutoDL/releases/download/opensource/thin_resnet34.h5) 放至 `AutoDL_sample_code_submission/at_speech/pretrained_models/` 目录。
 
-3. 可选：使用与竞赛同步的docker环境 
+4. 可选：使用与竞赛同步的docker环境 
     - CPU
     ```
     cd path/to/autodl/
@@ -71,16 +79,16 @@ git clone https://github.com/DeepWisdom/AutoDL.git
     ```
     nvidia-docker run -it -v "$(pwd):/app/codalab" -p 8888:8888 evariste/autodl:gpu-latest
     ```
-4. 数据集准备：使用 `AutoDL_sample_data` 中样例数据集，或批量下载竞赛公开数据集。
+5. 数据集准备：使用 `AutoDL_sample_data` 中样例数据集，或批量下载竞赛公开数据集。
 
-5. 进行本地测试
-```
-python run_local_test.py
-```
+6. 进行本地测试
+    ```
+    python run_local_test.py
+    ```
 本地测试完整使用。
-```
-python run_local_test.py -dataset_dir='AutoDL_sample_data/miniciao' -code_dir='AutoDL_sample_code_submission'
-```
+    ```
+    python run_local_test.py -dataset_dir='AutoDL_sample_data/miniciao' -code_dir='AutoDL_sample_code_submission'
+    ```
 您可在 `AutoDL_scoring_output/` 目录中查看实时学习曲线反馈的HTML页面。
 
 细节可参考 [AutoDL Challenge official starting_kit](https://github.com/zhengying-liu/autodl_starting_kit_stable).
@@ -93,9 +101,9 @@ python run_local_test.py -dataset_dir='AutoDL_sample_data/miniciao' -code_dir='A
 
 ## 可用数据集
 ### (可选) 下载数据集
-```bash
-python download_public_datasets.py
-```
+    ```bash
+    python download_public_datasets.py
+    ```
 
 ### 公共数据集信息
 | #   | Name     | Type    | Domain   | Size   | Source      | Data (w/o test labels) | Test labels       |
