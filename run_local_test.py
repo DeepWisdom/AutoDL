@@ -102,9 +102,11 @@ def run_baseline(dataset_dir, code_dir, time_budget=1200):
     'python {} --solution_dir={}'\
     .format(path_scoring, dataset_dir)
   def run_ingestion():
+    print(command_ingestion)
     exit_code = os.system(command_ingestion)
     assert exit_code == 0
   def run_scoring():
+    print(command_scoring)
     exit_code = os.system(command_scoring)
     assert exit_code == 0
   ingestion_process = Process(name='ingestion', target=run_ingestion)
