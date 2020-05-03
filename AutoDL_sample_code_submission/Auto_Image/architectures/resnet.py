@@ -240,7 +240,7 @@ class ResNet9(nn.Module):
     def init(self, model_dir=None, gain=1.):
         self.model_dir = model_dir if model_dir is not None else self.model_dir
         sd = model_zoo.load_url(
-            'https://github.com/DeepWisdom/AutoDL2019/releases/download/opensource/r9.pth.tar',
+            'https://github.com/DeepWisdom/AutoDL/releases/download/opensource/r9-70e4b5c2.pth.tar',
             model_dir=self.model_dir)
         new_sd = copy.deepcopy(sd['state_dict'])
         for key, value in sd['state_dict'].items():

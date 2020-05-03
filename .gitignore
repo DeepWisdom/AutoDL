@@ -1,4 +1,9 @@
 
+
+models/
+AutoDL_sample_result_submission/
+AutoDL_scoring_output/
+
 task01.h5
 log/
 log_events/
