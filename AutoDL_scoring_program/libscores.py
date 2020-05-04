@@ -59,26 +59,28 @@ def _HERE(*args):
     h = os.path.dirname(os.path.realpath(__file__))
     return os.path.abspath(os.path.join(h, *args))
 
+
 def get_logger(verbosity_level, use_error_log=False):
-  """Set logging format to something like:
-       2019-04-25 12:52:51,924 INFO score.py: <message>
-  """
-  logger = logging.getLogger(__file__)
-  logging_level = getattr(logging, verbosity_level)
-  logger.setLevel(logging_level)
-  formatter = logging.Formatter(
-    fmt='%(asctime)s %(levelname)s %(filename)s: %(message)s')
-  stdout_handler = logging.StreamHandler(sys.stdout)
-  stdout_handler.setLevel(logging_level)
-  stdout_handler.setFormatter(formatter)
-  logger.addHandler(stdout_handler)
-  if use_error_log:
-    stderr_handler = logging.StreamHandler(sys.stderr)
-    stderr_handler.setLevel(logging.WARNING)
-    stderr_handler.setFormatter(formatter)
-    logger.addHandler(stderr_handler)
-  logger.propagate = False
-  return logger
+    """Set logging format to something like:
+         2019-04-25 12:52:51,924 INFO score.py: <message>
+    """
+    logger = logging.getLogger(__file__)
+    logging_level = getattr(logging, verbosity_level)
+    logger.setLevel(logging_level)
+    formatter = logging.Formatter(
+        fmt='%(asctime)s %(levelname)s %(filename)s: %(message)s')
+    stdout_handler = logging.StreamHandler(sys.stdout)
+    stdout_handler.setLevel(logging_level)
+    stdout_handler.setFormatter(formatter)
+    logger.addHandler(stdout_handler)
+    if use_error_log:
+        stderr_handler = logging.StreamHandler(sys.stderr)
+        stderr_handler.setLevel(logging.WARNING)
+        stderr_handler.setFormatter(formatter)
+        logger.addHandler(stderr_handler)
+    logger.propagate = False
+    return logger
+
 
 def read_array(filename):
     ''' Read array and convert to 2d np arrays '''
@@ -86,6 +88,7 @@ def read_array(filename):
     if len(array.shape) == 1:
         array = array.reshape(-1, 1)
     return array
+
 
 def list_files(startpath):
     """List a tree structure of directories and files from startpath"""
@@ -96,6 +99,7 @@ def list_files(startpath):
         subindent = ' ' * 4 * (level + 1)
         for f in files:
             logger.debug('{}{}'.format(subindent, f))
+
 
 def sanitize_array(array):
     ''' Replace NaN and Inf (there should not be any!)'''
@@ -220,35 +224,46 @@ def mvmean(R, axis=0):
 def bac_binary(solution, prediction):
     return bac_metric(solution, prediction, task='binary.classification')
 
+
 def bac_multiclass(solution, prediction):
     return bac_metric(solution, prediction, task='multiclass.classification')
+
 
 def bac_multilabel(solution, prediction):
     return bac_metric(solution, prediction, task='multilabel.classification')
 
+
 def auc_binary(solution, prediction):
     return auc_metric(solution, prediction, task='binary.classification')
+
 
 def auc_multilabel(solution, prediction):
     return auc_metric(solution, prediction, task='multilabel.classification')
 
+
 def pac_binary(solution, prediction):
     return pac_metric(solution, prediction, task='binary.classification')
+
 
 def pac_multiclass(solution, prediction):
     return pac_metric(solution, prediction, task='multiclass.classification')
 
+
 def pac_multilabel(solution, prediction):
     return pac_metric(solution, prediction, task='multilabel.classification')
+
 
 def f1_binary(solution, prediction):
     return f1_metric(solution, prediction, task='binary.classification')
 
+
 def f1_multilabel(solution, prediction):
     return f1_metric(solution, prediction, task='multilabel.classification')
 
+
 def abs_regression(solution, prediction):
     return a_metric(solution, prediction, task='regression')
+
 
 def r2_regression(solution, prediction):
     return r2_metric(solution, prediction, task='regression')
