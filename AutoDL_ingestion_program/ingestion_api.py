@@ -15,6 +15,9 @@ import sys
 import signal
 import time
 
+import data_io
+from dataset import AutoDLDataset  # THE class of AutoDL datasets
+
 
 def get_logger(verbosity_level, use_error_log=False):
     """Set logging format to something like:
@@ -136,44 +139,8 @@ class Timer:
 
 # =========================== BEGIN PROGRAM ================================
 
-def run_program(dataset_dir, output_dir, time_budget):
-    ingestion_success = True
 
-    import data_io
-    from dataset import AutoDLDataset  # THE class of AutoDL datasets
-
-    data_io.mkdir(output_dir)
-
-    #### INVENTORY DATA (and sort dataset names alphabetically)
-    datanames = data_io.inventory_data(dataset_dir)
-    #### Delete zip files and metadata file
-    datanames = [x for x in datanames if x.endswith('.data')]
-
-    if len(datanames) != 1:
-        raise ValueError("{} datasets found in dataset_dir={}!\n" \
-                         .format(len(datanames), dataset_dir) +
-                         "Please put only ONE dataset under dataset_dir.")
-
-    basename = datanames[0]
-
-    logger.info("************************************************")
-    logger.info("******** Processing dataset " + basename[:-5].capitalize() +
-                " ********")
-    logger.info("************************************************")
-    logger.debug("Version: {}. Description: {}".format(VERSION, DESCRIPTION))
-
-    ##### Begin creating training set and test set #####
-    logger.info("Reading training set and test set...")
-    D_train = AutoDLDataset(os.path.join(dataset_dir, basename, "train"))
-    D_test = AutoDLDataset(os.path.join(dataset_dir, basename, "test"))
-    ##### End creating training set and test set #####
-
-    ## Get correct prediction shape
-    num_examples_test = D_test.get_metadata().size()
-    output_dim = D_test.get_metadata().get_output_size()
-    correct_prediction_shape = (num_examples_test, output_dim)
-
-    # 20 min for participants to initializing and install other packages
+def get_model(D_train):
     try:
         init_time_budget = 20 * 60  # time budget for initilization.
         timer = Timer()
@@ -184,12 +151,15 @@ def run_program(dataset_dir, output_dir, time_budget):
             from model import Model  # in participants' model.py
 
             M = Model(D_train.get_metadata())  # The metadata of D_train and D_test only differ in sample_count
-            ###### End creating model ######
+            return M
     except TimeoutException as e:
         logger.info("[-] Initialization phase exceeded time budget. Move to train/predict phase")
     except Exception as e:
         logger.error("Failed to initializing model.")
         logger.error("Encountered exception:\n" + str(e), exc_info=True)
+
+
+def train_eval_model(M, D_train, D_test, time_budget, output_dir, basename):
 
     # Mark starting time of ingestion
     start = time.time()
@@ -199,6 +169,10 @@ def run_program(dataset_dir, output_dir, time_budget):
     write_start_file(output_dir, start_time=start, time_budget=time_budget,
                      task_name=basename.split('.')[0])
 
+    ## Get correct prediction shape
+    num_examples_test = D_test.get_metadata().size()
+    output_dim = D_test.get_metadata().get_output_size()
+    correct_prediction_shape = (num_examples_test, output_dim)
     try:
         # Check if the model has methods `train` and `test`.
         for attr in ['train', 'test']:
@@ -268,6 +242,42 @@ def run_program(dataset_dir, output_dir, time_budget):
     # Finishing ingestion program
     end_time = time.time()
     overall_time_spent = end_time - start
+    return (end_time, overall_time_spent)
+
+
+def run_program(dataset_dir, output_dir, time_budget):
+    ingestion_success = True
+
+    data_io.mkdir(output_dir)
+
+    #### INVENTORY DATA (and sort dataset names alphabetically)
+    datanames = data_io.inventory_data(dataset_dir)
+    #### Delete zip files and metadata file
+    datanames = [x for x in datanames if x.endswith('.data')]
+
+    if len(datanames) != 1:
+        raise ValueError("{} datasets found in dataset_dir={}!\n" \
+                         .format(len(datanames), dataset_dir) +
+                         "Please put only ONE dataset under dataset_dir.")
+
+    basename = datanames[0]
+
+    logger.info("************************************************")
+    logger.info("******** Processing dataset " + basename[:-5].capitalize() +
+                " ********")
+    logger.info("************************************************")
+    logger.debug("Version: {}. Description: {}".format(VERSION, DESCRIPTION))
+
+    ##### Begin creating training set and test set #####
+    logger.info("Reading training set and test set...")
+    D_train = AutoDLDataset(os.path.join(dataset_dir, basename, "train"))
+    D_test = AutoDLDataset(os.path.join(dataset_dir, basename, "test"))
+    ##### End creating training set and test set #####
+
+    # 20 min for participants to initializing and install other packages
+    M = get_model(D_train)
+
+    end_time, overall_time_spent = train_eval_model(M, D_train, D_test, time_budget, output_dir, basename)
 
     # Write overall_time_spent to a end.txt file
     end_filename = 'end.txt'
