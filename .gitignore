@@ -3,6 +3,7 @@
 models/
 AutoDL_sample_result_submission/
 AutoDL_scoring_output/
+AutoDL*_dataset*/
 
 task01.h5
 log/
