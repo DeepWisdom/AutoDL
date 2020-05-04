@@ -2,7 +2,10 @@
 
 <p align="center">
 
+[![HitCount](http://hits.dwyl.com/DeepWisdom/AutoDL.svg)](http://hits.dwyl.com/DeepWisdom/AutoDL)
+![GitHub All Releases](https://img.shields.io/github/downloads/DeepWisdom/AutoDL/total)
 [![GitHub issues](https://img.shields.io/github/issues/DeepWisdom/AutoDL)](https://github.com/DeepWisdom/AutoDL/issues)
+![GitHub closed issues](https://img.shields.io/github/issues-closed/DeepWisdom/AutoDL)
 [![GitHub forks](https://img.shields.io/github/forks/DeepWisdom/AutoDL)](https://github.com/DeepWisdom/AutoDL/network)
 [![GitHub stars](https://img.shields.io/github/stars/DeepWisdom/AutoDL)](https://github.com/DeepWisdom/AutoDL/stargazers)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/deepwisdom/AutoDL)
