@@ -1,4 +1,4 @@
-tensorflow-gpu>=1.13.1
+numba==0.48.0
 numpy==1.16.2
 pandas==0.24.2
 jupyter==1.0.0
@@ -16,6 +16,7 @@ protobuf==3.7.1
 xgboost==0.90
 pyyaml==5.1.1
 lightgbm==2.2.3
+tensorflow-gpu==1.15.0
 torch==1.3.1
 torchvision==0.4.2
 
