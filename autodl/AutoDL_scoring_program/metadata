@@ -1,0 +1,2 @@
+command: python $program/score.py --solution_dir=$hidden --prediction_dir=$predictions --score_dir=$output
+description: Compute scores for the competition

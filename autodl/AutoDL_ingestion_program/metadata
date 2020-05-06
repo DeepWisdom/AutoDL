@@ -1,0 +1,1 @@
+command: python $ingestion_program/ingestion.py --dataset_dir=$input --output_dir=$predictions --ingestion_program_dir=$ingestion_program --code_dir=$submission_program --score_dir=$output

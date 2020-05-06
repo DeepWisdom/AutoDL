@@ -1,0 +1,142 @@
+// Copyright 2016 Google Inc. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS-IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto2";
+// option py_api_version = 2;
+
+package autodl;
+
+// Matrix values in a dense format. Column-major layout.
+message DenseValue {
+  // Matrix[i][j] is at index: i * col_count + j.
+  // The length of the array can be smaller than col_count * row_count. The
+  // missing values are considered null/zero.
+  repeated float value = 1 [packed = true];
+}
+
+// Matrix entry in a sparse format.
+message SparseEntry {
+  optional int32 row = 1;
+  optional int32 col = 2;
+  optional float value = 3;
+}
+
+// Compressed value
+message Compressed {
+  // Image encoded with the util image_codec::CoderUtil
+  // and the image_codec::IMAGE_JPG encoding.
+  optional bytes encoded_image = 1;
+}
+
+// Matrix values in a sparse format.
+message SparseValue {
+  repeated SparseEntry entry = 1;
+}
+
+// Metadata about a matrix
+message MatrixSpec {
+  optional int32 col_count = 1;
+  optional int32 row_count = 2;
+  // True if input matrix columns/rows refer to sequences (e.g. for time
+  // series).
+  optional bool is_sequence_col = 3;
+  optional bool is_sequence_row = 4;
+  // Sets if the column indices carry some structure/information based on
+  // closeness of indices, like in a time series where the col index is time.
+  optional bool has_locality_col = 5;
+  optional bool has_locality_row = 6;
+
+  enum Format {
+    DENSE = 0;
+    SPARSE = 1;
+    COMPRESSED = 2;
+  }
+  // A matrix is a Dense matrix unless specified.
+  optional Format format = 8 [default = DENSE];
+
+  optional bool is_sparse = 7 [deprecated = true];
+
+  // Number of channels. This is useful for RGB or sensor data
+  optional int32 num_channels = 9 [default = -1];
+}
+
+message Matrix {
+  oneof values {
+    SparseValue sparse = 1;
+    DenseValue dense = 2;
+    Compressed compressed = 5;
+  }
+  optional MatrixSpec spec = 3;
+  // Position of this matrix in a bundle.
+  optional int32 bundle_index = 4;
+}
+
+// A matrix bundle can be used to model a mix of dense and sparse matrices. It
+// is for example useful to model an image and some extra information of the
+// image (where it comes from). Matrices inside a matrix bundle can have
+// different formats (e.g. different dimensions and dense/sparse).
+message MatrixBundle {
+  repeated Matrix matrix = 1;
+  // Position of this bundle set in a sequence (from 0 to ...).
+  optional int32 sequence_index = 2;
+}
+
+// An input is a sequence of matrix bundles. The matrix bundles should have the
+// same structure. That is the nth matrices in each bundle should have the same
+// specification.
+message Input {
+  repeated MatrixBundle bundle = 1;
+  // True if this input is part of a sequence, e.g. a frame in a video clip.
+  optional bool is_sequence = 2;
+}
+
+message Label {
+  optional int32 index = 1;
+  optional float score = 2;
+}
+
+message Output {
+  repeated Label label = 1;
+}
+
+message Sample {
+  optional int32 id = 1;
+  optional Input input = 2;
+  optional Output output = 3;
+}
+
+// Metadata of autodl datasets.
+// An input is a sequence of a set of real valued matrices (aka matrix bundle).
+// An output is a real valued vector.
+message DataSpecification {
+  // Describes the matrices in the matrix bundles.
+  repeated MatrixSpec matrix_spec = 1;
+  // True if the input set of matrix bundles is a sequence (order matters).
+  optional bool is_sequence = 2;
+  // Number of labels in the output.
+  optional int32 output_dim = 3;
+  // Mapping between int and human-readable label names.
+  map<string, int32> label_to_index_map = 4;
+  // Mapping between int and human-readable feature names.
+  map<string, int32> feature_to_index_map = 5;
+  // Mapping between int and human-readable channel names.
+  map<string, int32> channel_to_index_map = 6;
+  // Size of the sequence of matrix bundles.
+  // If the size of a sample is less than sequence_size it will be
+  // padded with a 0-value matrices. Any bundle after sequence_size will
+  // be dropped.
+  optional int32 sequence_size = 7 [default = 1];
+  // Number of samples in this dataset.
+  optional int32 sample_count = 8;
+}
