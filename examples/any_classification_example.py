@@ -1,8 +1,9 @@
 import os
 
 from autodl import Model, AutoDLDataset
-from autodl.AutoDL_ingestion_program import dataset_utils_v2
-from autodl.AutoDL_scoring_program.score import autodl_auc, accuracy, get_solution
+from autodl.auto_ingestion import dataset_utils_v2
+from autodl.auto_scoring.score import get_solution
+from autodl.metrics import autodl_auc, accuracy
 
 os.environ["CUDA_VISIBLE_DEVICES"]='0'
 

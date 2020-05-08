@@ -1,2 +1,2 @@
-from autodl.AutoDL_sample_code_submission.model import Model
-from autodl.AutoDL_ingestion_program.dataset import AutoDLDataset, AutoDLMetadata
+from autodl.auto_models.model import Model
+from autodl.auto_ingestion.dataset import AutoDLDataset, AutoDLMetadata

@@ -1,0 +1,2 @@
+from autodl.convertor.nlp_to_tfrecords import autonlp_2_autodl_format
+from autodl.convertor.speech_to_tfrecords import autospeech_2_autodl_format

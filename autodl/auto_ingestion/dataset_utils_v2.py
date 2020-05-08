@@ -1,4 +1,4 @@
-from autodl.AutoDL_ingestion_program import data_io
+from autodl.auto_ingestion import data_io
 
 
 def get_dataset_basename(dataset_dir: str):
