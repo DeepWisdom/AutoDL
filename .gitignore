@@ -141,10 +141,6 @@ data/**
 models_warehouses/*
 models_warehouses/**
 
-
-sample_data/*
-sample_data/**
-
 sample_result_submission/*
 sample_result_submission/**
 

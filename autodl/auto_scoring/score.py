@@ -97,52 +97,9 @@ import sys
 import time
 import yaml
 from random import randrange
+from autodl.metrics.scores import autodl_auc, accuracy
+from autodl.utils.logger import logger
 
-logger = get_logger(verbosity_level)
-
-
-################################################################################
-# Functions
-################################################################################
-
-# Metric used to compute the score of a point on the learning curve
-def autodl_auc(solution, prediction, valid_columns_only=True):
-    """Compute normarlized Area under ROC curve (AUC).
-    Return Gini index = 2*AUC-1 for  binary classification problems.
-    Should work for a vector of binary 0/1 (or -1/1)"solution" and any discriminant values
-    for the predictions. If solution and prediction are not vectors, the AUC
-    of the columns of the matrices are computed and averaged (with no weight).
-    The same for all classification problems (in fact it treats well only the
-    binary and multilabel classification problems). When `valid_columns` is not
-    `None`, only use a subset of columns for computing the score.
-    """
-    if valid_columns_only:
-        valid_columns = get_valid_columns(solution)
-        if len(valid_columns) < solution.shape[-1]:
-            logger.info("Some columns in solution have only one class, " +
-                        "ignoring these columns for evaluation.")
-        solution = solution[:, valid_columns].copy()
-        prediction = prediction[:, valid_columns].copy()
-    label_num = solution.shape[1]
-    auc = np.empty(label_num)
-    for k in range(label_num):
-        r_ = tiedrank(prediction[:, k])
-        s_ = solution[:, k]
-        if sum(s_) == 0: print("WARNING: no positive class example in class {}" \
-                               .format(k + 1))
-        npos = sum(s_ == 1)
-        nneg = sum(s_ < 1)
-        auc[k] = (sum(r_[s_ == 1]) - npos * (npos + 1) / 2) / (nneg * npos)
-    return 2 * mvmean(auc) - 1
-
-
-def accuracy(solution, prediction):
-    """Get accuracy of 'prediction' w.r.t true labels 'solution'."""
-    epsilon = 1e-15
-    # normalize prediction
-    prediction_normalized = \
-        prediction / (np.sum(np.abs(prediction), axis=1, keepdims=True) + epsilon)
-    return np.sum(solution * prediction_normalized) / solution.shape[0]
 
 
 scoring_functions = {'nauc': autodl_auc,

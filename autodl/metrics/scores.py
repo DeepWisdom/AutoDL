@@ -1,10 +1,13 @@
 import numpy as np
 from functools import reduce
+from autodl.utils.logger import logger
 
 
 def tiedrank(a):
-    ''' Return the ranks (with base 1) of a list resolving ties by averaging.
-     This works for numpy arrays.'''
+    '''
+    Return the ranks (with base 1) of a list resolving ties by averaging.
+     This works for numpy arrays.
+    '''
     m = len(a)
     # Sort a in ascending order (sa=sorted vals, i=indices)
     i = a.argsort()
@@ -24,12 +27,13 @@ def tiedrank(a):
                 # moving average
                 R[k0:k + 1] = R[k - 1] * (k - k0) / (k - k0 + 1) + R[k] / (k - k0 + 1)
             else:
-                k0 = k;
+                k0 = k
                 oldval = newval
     # Invert the index
     S = np.empty(m)
     S[i] = R
     return S
+
 
 def get_valid_columns(solution):
     """Get a list of column indices for which the column has more than one class.
@@ -50,6 +54,7 @@ def get_valid_columns(solution):
                              np.isclose(col_sum, num_examples))[0]
     return valid_columns
 
+
 def mvmean(R, axis=0):
     ''' Moving average to avoid rounding errors. A bit slow, but...
     Computes the mean along the given axis, except if this is a vector, in which case the mean is returned.
@@ -63,7 +68,6 @@ def mvmean(R, axis=0):
         return np.array(map(average, R))
     else:
         return np.array(map(average, R.transpose()))
-
 
 
 # Metric used to compute the score of a point on the learning curve
@@ -106,4 +110,13 @@ def accuracy(solution, prediction):
     return np.sum(solution * prediction_normalized) / solution.shape[0]
 
 
-
+def auc_step(X, Y):
+    """Compute area under curve using step function (in 'post' mode)."""
+    if len(X) != len(Y):
+        raise ValueError("The length of X and Y should be equal but got " +
+                         "{} and {} !".format(len(X), len(Y)))
+    area = 0
+    for i in range(len(X) - 1):
+        delta_X = X[i + 1] - X[i]
+        area += delta_X * Y[i]
+    return area

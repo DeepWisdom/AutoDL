@@ -26,7 +26,8 @@ import numpy as np
 import pandas as pd
 import os
 import shutil
-from scipy.sparse import *  # used in data_binary_sparse
+import time
+import datetime
 from zipfile import ZipFile, ZIP_DEFLATED
 from contextlib import closing
 from . import data_converter
@@ -47,6 +48,7 @@ from shutil import copy2
 import csv
 import psutil
 import platform
+from autodl.utils.logger import logger
 
 
 # ================ Small auxiliary functions =================
@@ -126,6 +128,18 @@ def rmdir(d):
         shutil.rmtree(d)
 
 
+def remove_dir(output_dir):
+    if os.path.isdir(output_dir):
+        logger.info("Cleaning existing output directory of last run: {}".format(output_dir))
+        shutil.rmtree(output_dir)
+
+
+def copy_dir(output_dir):
+    if os.path.isdir(output_dir):
+        target_dir = output_dir + datetime.datetime.fromtimestamp(time.time()).strftime("%Y-%m-%d_%H-%M-%S")
+        shutil.copytree(src=output_dir, dst=target_dir)
+
+
 def vprint(mode, t):
     ''' Print to stdout, only if in verbose mode'''
     if (mode):
@@ -199,8 +213,11 @@ def check_dataset(dirname, name):
 
 
 def data(filename, nbr_features=None, verbose=False):
-    ''' The 2nd parameter makes possible a using of the 3 functions of data reading (data, data_sparse, data_binary_sparse) without changing parameters'''
-    if verbose: print(np.array(data_converter.file_to_array(filename)))
+    ''' The 2nd parameter makes possible a using of the 3 functions of
+    data reading (data, data_sparse, data_binary_sparse) without changing parameters
+    '''
+    if verbose:
+        print(np.array(data_converter.file_to_array(filename)))
     return np.array(data_converter.file_to_array(filename), dtype=float)
 
 
@@ -235,13 +252,15 @@ def copy_results(datanames, result_dir, output_dir, verbose):
             if len(valid_files) == 0:
                 vprint(verbose, "[-] Missing 'valid' result files for " + basename)
                 missing = True
-            if missing == False:
-                for f in test_files: copy2(f, output_dir)
-                for f in valid_files: copy2(f, output_dir)
+            if missing is False:
+                for f in test_files:
+                    copy2(f, output_dir)
+                for f in valid_files:
+                    copy2(f, output_dir)
                 vprint(verbose, "[+] " + basename.capitalize() + " copied")
             else:
                 missing_files.append(basename)
-        except:
+        except Exception as exp:
             vprint(verbose, "[-] Missing result files")
             return datanames
     return missing_files
@@ -287,8 +306,8 @@ def show_io(input_dir, output_dir):
         for key, value in metadata.items():
             swrite(key + ': ')
             swrite(str(value) + '\n')
-    except:
-        swrite("none\n");
+    except Exception as exp:
+        swrite("none\n")
     swrite("-- Input directory " + input_dir + ":\n")
     try:
         metadata = yaml.load(open(os.path.join(input_dir, 'metadata'), 'r'))
@@ -296,8 +315,8 @@ def show_io(input_dir, output_dir):
             swrite(key + ': ')
             swrite(str(value) + '\n')
         swrite("\n")
-    except:
-        swrite("none\n");
+    except Exception as exp:
+        swrite("none\n")
 
 
 def show_version():
@@ -352,17 +371,24 @@ def total_size(o, handlers={}, verbose=False):
 
     return sizeof(o)
 
-    # write the results in a csv file
-
 
 def platform_score(basename, mem_used, n_estimators, time_spent, time_budget):
     # write the results and platform information in a csv file (performance.csv)
     with open('performance.csv', 'a') as fp:
         a = csv.writer(fp, delimiter=',')
-        # ['Data name','Nb estimators','System', 'Machine' , 'Platform' ,'memory used (Mb)' , 'number of CPU' ,' time spent (sec)' , 'time budget (sec)'],
+        # ['Data name','Nb estimators','System', 'Machine' , 'Platform' ,'memory used (Mb)' , 'number of CPU' ,
+        # ' time spent (sec)' , 'time budget (sec)'],
         data = [
             [basename, n_estimators, platform.system(), platform.machine(), platform.platform(),
              float("{0:.2f}".format(mem_used / 1048576.0)), str(psutil.cpu_count()),
              float("{0:.2f}".format(time_spent)), time_budget]
         ]
         a.writerows(data)
+
+
+def get_basename(path):
+    if len(path) == 0:
+        return ""
+    if path[-1] == os.sep:
+        path = path[:-1]
+    return path.split(os.sep)[-1]
