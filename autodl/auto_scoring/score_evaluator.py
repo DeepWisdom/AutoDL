@@ -337,7 +337,7 @@ class ScoreEvaluator(object):
 
     def score_new_predictions(self):
         new_prediction_list = self.get_new_prediction_list()
-        if len(new_prediction_list) > 0:
+        if len(new_prediction_list) > 0 or self.save_final:
             score = self.update_score_and_learning_curve()
             logger.info("[+] New prediction found. Now number of predictions made = {}"
                         .format(len(self.prediction_list_so_far)))
