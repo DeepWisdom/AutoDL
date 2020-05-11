@@ -12,7 +12,7 @@ from autodl.utils.task_type import is_multiclass
 from autodl.auto_scoring.libscores import ls, read_array
 from autodl.utils.plot_alc import PlotAlc
 from autodl.utils.logger import logger
-from autodl.utils.util import is_process_alive, terminate_process, get_fig_name
+from autodl.utils.util import is_process_alive, terminate_process
 from autodl.utils.exception import IngestionException
 from autodl.utils.learning_curve import LearningCurve
 
@@ -61,17 +61,23 @@ class ScoreEvaluator(object):
         self.ingestion_pid = 0
         self.time_budget = 0
 
+        # save final
+        self.save_final = False  # call activate_save_final to save figure
+
         # Resolve info from directories
         self.solution = self.get_solution()
         # Check if the task is multilabel (i.e. with one hot label)
         self.is_multiclass_task = is_multiclass(self.solution)
 
         self.fetch_ingestion_info()
-        self.plot_alc = PlotAlc(method="step", transform=None, task_name=None,
+        self.plot_alc = PlotAlc(method="step", transform=None, time_budget=self.time_budget, task_name=self.task_name,
                                 area_color='cyan', fill_area=True, model_name=None,
                                 clear_figure=True, show_final_score=True,
-                                show_title=True)
+                                show_title=True, save_path=self.score_dir)
         self.learning_curve = self.get_learning_curve()
+
+    def activate_save_final(self):
+        self.save_final = True
 
     def get_task_name(self, solution_dir):
         """Get the task name from solution directory."""
@@ -268,11 +274,8 @@ class ScoreEvaluator(object):
                 latest_acc = sorted_pairs_acc[-1][1]
         X = [t for t, _ in sorted_pairs]
         Y = [s for _, s in sorted_pairs]
-        alc, fig = self.plot_alc.plot_learning_curve(X, Y, time_budget=self.time_budget)
-        fig_name = get_fig_name(self.task_name)
-        path_to_fig = os.path.join(self.score_dir, fig_name)
-        plt.savefig(path_to_fig)
-        plt.close()
+        alc = self.plot_alc.plot_learning_curve(X, Y, save_final=self.save_final)
+
         return alc, time_used
 
     def update_score_and_learning_curve(self):

@@ -2,10 +2,13 @@
 # -*- coding: utf-8 -*-
 # @Desc    : base dynamic plot model metric
 
-from matplotlib.figure import Figure
+import matplotlib.pyplot as plt
 
 
 class PlotBaseMetric(object):
 
     def __init__(self):
         pass
+
+    def save_figure(self):
+        raise NotImplementedError()
