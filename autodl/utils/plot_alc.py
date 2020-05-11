@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from autodl.utils.plot_base_metric import PlotBaseMetric
 from autodl.utils.util import transform_time, get_fig_name
 from autodl.utils.logger import logger
-from autodl.auto_scoring.score import auc_step
+from autodl.metrics.scores import auc_step
 
 
 class PlotAlc(PlotBaseMetric):

@@ -9,10 +9,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from autodl.utils.task_type import is_multiclass
-from autodl.auto_scoring.libscores import ls, read_array
 from autodl.utils.plot_alc import PlotAlc
 from autodl.utils.logger import logger
-from autodl.utils.util import is_process_alive, terminate_process
+from autodl.auto_scoring.libscores import ls
+from autodl.utils.util import is_process_alive, terminate_process, get_solution
 from autodl.utils.exception import IngestionException
 from autodl.utils.learning_curve import LearningCurve
 
@@ -65,7 +65,7 @@ class ScoreEvaluator(object):
         self.save_final = False  # call activate_save_final to save figure
 
         # Resolve info from directories
-        self.solution = self.get_solution()
+        self.solution = get_solution(self.solution_dir)
         # Check if the task is multilabel (i.e. with one hot label)
         self.is_multiclass_task = is_multiclass(self.solution)
 
@@ -90,20 +90,6 @@ class ScoreEvaluator(object):
         solution_file = solution_names[0]
         task_name = solution_file.split(os.sep)[-1].split(".")[0]
         return task_name
-
-    def get_solution(self):
-        """Get solution as NumPy array from `self.solution_dir`."""
-        solution_names = sorted(ls(os.path.join(self.solution_dir, "*.solution")))
-        if len(solution_names) != 1:  # Assert only one file is found
-            logger.warning("{} solution files found: {}! ".format(len(solution_names), solution_names) +
-                           "Return `None` as solution.")
-            solution = None
-        else:
-            solution_file = solution_names[0]
-            solution = read_array(solution_file)
-
-        logger.debug("Successfully loaded solution from solution_dir={}".format(self.solution_dir))
-        return solution
 
     def get_ingestion_info(self):
         # TODO 使用共享变量得到 start.txt的内容
