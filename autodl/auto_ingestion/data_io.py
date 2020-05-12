@@ -48,7 +48,7 @@ from shutil import copy2
 import csv
 import psutil
 import platform
-from autodl.utils.logger import logger
+from autodl.utils.log_utils import logger
 
 
 # ================ Small auxiliary functions =================

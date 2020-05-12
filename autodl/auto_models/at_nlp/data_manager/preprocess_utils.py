@@ -4,8 +4,8 @@ import numpy as np
 
 import jieba_fast as jieba
 
-from Auto_NLP.second_stage_models import ac
-from at_nlp.data_manager.feature_config import MAX_SEQ_LENGTH
+from ...auto_nlp.second_stage_models import ac
+from ...at_nlp.data_manager.feature_config import MAX_SEQ_LENGTH
 
 
 def detect_digits(input_str):

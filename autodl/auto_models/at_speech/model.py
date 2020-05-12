@@ -8,22 +8,18 @@ import os
 import sys
 import tensorflow as tf
 
+os.environ["CUDA_VISIBLE_DEVICES"] = '1'
+
 config = tf.ConfigProto(log_device_placement=True, allow_soft_placement=True)
 config.gpu_options.allow_growth = True
 
-here = os.path.dirname(os.path.abspath(__file__))
-import_dir = os.path.abspath(os.path.join(here, ".."))
-sys.path.append(import_dir)
-
-sys.path.append(os.path.join(here, ""))
-from at_toolkit.at_utils import autodl_install_download
+from ..at_toolkit.at_utils import autodl_install_download
 
 autodl_install_download("speech")
 
-from at_speech.policy_space.model_executor import ModelExecutor
-# from at_toolkit import logger, info, error, as_timer
-from at_speech.at_speech_config import IF_TRAIN_BREAK_CONDITION
-from at_speech.at_speech_cons import CLS_TR34
+from ..at_speech.policy_space.model_executor import ModelExecutor
+from ..at_speech.at_speech_config import IF_TRAIN_BREAK_CONDITION
+from ..at_speech.at_speech_cons import CLS_TR34
 
 EVAL_TLOSS_TAIL_SIZE = 8
 EVAL_TLOSS_GODOWN_RATE_THRES = 0.7

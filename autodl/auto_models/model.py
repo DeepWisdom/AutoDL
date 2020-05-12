@@ -2,37 +2,22 @@
 AutoNLP and AutoSpeech).
 """
 
-import os
-import sys
-
-here = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(here, ""))
-
-model_dirs = [
-    "",  # current directory
-    "Auto_Tabular",
-]
-for model_dir in model_dirs:
-    sys.path.append(os.path.join(here, model_dir))
-
 
 def meta_domain_2_model(domain):
     if domain in ["image"]:
-        sys.path.append(os.path.join(here, "Auto_Image"))
-        from Auto_Image.model import Model as AutoImageModel
+        from .auto_image.model import Model as AutoImageModel
         return AutoImageModel
     elif domain in ["video"]:
-        sys.path.append(os.path.join(here, "Auto_Video"))
-        from Auto_Video.model import Model as AutoVideoModel
+        from .auto_video.model import Model as AutoVideoModel
         return AutoVideoModel
     elif domain in ["text"]:
-        from model_nlp import Model as AutoNlpModel
+        from .model_nlp import Model as AutoNlpModel
         return AutoNlpModel
     elif domain in ["speech"]:
-        from at_speech.model import Model as AutoSpeechModel
+        from .at_speech.model import Model as AutoSpeechModel
         return AutoSpeechModel
     else:
-        from Auto_Tabular.model import Model as TabularModel
+        from .auto_tabular.model import Model as TabularModel
         return TabularModel
 
 

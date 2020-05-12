@@ -3,10 +3,10 @@
 import numpy as np
 from scipy import stats
 
-from log_utils import info
-from at_nlp.utils import color_msg, ohe2cat
-from at_toolkit.at_evalator import ATEvaluator
-from at_nlp.generators.data_generator import DataGenerator as BatchDataGenerator
+from autodl.utils.log_utils import info
+from ..at_nlp.utils import color_msg, ohe2cat
+from ..at_toolkit.at_evalator import ATEvaluator
+from ..at_nlp.generators.data_generator import DataGenerator as BatchDataGenerator
 
 
 class Evaluator():

@@ -5,7 +5,7 @@ import copy
 
 #
 IF_RESET_TFGRAPH_SESS_RUN = False
-TF_DATASET_TO_NUMPY_MODE = "graph" # eager/graph
+TF_DATASET_TO_NUMPY_MODE = "graph"  # eager/graph
 #
 
 #
@@ -71,5 +71,3 @@ config_parser_a = ConfigParserA()
 AUTODL_G_CONF = config_parser_a.from_type_autodlconf(autodl_global_config)
 META_SOLUS = AUTODL_G_CONF.meta_solution
 DM_DS_PARAS = AUTODL_G_CONF.data_space.domain_dataset
-
-

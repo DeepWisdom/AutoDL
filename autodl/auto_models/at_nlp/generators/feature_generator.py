@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 # @Date    : 2020/3/3 16:29
-from log_utils import info
-from at_nlp.utils import color_msg
-from at_nlp.data_manager.feature_utils import *
-from at_nlp.data_manager.preprocess_utils import *
-from at_nlp.data_manager.feature_config import DEFAULT_EN_CONF, DEFAULT_ZH_CONF, CUSTOM_ZH_CONF
+from autodl.utils.log_utils import info
+from ...at_nlp.data_manager.feature_utils import *
+from ...at_nlp.data_manager.preprocess_utils import *
+from ...at_nlp.data_manager.feature_config import DEFAULT_EN_CONF, DEFAULT_ZH_CONF, CUSTOM_ZH_CONF
 
 MAX_VOCAB_SIZE = 20000
 MAX_SEQ_LENGTH = 301
 MAX_TOLERANT_STD = 150
+
 
 class FeatureGenerator():
     def __init__(self, language, do_seg, num_class):

@@ -8,7 +8,7 @@ import math
 import time
 
 from autodl.utils.exception import TimeoutException
-from autodl.utils.logger import logger
+from autodl.utils.log_utils import logger
 
 
 class Timer(object):

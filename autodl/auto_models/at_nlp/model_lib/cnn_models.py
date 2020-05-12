@@ -7,7 +7,7 @@ from keras.layers import MaxPooling1D, GlobalMaxPooling1D
 from keras.layers import Dropout, BatchNormalization
 from keras.layers import PReLU
 
-from at_nlp.model_lib.model_utils import _get_last_layer_units_and_activation
+from ...at_nlp.model_lib.model_utils import _get_last_layer_units_and_activation
 
 
 def TextCNN_Model(input_shape,

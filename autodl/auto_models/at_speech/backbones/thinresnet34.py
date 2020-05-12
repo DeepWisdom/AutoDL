@@ -4,7 +4,8 @@ import keras
 import tensorflow as tf
 import keras.backend as K
 
-import at_speech.backbones.tr34_bb as backbone
+from ...at_speech.backbones import tr34_bb as backbone
+
 weight_decay = 1e-3
 
 

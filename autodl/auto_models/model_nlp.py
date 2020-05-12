@@ -2,18 +2,17 @@
 AutoNLP and AutoSpeech).
 """
 
-
 import numpy as np
 import os
 import sys
 import tensorflow as tf
 from scipy import stats
-
-here = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(here, ""))
-
-from nlp_autodl_config import autodl_g_conf_repr, META_SOLUS, DM_DS_PARAS
 import multiprocessing
+
+from .nlp_autodl_config import DM_DS_PARAS
+from .at_nlp.run_model import RunModel as AutoNLPModel
+from .nlp_dataset_convertor import TfDatasetsConvertor as TfDatasetTransformer
+
 
 NCPU = multiprocessing.cpu_count() - 1
 
@@ -23,23 +22,19 @@ feature_dict = {'avg_upper_cnt': 0.13243329407894736, 'check_len': 224.195714285
                 'first_detect_normal_std': 0.00025, 'test_num': 10000, 'max_length': 1830, 'avg_length': 230,
                 'class_num': 2, 'min_length': 1}
 
-
-model_dirs = ['',  # current directory
-              'AutoCV/{}'.format(META_SOLUS.cv_solution),  # AutoCV/AutoCV2 winner model
-              'AutoNLP/{}'.format(META_SOLUS.nlp_solution),  # AutoNLP 2nd place winner
-              # 'AutoSpeech/PASA_NJU',    # AutoSpeech winner
-              'AutoSpeech/{}'.format(META_SOLUS.speech_solution),  # AutoSpeech winner
-              'tabular_Meysam']  # simple NN model
-for model_dir in model_dirs:
-    sys.path.append(os.path.join(here, model_dir))
+# model_dirs = ['',  # current directory
+#               'AutoCV/{}'.format(META_SOLUS.cv_solution),  # AutoCV/AutoCV2 winner model
+#               'AutoNLP/{}'.format(META_SOLUS.nlp_solution),  # AutoNLP 2nd place winner
+#               # 'AutoSpeech/PASA_NJU',    # AutoSpeech winner
+#               'AutoSpeech/{}'.format(META_SOLUS.speech_solution),  # AutoSpeech winner
+#               'tabular_Meysam']  # simple NN model
+# for model_dir in model_dirs:
+#     sys.path.append(os.path.join(here, model_dir))
 
 seq_len = []
-from nlp_dataset_convertor import TfDatasetsConvertor as TfDatasetTransformer
-from log_utils import logger
 
 
 def meta_domain_2_model(domain):
-    from at_nlp.run_model import RunModel as AutoNLPModel
     return AutoNLPModel
 
 config = tf.ConfigProto()

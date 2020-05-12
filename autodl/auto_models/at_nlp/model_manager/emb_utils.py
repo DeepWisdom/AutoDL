@@ -4,7 +4,7 @@ import os
 import gzip
 import numpy as np
 
-from log_utils import info
+from autodl.utils.log_utils import info
 
 EMBEDDING_DIM = 300
 

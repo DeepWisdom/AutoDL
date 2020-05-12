@@ -7,24 +7,22 @@ from keras import backend as K
 from keras.preprocessing import sequence
 from keras.callbacks import EarlyStopping, LearningRateScheduler
 
-from at_toolkit.at_utils import autodl_nlp_install_download
+from ..at_toolkit.at_utils import autodl_nlp_install_download
 
 autodl_nlp_install_download()
 
-from log_utils import info
-from at_nlp.data_manager.data_sampler import DataGenerator
-from at_nlp.data_manager.sample_utils import downsampling_input_data
-from at_nlp.utils import color_msg, ohe2cat
-from at_nlp.model_manager.emb_utils import _load_emb
-from at_nlp.data_manager.sample_config import sample_strategy
-from at_nlp.generators.model_generator import ModelGenerator
-from at_nlp.generators.feature_generator import FeatureGenerator
-from at_nlp.generators.data_generator import DataGenerator as BatchDataGenerator
-from at_nlp.data_manager.preprocess_utils import _tokenize_chinese_words
-from at_nlp.evaluator import Evaluator
-from at_toolkit.at_evalator import ATEvaluator
+from autodl.utils.log_utils import info
+from ..at_nlp.data_manager.data_sampler import DataGenerator
+from ..at_nlp.utils import color_msg, ohe2cat
+from ..at_nlp.model_manager.emb_utils import _load_emb
+from ..at_nlp.data_manager.sample_config import sample_strategy
+from ..at_nlp.generators.model_generator import ModelGenerator
+from ..at_nlp.generators.feature_generator import FeatureGenerator
+from ..at_nlp.generators.data_generator import DataGenerator as BatchDataGenerator
+from ..at_nlp.data_manager.preprocess_utils import _tokenize_chinese_words
+from ..at_nlp.evaluator import Evaluator
 
-from Auto_NLP.second_stage_models.model_iter_second_stage import Model as Second_Stage_Model
+from ..auto_nlp.second_stage_models.model_iter_second_stage import Model as Second_Stage_Model
 
 INIT_BATCH_SIZE = 32
 MAX_SVM_FIT_NUM = 20000

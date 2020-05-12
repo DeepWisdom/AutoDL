@@ -1,22 +1,16 @@
-import os, sys
+
 import numpy as np
 
-here = os.path.abspath(os.path.dirname(__file__))
-CODE_SUB_DIR = os.path.abspath(os.path.join(here, "..", ".."))
-print(CODE_SUB_DIR)
-sys.path.append(CODE_SUB_DIR)
-
-
-from at_speech import SLLRLiblinear, SLLRSag, ThinResnet34Classifier
-from at_speech.data_space.raw_data_space import RawDataNpDb
-from at_toolkit.at_sampler import AutoSamplerBasic, AutoSpSamplerNew, AutoValidSplitor, minisamples_edaer, sample_y_edaer
-from at_speech.data_space.feats_data_space import FeatsDataDb
-from at_speech.policy_space.decision_making import DecisionMaker
-from at_toolkit.at_tfds_convertor import TfdsConvertor
-from at_toolkit import AdlClassifier, AdlSpeechDMetadata
-from at_toolkit.at_evalator import  ATEvaluator
-from at_speech.at_speech_cons import *
-from at_speech.at_speech_config import TFDS2NP_TAKESIZE_RATION_LIST, TR34_TRAINPIP_WARMUP, IF_VAL_ON, Tr34SamplerHpParams
+from ...at_speech import SLLRLiblinear, SLLRSag, ThinResnet34Classifier
+from ...at_speech.data_space.raw_data_space import RawDataNpDb
+from ...at_toolkit.at_sampler import AutoSamplerBasic, AutoSpSamplerNew, AutoValidSplitor, minisamples_edaer, sample_y_edaer
+from ...at_speech.data_space.feats_data_space import FeatsDataDb
+from ...at_speech.policy_space.decision_making import DecisionMaker
+from ...at_toolkit.at_tfds_convertor import TfdsConvertor
+from ...at_toolkit import AdlClassifier, AdlSpeechDMetadata
+from ...at_toolkit.at_evalator import  ATEvaluator
+from ...at_speech.at_speech_cons import *
+from ...at_speech.at_speech_config import TFDS2NP_TAKESIZE_RATION_LIST, TR34_TRAINPIP_WARMUP, IF_VAL_ON, Tr34SamplerHpParams
 
 
 CLS_REG_TABLE = {

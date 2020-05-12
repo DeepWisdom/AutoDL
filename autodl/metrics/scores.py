@@ -1,6 +1,6 @@
 import numpy as np
 from functools import reduce
-from autodl.utils.logger import logger
+from autodl.utils.log_utils import logger
 
 
 def tiedrank(a):

@@ -1,7 +1,7 @@
-from at_speech.policy_space.meta_learning import ModelSelectLearner
-from at_speech.policy_space.ensemble_learning import EnsembleLearner
-from at_toolkit import AdlSpeechDMetadata
-from at_speech.at_speech_cons import CLS_LR_LIBLINEAER, CLS_LR_SAG, CLS_TR34
+from ...at_speech.policy_space.meta_learning import ModelSelectLearner
+from ...at_speech.policy_space.ensemble_learning import EnsembleLearner
+from ...at_toolkit import AdlSpeechDMetadata
+from ...at_speech.at_speech_cons import CLS_LR_LIBLINEAER, CLS_LR_SAG, CLS_TR34
 
 
 class DecisionMaker(object):

@@ -6,6 +6,7 @@ import numpy as np
 import keras
 from keras.preprocessing import sequence
 
+
 class DataGenerator(keras.utils.Sequence):
     def __init__(self, x_train, labels, batch_size,  language, max_length, vocab, num_features,
                  tokenizer=None,

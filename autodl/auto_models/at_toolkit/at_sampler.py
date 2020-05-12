@@ -2,10 +2,10 @@ import numpy as np
 import random
 from sklearn.model_selection import train_test_split
 
-# from at_toolkit import info, error
 
 def ohe2cat(label):
     return np.argmax(label, axis=1)
+
 
 def ohe2cat_new(y_labels):
     assert isinstance(y_labels, np.ndarray)

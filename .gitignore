@@ -1,18 +1,7 @@
-
-
-models/
-AutoDL_sample_result_submission/
-AutoDL_scoring_output/
-AutoDL*_dataset*/
+autodl.egg-info
 
 task01.h5
-log/
-log_events/
-upload/
-*.zip
-autorunner_reports
-code_submission/model.py
-pretrained_models
+log
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -122,32 +111,3 @@ venv.bak/
 # idea config.
 .idea/
 .idea/*.xml
-
-
-# logs.
-logs/*.log
-logs/*.txt
-
-src/*.pyc
-src/**/*.pyc
-
-autonlp/*.pyc
-autonlp/**/*.pyc
-
-
-data/*
-data/**
-
-models_warehouses/*
-models_warehouses/**
-
-sample_result_submission/*
-sample_result_submission/**
-
-scoring_output/*
-scoring_output/**
-
-model.h5
-
-feature.config
-

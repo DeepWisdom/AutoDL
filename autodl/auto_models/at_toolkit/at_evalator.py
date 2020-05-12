@@ -2,7 +2,8 @@ import numpy as np
 from sklearn.metrics import roc_auc_score
 from functools import reduce
 # from tools import log_warning
-from at_toolkit import warning as log_warning
+from ..at_toolkit import warning as log_warning
+
 
 def get_valid_columns(solution):
     """Get a list of column indices for which the column has more than one class.

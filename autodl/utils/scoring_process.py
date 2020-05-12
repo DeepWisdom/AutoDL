@@ -3,7 +3,7 @@
 # @Desc    :
 
 import time
-from autodl.utils.logger import logger
+from autodl.utils.log_utils import logger
 
 from autodl.metrics.scores import autodl_auc, accuracy
 from autodl.auto_scoring.score_evaluator import ScoreEvaluator

@@ -6,7 +6,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer, HashingVectorizer
 from keras.preprocessing import text
 from keras.preprocessing import sequence
 
-from at_nlp.data_manager.preprocess_utils import _tokenize_chinese_words, clean_en_text_custom, clean_zh_text_custom
+from ...at_nlp.data_manager.preprocess_utils import _tokenize_chinese_words, clean_en_text_custom, clean_zh_text_custom
 
 
 def preprocess_data(x, preprocess_conf, language='EN', do_seg=False):

@@ -6,8 +6,7 @@ from sklearn.multiclass import OneVsRestClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.tree import DecisionTreeClassifier
 
-from at_toolkit.interface.adl_classifier import AdlOfflineClassifier, AdlOnlineClassifier
-# from at_toolkit import info, error, as_timer
+from ...at_toolkit.interface.adl_classifier import AdlOfflineClassifier, AdlOnlineClassifier
 
 
 def ohe2cat(label):

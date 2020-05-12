@@ -1,8 +1,6 @@
 # coding:utf-8
 import numpy as np
-from at_toolkit.interface.adl_metadata import AdlSpeechDMetadata as ASMD
-# from at_toolkit import info
-
+from ...at_toolkit.interface.adl_metadata import AdlSpeechDMetadata as ASMD
 
 # Config
 G_VAL_CL_NUM = 3

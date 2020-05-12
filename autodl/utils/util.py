@@ -6,7 +6,7 @@ import os
 import psutil
 import numpy as np
 
-from autodl.utils.logger import logger
+from autodl.utils.log_utils import logger
 from autodl.auto_scoring.libscores import ls, read_array
 
 

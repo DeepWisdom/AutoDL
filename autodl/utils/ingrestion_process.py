@@ -7,7 +7,7 @@ import time
 import numpy as np
 from autodl.utils.time_utils import Timer
 from autodl.utils.exception import TimeoutException, ModelAttrLackException, BadPredShapeException
-from autodl.utils.logger import logger
+from autodl.utils.log_utils import logger
 from autodl.auto_ingestion import data_io
 from autodl.auto_ingestion.dataset import AutoDLDataset
 from autodl.auto_models.model import Model
@@ -35,7 +35,7 @@ def run_ingestion(dataset_dir, output_dir, start_info_share_dict, end_info_share
     basename = datanames[0]
 
     logger.info("************************************************")
-    logger.info("******** Processing dataset " + basename[:-5].capitalize() + "********")
+    logger.info("******** Processing dataset " + basename[:-5].capitalize() + " ********")
     logger.info("************************************************")
 
     # begin to create train and test set

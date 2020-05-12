@@ -2,8 +2,7 @@ import tensorflow as tf
 import numpy as np
 import time
 
-# from at_toolkit.at_utils import info, error, as_timer
-from at_toolkit.interface.adl_tfds_convertor import AbsTfdsConvertor
+from ..at_toolkit.interface.adl_tfds_convertor import AbsTfdsConvertor
 
 
 class TfdsConvertor(AbsTfdsConvertor):

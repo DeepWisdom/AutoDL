@@ -2,8 +2,6 @@ import tensorflow as tf
 import numpy as np
 import time
 
-# from Auto_NLP.utils.time_utils import info, error
-
 
 class TfDatasetsConvertor(object):
     def __init__(self, if_train_shuffle=False, config=None):

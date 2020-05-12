@@ -39,9 +39,9 @@ min_token_length = 2
 
 MAX_EN_CHAR_LENGTH = 35
 
-from Auto_NLP.utils.time_utils import info
-from at_nlp.data_manager.sample_utils import *
-from at_nlp.utils import color_msg
+from autodl.utils.log_utils import info
+from ...at_nlp.data_manager.sample_utils import *
+from ...at_nlp.utils import color_msg
 
 punctuations = string.punctuation
 

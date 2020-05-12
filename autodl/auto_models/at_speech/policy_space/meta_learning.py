@@ -1,6 +1,6 @@
 # coding:utf-8
-from at_speech.at_speech_cons import CLS_LR_LIBLINEAER, CLS_LR_SAG, CLS_TR34
-from at_speech.at_speech_config import MODEL_SELECT_DEF
+from ...at_speech.at_speech_cons import CLS_LR_LIBLINEAER, CLS_LR_SAG, CLS_TR34
+from ...at_speech.at_speech_config import MODEL_SELECT_DEF
 
 
 class SpeechMetaLearner(object):

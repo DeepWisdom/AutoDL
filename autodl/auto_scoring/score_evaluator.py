@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 from autodl.utils.task_type import is_multiclass
 from autodl.utils.plot_alc import PlotAlc
-from autodl.utils.logger import logger
+from autodl.utils.log_utils import logger
 from autodl.auto_scoring.libscores import ls
 from autodl.utils.util import is_process_alive, terminate_process, get_solution
 from autodl.utils.exception import IngestionException

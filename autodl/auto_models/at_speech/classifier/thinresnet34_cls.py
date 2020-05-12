@@ -5,12 +5,11 @@ import keras
 from keras import backend as K
 from keras.callbacks import Callback, EarlyStopping, LearningRateScheduler
 
-from at_toolkit.interface.adl_classifier import AdlOfflineClassifier, AdlOnlineClassifier
-# from at_toolkit import info, error, as_timer, SPEECH_TR34_PT_MODEL_PATH
-from at_speech.backbones.thinresnet34 import build_tr34_model
-from at_speech.at_speech_cons import TR34_PRETRAIN_PATH
-from at_speech.at_speech_config import ThinRes34Config
-from at_speech.data_space.examples_gen_maker import DataGenerator as Tr34DataGenerator
+from ...at_toolkit.interface.adl_classifier import AdlOfflineClassifier, AdlOnlineClassifier
+from ...at_speech.backbones.thinresnet34 import build_tr34_model
+from ...at_speech.at_speech_cons import TR34_PRETRAIN_PATH
+from ...at_speech.at_speech_config import ThinRes34Config
+from ...at_speech.data_space.examples_gen_maker import DataGenerator as Tr34DataGenerator
 
 
 IF_TR34_MODELSUMMARY = True

@@ -1,13 +1,13 @@
 # coding:utf-8
 import numpy as np
-from at_speech.data_space.raw_data_space import RawDataNpDb
-from at_speech.data_space.feats_engine import (
+from ...at_speech.data_space.raw_data_space import RawDataNpDb
+from ...at_speech.data_space.feats_engine import (
     AbsFeatsMaker,
     KapreMelSpectroGramFeatsMaker,
     LibrosaMelSpectroGramFeatsMaker,
     LbrsTr34FeatsMaker,
 )
-from at_speech.at_speech_cons import *
+from ...at_speech.at_speech_cons import *
 
 
 class FeatsDataDb:

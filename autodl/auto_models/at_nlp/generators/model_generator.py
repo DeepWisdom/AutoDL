@@ -7,10 +7,10 @@ from sklearn.multiclass import OneVsRestClassifier
 from keras_radam import RAdam
 from keras.optimizers import SGD, RMSprop, Adamax, Adadelta, Adam
 
-from log_utils import info
-from at_nlp.model_manager.emb_utils import generate_emb_matrix
-from at_nlp.model_lib.cnn_models import TextCNN_Model, CNN_Model
-from at_nlp.model_lib.rnn_models import TextRCNN_Model, RNN_Model
+from autodl.utils.log_utils import info
+from ...at_nlp.model_manager.emb_utils import generate_emb_matrix
+from ...at_nlp.model_lib.cnn_models import TextCNN_Model, CNN_Model
+from ...at_nlp.model_lib.rnn_models import TextRCNN_Model, RNN_Model
 
 
 class ModelGenerator(object):
