@@ -62,20 +62,6 @@ def run_ingestion(dataset_dir, output_dir, start_info_share_dict, end_info_share
         logger.error("Failed to initializing model.")
         logger.error("Encountered exception:\n" + str(e), exc_info=True)
 
-    # pre-check Model's attribute
-    for attr in ["train", "test"]:
-        if not hasattr(model, attr):
-            raise ModelAttrLackException("Your model object doesn't have the method `{}`. "
-                                         "Please implement it in model.py.".format(attr))
-
-    use_done_training_attr = hasattr(model, "done_training")
-    if not use_done_training_attr:
-        logger.warning("Your model object doesn't have an attribute " +
-                       "`done_training`. But this is necessary for ingestion " +
-                       "program to know whether the model has done training " +
-                       "and to decide whether to proceed more training. " +
-                       "Please add this attribute to your model.")
-
     # train and test phrase, let's do it!
     logger.info("=" * 5 + " Start core part of ingestion program. " + "=" * 5)
     start = time.time()
@@ -93,6 +79,20 @@ def run_ingestion(dataset_dir, output_dir, start_info_share_dict, end_info_share
     write_start_info()
 
     try:
+        # pre-check Model's attribute
+        for attr in ["train", "test"]:
+            if not hasattr(model, attr):
+                raise ModelAttrLackException("Your model object doesn't have the method `{}`. "
+                                             "Please implement it in model.py.".format(attr))
+
+        use_done_training_attr = hasattr(model, "done_training")
+        if not use_done_training_attr:
+            logger.warning("Your model object doesn't have an attribute " +
+                           "`done_training`. But this is necessary for ingestion " +
+                           "program to know whether the model has done training " +
+                           "and to decide whether to proceed more training. " +
+                           "Please add this attribute to your model.")
+
         # keeping track of how many predictions are made
         prediction_order_number = 0
 
