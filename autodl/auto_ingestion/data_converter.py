@@ -104,7 +104,7 @@ def convert_to_num(Ybin, verbose=True):
 def convert_to_bin(Ycont, nval, verbose=True):
     ''' Convert numeric vector to binary (typically classification target values)'''
     if verbose: print("\t_______ Converting to binary representation")
-    Ybin = [[0] * nval for x in xrange(len(Ycont))]
+    Ybin = [[0] * nval for x in range(len(Ycont))]
     for i in range(len(Ybin)):
         line = Ybin[i]
         line[np.int(Ycont[i])] = 1

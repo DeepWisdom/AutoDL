@@ -2,8 +2,8 @@
 from __future__ import absolute_import
 import os
 
-# os.system(
-#     "pip install --extra-index-url https://developer.download.nvidia.com/compute/redist/cuda/10.0 nvidia-dali && pip3 install torch torchvision")
+os.system(
+    "pip install --extra-index-url https://developer.download.nvidia.com/compute/redist/cuda/10.0 nvidia-dali && pip3 install torch torchvision")
 
 import threading
 import random

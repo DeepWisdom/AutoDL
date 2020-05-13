@@ -45,6 +45,9 @@ from glob import glob
 import platform
 import psutil
 from functools import reduce
+import yaml
+
+from autodl.utils.log_utils import logger
 
 if (os.name == "nt"):
     filesep = '\\'
@@ -196,7 +199,7 @@ def tiedrank(a):
                 # moving average
                 R[k0:k + 1] = R[k - 1] * (k - k0) / (k - k0 + 1) + R[k] / (k - k0 + 1)
             else:
-                k0 = k;
+                k0 = k
                 oldval = newval
     # Invert the index
     S = np.empty(m)
@@ -600,7 +603,7 @@ def show_io(input_dir, output_dir):
             swrite(key + ': ')
             swrite(str(value) + '\n')
     except:
-        swrite("none\n");
+        swrite("none\n")
     swrite("-- Input directory " + input_dir + ":\n")
     try:
         metadata = yaml.load(open(os.path.join(input_dir, 'metadata'), 'r'))
@@ -609,7 +612,7 @@ def show_io(input_dir, output_dir):
             swrite(str(value) + '\n')
         swrite("\n")
     except:
-        swrite("none\n");
+        swrite("none\n")
 
 
 def show_version(scoring_version):
@@ -670,7 +673,7 @@ def compute_all_scores(solution, prediction):
                'PAC (multiclass)': npac_multiclass_score}
     # Normalize/sanitize inputs
     [csolution, cprediction] = normalize_array(solution, prediction)
-    solution = sanitize_array(solution);
+    solution = sanitize_array(solution)
     prediction = sanitize_array(prediction)
     # Compute all scores
     score_names = sorted(scoring.keys())

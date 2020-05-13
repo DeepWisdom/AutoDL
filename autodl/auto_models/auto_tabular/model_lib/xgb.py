@@ -6,12 +6,11 @@ import lightgbm as lgb
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split, RandomizedSearchCV
+from sklearn.model_selection import StratifiedShuffleSplit
 
-from ...auto_tabular.utils.log_utils import log, timeit
+from .meta_model import MetaModel
 from ...auto_tabular import CONSTANT
 from ...auto_tabular.utils.data_utils import ohe2cat
-from .meta_model import MetaModel
-from sklearn.model_selection import StratifiedShuffleSplit
 
 
 class XGBModel(MetaModel):

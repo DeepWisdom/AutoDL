@@ -21,6 +21,7 @@ color_range = range(30, 38)
 color_dict = dict(zip(color_list, color_range))
 
 from collections import defaultdict, OrderedDict, Callable
+from autodl.utils.log_utils import logger
 
 
 class DefaultOrderedDict(OrderedDict):

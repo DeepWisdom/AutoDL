@@ -28,12 +28,6 @@ from tensorflow.python.client import device_lib
 import logging
 import numpy as np
 import os
-
-# os.system("pip install -i https://pypi.tuna.tsinghua.edu.cn/simple hyperopt==0.2.3")
-# os.system("pip install -i https://pypi.tuna.tsinghua.edu.cn/simple xgboost==0.90")
-# os.system("pip install -i https://pypi.tuna.tsinghua.edu.cn/simple catboost==0.21")
-
-
 import sys
 import pandas as pd
 import gc

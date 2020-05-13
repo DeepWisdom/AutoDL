@@ -46,6 +46,11 @@ setup(
         "spacy==2.1.6",
         "gensim==3.8.0",
         "polyglot==16.7.4"
+        "hyperopt==0.2.3",
+        "catboost==0.21",
+        "fastai",
+        "kapre",
+        "keras-radam",
     ],
     extras_require={
         'tests': ['pytest>=4.4.0',

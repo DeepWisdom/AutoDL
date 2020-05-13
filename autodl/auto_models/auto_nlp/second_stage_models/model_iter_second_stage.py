@@ -18,6 +18,7 @@ from keras.layers.normalization import BatchNormalization
 from keras.callbacks import LearningRateScheduler  # , EarlyStopping
 import keras.backend as K
 from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer
 from functools import reduce
 from keras.layers import CuDNNGRU
 
@@ -26,6 +27,7 @@ from keras.backend.tensorflow_backend import set_session
 
 from ...auto_nlp.second_stage_models.tf_model import *
 from ...auto_nlp.second_stage_models import ac
+from ...at_nlp.model_lib.attention import Attention
 
 import warnings
 
@@ -112,6 +114,31 @@ def RNN_Model(seq_len, num_classes, num_features, embedding_matrix=None):
     y = Dense(op_units, activation=op_activation)(x)
 
     md = keras.models.Model(inputs=[in_text], outputs=y)
+
+    return md
+
+
+def GRU_Attention_Model(seq_len, num_classes, num_features, embedding_matrix=None):
+    in_text = Input(shape=(seq_len,))
+    op_units, op_activation = _get_last_layer_units_and_activation(num_classes)
+
+    trainable = True
+    if embedding_matrix is None:
+        x = Embedding(num_features, 64, trainable=trainable)(in_text)
+    else:
+        x = Embedding(num_features, 300, trainable=trainable, weights=[embedding_matrix])(in_text)
+
+    x = CuDNNGRU(128, return_sequences=True)(x)
+    x = Attention(seq_len)(x)
+
+    x = Dense(128)(x) #
+    x = PReLU()(x)
+    x = Dropout(0.35)(x) #0
+    x = BatchNormalization()(x)
+
+    y = Dense(op_units, activation=op_activation)(x)
+
+    md = keras.models.Model(inputs = [in_text], outputs=y)
 
     return md
 
