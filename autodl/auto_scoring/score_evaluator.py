@@ -342,6 +342,9 @@ class ScoreEvaluator(object):
             logger.info("[+] New prediction found. Now number of predictions made = {}"
                         .format(len(self.prediction_list_so_far)))
             logger.info("Current area under learning curve for {}: {:.4f}".format(self.task_name, score))
-            logger.info("(2 * AUC - 1) of the latest prediction is {:.4f}.".format(self.scores_so_far["nauc"][-1]))
-            if self.is_multiclass_task:
-                logger.info("Accuracy of the latest prediction is {:.4f}.".format(self.scores_so_far["accuracy"][-1]))
+            if len(self.scores_so_far["nauc"]) > 0:
+                logger.info("(2 * AUC - 1) of the latest prediction is {:.4f}."
+                            .format(self.scores_so_far["nauc"][-1]))
+                if self.is_multiclass_task:
+                    logger.info("Accuracy of the latest prediction is {:.4f}."
+                                .format(self.scores_so_far["accuracy"][-1]))

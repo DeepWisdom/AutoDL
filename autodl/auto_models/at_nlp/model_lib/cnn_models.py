@@ -19,9 +19,9 @@ def TextCNN_Model(input_shape,
                   filter_num=64,
                   emb_size=300,
                   trainable=False,
-                  use_multi_label = False
+                  use_multi_label=False
                   ):
-    op_units, op_activation = _get_last_layer_units_and_activation(num_classes, use_softmax=True)
+    op_units, op_activation = _get_last_layer_units_and_activation(num_classes, only_use_softmax=True)
 
     in_text = Input(name='inputs', shape=[max_length], tensor=input_tensor)
 
@@ -63,9 +63,10 @@ def CNN_Model(max_length, num_classes, num_features, embedding_matrix=None,
               trainable=False, input_shape=None,
               input_tensor=None,
               filter_num=64,
-              emb_size=300):
+              emb_size=300,
+              only_use_softmax=True):
     in_text = Input(shape=(max_length,))
-    op_units, op_activation = _get_last_layer_units_and_activation(num_classes, use_softmax=True)
+    op_units, op_activation = _get_last_layer_units_and_activation(num_classes, only_use_softmax=only_use_softmax)
 
     trainable = True
     if embedding_matrix is None:

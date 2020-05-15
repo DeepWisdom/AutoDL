@@ -10,18 +10,14 @@ import random
 
 import tensorflow as tf
 import torch
-import torchvision as tv
 import numpy as np
 
-from . import skeleton
-from .architectures.mc3 import ResNet as MC3
-from .skeleton.projects import LogicModel, get_logger
-from .skeleton.projects.others import NBAC, AUC
-import time
 from collections import OrderedDict
+from ..at_toolkit import skeleton
+from ..at_toolkit.architectures.mc3 import ResNet as MC3
+from ..at_toolkit.skeleton.projects import VideoLogicModel, get_logger
 from autodl.utils.log_utils import timeit
-
-import pdb
+from autodl.metrics.scores import NBAC, AUC
 
 torch.backends.cudnn.benchmark = True
 threads = [
@@ -53,9 +49,9 @@ def get_top_players(data, sort_keys, reverse=True, n=2, order=True):
     return dict(top)
 
 
-class Model(LogicModel):
+class Model(VideoLogicModel):
     def __init__(self, metadata):
-        set_random_seed_all(0xC0FFEE,True)
+        set_random_seed_all(0xC0FFEE, True)
         super(Model, self).__init__(metadata)
 
     def build(self):

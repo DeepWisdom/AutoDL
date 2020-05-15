@@ -57,33 +57,6 @@ else:
 
 # ========= Useful functions ==============
 
-def _HERE(*args):
-    """Helper function for getting the current directory of the script."""
-    h = os.path.dirname(os.path.realpath(__file__))
-    return os.path.abspath(os.path.join(h, *args))
-
-
-def get_logger(verbosity_level, use_error_log=False):
-    """Set logging format to something like:
-         2019-04-25 12:52:51,924 INFO score.py: <message>
-    """
-    logger = logging.getLogger(__file__)
-    logging_level = getattr(logging, verbosity_level)
-    logger.setLevel(logging_level)
-    formatter = logging.Formatter(
-        fmt='%(asctime)s %(levelname)s %(filename)s: %(message)s')
-    stdout_handler = logging.StreamHandler(sys.stdout)
-    stdout_handler.setLevel(logging_level)
-    stdout_handler.setFormatter(formatter)
-    logger.addHandler(stdout_handler)
-    if use_error_log:
-        stderr_handler = logging.StreamHandler(sys.stderr)
-        stderr_handler.setLevel(logging.WARNING)
-        stderr_handler.setFormatter(formatter)
-        logger.addHandler(stderr_handler)
-    logger.propagate = False
-    return logger
-
 
 def read_array(filename):
     ''' Read array and convert to 2d np arrays '''

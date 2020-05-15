@@ -1,5 +1,6 @@
 import numpy as np
 from functools import reduce
+from sklearn.metrics import roc_auc_score
 from autodl.utils.log_utils import logger
 
 
@@ -120,3 +121,49 @@ def auc_step(X, Y):
         delta_X = X[i + 1] - X[i]
         area += delta_X * Y[i]
     return area
+
+
+def auc_metric(solution, prediction, task='binary.classification'):
+    '''roc_auc_score() in sklearn is fast than code provided by sponsor
+    '''
+    if solution.sum(axis=0).min() == 0:
+        return np.nan
+    auc = roc_auc_score(solution, prediction, average='macro')
+    return np.mean(auc * 2 - 1)
+
+
+def NBAC(logits, labels):
+    if logits.device != labels.device:
+        labels = labels.to(device=logits.device)
+
+    positive_mask = labels > 0
+    negative_mask = labels < 1
+
+    tpr = (logits * labels).sum() / positive_mask.sum()
+    tnr = ((1 - logits) * (1 - labels)).sum() / negative_mask.sum()
+    return tpr, tnr, (tpr + tnr - 1)
+
+
+def AUC(logits, labels):
+    logits = logits.detach().float().cpu().numpy()
+    labels = labels.detach().float().cpu().numpy()
+
+    valid_columns = get_valid_columns(labels)
+
+    logits = logits[:, valid_columns].copy()
+    labels = labels[:, valid_columns].copy()
+
+    label_num = labels.shape[1]
+    if label_num == 0:
+        return 0.0
+
+    auc = np.empty(label_num)
+    for k in range(label_num):
+        r_ = tiedrank(logits[:, k])
+        s_ = labels[:, k]
+
+        npos = sum(s_ == 1)
+        nneg = sum(s_ < 1)
+        auc[k] = (sum(r_[s_ == 1]) - npos * (npos + 1) / 2) / (nneg * npos)
+
+    return 2 * mvmean(auc) - 1

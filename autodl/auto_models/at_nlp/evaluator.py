@@ -5,11 +5,11 @@ from scipy import stats
 
 from autodl.utils.log_utils import info
 from ..at_nlp.utils import color_msg, ohe2cat
-from ..at_toolkit.at_evalator import ATEvaluator
 from ..at_nlp.generators.data_generator import DataGenerator as BatchDataGenerator
+from autodl.metrics.scores import autodl_auc, auc_metric
 
 
-class Evaluator():
+class Evaluator(object):
     def __init__(self, x, y):
         self.x = x
         self.label = y
@@ -74,9 +74,9 @@ class Evaluator():
             result = model.predict_generator(self.eval_generator)
 
         if use_autodl_auc:
-            self.cur_val_auc = ATEvaluator.autodl_auc(solution=self.label, prediction=result)
+            self.cur_val_auc = autodl_auc(solution=self.label, prediction=result)
         else:
-            self.cur_val_auc = ATEvaluator.auc_metric(solution=self.label, prediction=result)
+            self.cur_val_auc = auc_metric(solution=self.label, prediction=result)
 
         info(color_msg("Note: cur_val_auc is {}".format(self.cur_val_auc), color='blue'))
 

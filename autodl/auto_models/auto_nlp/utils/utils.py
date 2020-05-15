@@ -6,7 +6,6 @@ import os
 import re
 import string
 from sklearn.feature_extraction.stop_words import ENGLISH_STOP_WORDS as stopwords
-# print(stopwords)
 from keras.preprocessing import text
 from keras.preprocessing import sequence
 from nltk.stem.snowball import EnglishStemmer, SnowballStemmer
@@ -23,6 +22,7 @@ with open(os.path.join(os.path.dirname(__file__), "en_stop_words_nltk.txt"), "r+
 
 full_stop_words = list(stopwords)+nltk_english_stopwords
 NCPU = multiprocessing.cpu_count() - 1
+
 
 def set_mp(processes=4):
     import multiprocessing as mp

@@ -9,10 +9,10 @@ import torch
 import torchvision as tv
 import numpy as np
 
-from . import skeleton
-from .architectures.resnet import ResNet9, ResNet18
-from .skeleton.projects import LogicModel, get_logger
-from .skeleton.projects.others import AUC, five_crop
+from ..at_toolkit import skeleton
+from autodl.auto_models.at_toolkit.architectures.resnet import ResNet9, ResNet18
+from ..at_toolkit.skeleton.projects import ImageLogicModel
+from autodl.metrics.scores import AUC
 
 torch.backends.cudnn.benchmark = True
 threads = [
@@ -35,7 +35,7 @@ def set_random_seed_all(seed, deterministic=False):
         torch.backends.cudnn.benchmark = False
 
 
-class Model(LogicModel):
+class Model(ImageLogicModel):
     def __init__(self, metadata):
         super(Model, self).__init__(metadata)
         self.use_test_time_augmentation = False

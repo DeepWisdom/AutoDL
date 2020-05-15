@@ -21,22 +21,20 @@ from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from functools import reduce
 from keras.layers import CuDNNGRU
-
+from sklearn.metrics import roc_auc_score
 import tensorflow as tf
 from keras.backend.tensorflow_backend import set_session
 
 from ...auto_nlp.second_stage_models.tf_model import *
 from ...auto_nlp.second_stage_models import ac
 from ...at_nlp.model_lib.attention import Attention
+from ...at_nlp.model_lib.model_utils import _get_last_layer_units_and_activation
+from ...at_nlp.model_lib.rnn_models import RNN_Model
+from ...at_nlp.model_lib.cnn_models import CNN_Model
 
 import warnings
 
 warnings.filterwarnings('ignore')
-
-try:
-    import gzip
-except:
-    os.system('pip3 install gzip')
 
 config = tf.ConfigProto()
 config.gpu_options.allow_growth = True  #
@@ -45,8 +43,6 @@ config.gpu_options.per_process_gpu_memory_fraction = 0.5
 
 MAX_SEQ_LENGTH = 50
 MAX_VOCAB_SIZE = 200000  #
-
-from sklearn.metrics import roc_auc_score
 
 
 def auc_metric(solution, prediction, task='binary.classification'):
@@ -57,70 +53,9 @@ def auc_metric(solution, prediction, task='binary.classification'):
     return np.mean(auc * 2 - 1)
 
 
-def _get_last_layer_units_and_activation(num_classes):
-
-    if num_classes == 2:
-        activation = 'sigmoid'
-        units = 1
-    else:
-        activation = 'softmax'
-        units = num_classes
-    return units, activation
-
-
-def CNN_Model(seq_len, num_classes, num_features, embedding_matrix=None):
-    in_text = Input(shape=(seq_len,))
-    op_units, op_activation = _get_last_layer_units_and_activation(num_classes)
-
-    trainable = True
-    if embedding_matrix is None:
-        x = Embedding(num_features, 64, trainable=trainable)(in_text)
-    else:
-        x = Embedding(num_features, 300, trainable=trainable, weights=[embedding_matrix])(in_text)
-
-    x = Conv1D(128, kernel_size=5, padding='valid', kernel_initializer='glorot_uniform')(x)
-    x = GlobalMaxPooling1D()(x)
-
-    x = Dense(128)(x)  #
-    x = PReLU()(x)
-    x = Dropout(0.35)(x)  # 0
-    x = BatchNormalization()(x)
-
-    y = Dense(op_units, activation=op_activation)(x)
-
-    md = keras.models.Model(inputs=[in_text], outputs=y)
-
-    return md
-
-
-def RNN_Model(seq_len, num_classes, num_features, embedding_matrix=None):
-    in_text = Input(shape=(seq_len,))
-    op_units, op_activation = _get_last_layer_units_and_activation(num_classes)
-
-    trainable = True
-    if embedding_matrix is None:
-        x = Embedding(num_features, 64, trainable=trainable)(in_text)
-    else:
-        x = Embedding(num_features, 300, trainable=trainable, weights=[embedding_matrix])(in_text)
-
-    x = CuDNNGRU(128, return_sequences=True)(x)
-    x = GlobalMaxPooling1D()(x)
-
-    x = Dense(128)(x)  #
-    x = PReLU()(x)
-    x = Dropout(0.35)(x)  # 0
-    x = BatchNormalization()(x)
-
-    y = Dense(op_units, activation=op_activation)(x)
-
-    md = keras.models.Model(inputs=[in_text], outputs=y)
-
-    return md
-
-
 def GRU_Attention_Model(seq_len, num_classes, num_features, embedding_matrix=None):
     in_text = Input(shape=(seq_len,))
-    op_units, op_activation = _get_last_layer_units_and_activation(num_classes)
+    op_units, op_activation = _get_last_layer_units_and_activation(num_classes, only_use_softmax=False)
 
     trainable = True
     if embedding_matrix is None:
@@ -441,7 +376,8 @@ class Model(object):
 
             if self.cand_models[self.model_id] == 'CNN':
                 model = CNN_Model(self.seq_len, num_classes=self.metadata['class_num'],
-                                  num_features=self.num_features, embedding_matrix=self.embedding_matrix)
+                                  num_features=self.num_features, embedding_matrix=self.embedding_matrix,
+                                  only_use_softmax=False)
             elif self.cand_models[self.model_id] == 'GRU':
                 if self.seq_len > self.max_seq_len:
                     self.model_id += 1
@@ -449,7 +385,8 @@ class Model(object):
                     return
 
                 model = RNN_Model(self.seq_len, num_classes=self.metadata['class_num'],
-                                  num_features=self.num_features, embedding_matrix=self.embedding_matrix)
+                                  num_features=self.num_features, embedding_matrix=self.embedding_matrix,
+                                  only_use_softmax=False)
             elif self.cand_models[self.model_id] == 'Att':
                 if self.seq_len > self.max_seq_len:
                     self.model_id += 1
@@ -458,7 +395,6 @@ class Model(object):
 
                 model = GRU_Attention_Model(self.seq_len, num_classes=self.metadata['class_num'],
                                             num_features=self.num_features, embedding_matrix=self.embedding_matrix)
-
 
             if self.metadata['class_num'] == 2:
                 loss = 'binary_crossentropy'

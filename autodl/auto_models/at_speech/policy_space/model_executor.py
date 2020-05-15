@@ -8,9 +8,9 @@ from ...at_speech.data_space.feats_data_space import FeatsDataDb
 from ...at_speech.policy_space.decision_making import DecisionMaker
 from ...at_toolkit.at_tfds_convertor import TfdsConvertor
 from ...at_toolkit import AdlClassifier, AdlSpeechDMetadata
-from ...at_toolkit.at_evalator import  ATEvaluator
 from ...at_speech.at_speech_cons import *
 from ...at_speech.at_speech_config import TFDS2NP_TAKESIZE_RATION_LIST, TR34_TRAINPIP_WARMUP, IF_VAL_ON, Tr34SamplerHpParams
+from autodl.metrics.scores import autodl_auc
 
 
 CLS_REG_TABLE = {
@@ -219,7 +219,7 @@ class ModelExecutor:
                 cur_val_examples_x = self.feats_data_db.get_split_val_feats(self.cur_feat_name, self.val_sample_idxs, self.use_feat_params)
                 cur_val_preds = self.cur_cls.predict_proba(cur_val_examples_x, predict_prob_params={"if_multilabel": self.is_multilabel})
 
-            self.cur_val_nauc = ATEvaluator.autodl_auc(solution=self.cur_val_examples_y, prediction=cur_val_preds)
+            self.cur_val_nauc = autodl_auc(solution=self.cur_val_examples_y, prediction=cur_val_preds)
         else:
             self.cur_val_nauc = -1
 

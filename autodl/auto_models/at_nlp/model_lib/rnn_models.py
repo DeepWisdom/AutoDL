@@ -23,7 +23,7 @@ def TextRCNN_Model(input_shape,
                    rnn_units=128,
                    trainable=False):
     inputs = Input(name='inputs', shape=[max_length], tensor=input_tensor)
-    op_units, op_activation = _get_last_layer_units_and_activation(num_classes, use_softmax=True)
+    op_units, op_activation = _get_last_layer_units_and_activation(num_classes, only_use_softmax=True)
 
     if embedding_matrix is None:
         layer = Embedding(input_dim=num_features,
@@ -84,10 +84,11 @@ def RNN_Model(max_length, num_classes, num_features, embedding_matrix=None,
               trainable=False, input_shape=None,
               input_tensor=None,
               filter_num=64,
-              emb_size=300
+              emb_size=300,
+              only_use_softmax=True
               ):
     in_text = Input(shape=(max_length,))
-    op_units, op_activation = _get_last_layer_units_and_activation(num_classes, use_softmax=True)
+    op_units, op_activation = _get_last_layer_units_and_activation(num_classes, only_use_softmax=only_use_softmax)
 
     trainable = True
     if embedding_matrix is None:
