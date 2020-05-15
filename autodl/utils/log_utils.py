@@ -79,8 +79,7 @@ def timeit(method, start_log=None):
             print()
 
         is_start = True
-        # log(f"Start [{method.__name__}]:" + (start_log if start_log else ""))
-        log("Start [{}]:" + (start_log if start_log else "").format(method.__name__))
+        log(f"Start [{method.__name__}]:" + (start_log if start_log else ""))
         nesting_level += 1
 
         start_time = time.time()
@@ -88,7 +87,7 @@ def timeit(method, start_log=None):
         end_time = time.time()
 
         nesting_level -= 1
-        log("End   [{}]. Time elapsed: {} sec.".format(method.__name__, end_time - start_time))
+        log("End [{}]. Time elapsed: {} sec.".format(method.__name__, end_time - start_time))
         is_start = False
 
         return result

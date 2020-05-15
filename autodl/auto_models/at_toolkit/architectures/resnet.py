@@ -3,21 +3,14 @@ import sys
 from collections import OrderedDict
 import copy
 import torch
+import torch.nn as nn
 import torchvision.models as models
 from torch.utils import model_zoo
 from torchvision.models.resnet import model_urls
 
 from .. import skeleton
-import torch.nn as nn
+from .torch_model_load_save import load_from_url_or_local
 
-formatter = logging.Formatter(fmt='[%(asctime)s %(levelname)s %(filename)s] %(message)s')
-
-handler = logging.StreamHandler(sys.stdout)
-handler.setFormatter(formatter)
-
-LOGGER = logging.getLogger(__name__)
-LOGGER.setLevel(logging.INFO)
-LOGGER.addHandler(handler)
 
 def conv3x3(in_planes, out_planes, stride=1, groups=1, dilation=1):
     return nn.Conv2d(in_planes, out_planes, kernel_size=3, stride=stride,
@@ -99,7 +92,8 @@ class ResNet18(models.ResNet):
 
     def init(self, model_dir=None, gain=1.):
         self.model_dir = model_dir if model_dir is not None else self.model_dir
-        sd = model_zoo.load_url(model_urls['resnet18'], model_dir=self.model_dir)
+        sd = load_from_url_or_local(model_urls["resnet18"], model_dir=self.model_dir)
+        # sd = model_zoo.load_url(model_urls['resnet18'], model_dir=self.model_dir)
         del sd['fc.weight']
         del sd['fc.bias']
         self.load_state_dict(sd, strict=False)
@@ -239,9 +233,11 @@ class ResNet9(nn.Module):
 
     def init(self, model_dir=None, gain=1.):
         self.model_dir = model_dir if model_dir is not None else self.model_dir
-        sd = model_zoo.load_url(
-            'https://github.com/DeepWisdom/AutoDL/releases/download/opensource/r9-70e4b5c2.pth.tar',
+        sd = load_from_url_or_local(
+            url='https://github.com/DeepWisdom/AutoDL/releases/download/opensource/r9-70e4b5c2.pth.tar',
             model_dir=self.model_dir)
+        # sd = model_zoo.load_url(
+        #     )
         new_sd = copy.deepcopy(sd['state_dict'])
         for key, value in sd['state_dict'].items():
             new_sd[key[7:]] = sd['state_dict'][key]

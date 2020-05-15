@@ -1,26 +1,16 @@
-## 
 import logging
 import sys
 from collections import OrderedDict
 
 import torch
 import torchvision.models.video.resnet as models
+import torch.nn as nn
 from torch.utils import model_zoo
 from torchvision.models.video.resnet import model_urls
 from itertools import chain
 
 from .. import skeleton
-import torch.nn as nn
-import math
-
-formatter = logging.Formatter(fmt='[%(asctime)s %(levelname)s %(filename)s] %(message)s')
-
-handler = logging.StreamHandler(sys.stdout)
-handler.setFormatter(formatter)
-
-LOGGER = logging.getLogger(__name__)
-LOGGER.setLevel(logging.INFO)
-LOGGER.addHandler(handler)
+from .torch_model_load_save import load_from_url_or_local
 
 
 class Conv3DSimple(nn.Conv3d):
