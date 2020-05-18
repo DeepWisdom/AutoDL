@@ -13,7 +13,7 @@ English | [简体中文](./README.md)
 
 # 1. NeurIPS AutoDL Challenge 1'st Solution
 
-![img](assets/autodl_logo_full.png)
+![img](https://github.com/DeepWisdom/AutoDL/tree/pip/assets/autodl_logo_full.png)
 
 **1st** solution for [AutoDL Challenge@NeurIPS](https://autodl.chalearn.org/neurips2019), competition rules can be found at [AutoDL Competition](https://autodl.lri.fr/competitions/162).
 
@@ -70,10 +70,10 @@ AutoDL concentrates on developing generic algorithms for multi-label classificat
 
 
 - **Feedback-phase leaderboard: DeepWisdom Top 1, average rank 1.2, won 4 out of 5 datasets.**
-![img](assets/feedback-lb.png)
+![img](https://github.com/DeepWisdom/AutoDL/tree/pip/assets/feedback-lb.png)
 
 - **Final-phase leaderboard visualization: DeepWisdom Top 1, average rank 1.2, won 7 out of 10 datasets.**
-![img](assets/final-lb-visual.png)
+![img](https://github.com/DeepWisdom/AutoDL/tree/pip/assets/final-lb-visual.png)
 
 
 ## 1.4. Installation
@@ -97,22 +97,23 @@ pip install autodl-gpu=1.0.0
 
 ## 1.5. Quick Tour
 ### 1.5.1. Run local test tour
-see [Quick Tour - Run local test tour](docs/run_local_test_tutorial_chn.md).
+see [Quick Tour - Run local test tour](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/run_local_test_tutorial_chn.md).
+
 
 ### 1.5.2. Tour of Image Classification
-see [Quick Tour - Image Classification Demo](docs/image_classification_tutorial_chn.md).
+see [Quick Tour - Image Classification Demo](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/image_classification_tutorial_chn.md).
 
 ### 1.5.3. Tour of Video Classification
-see [Quick Tour - Video Classification Demo](docs/video_classification_tutorial_chn.md).
+see [Quick Tour - Video Classification Demo](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/video_classification_tutorial_chn.md).
 
 ### 1.5.4. Tour of Speech Classification
-see [Quick Tour - Speech Classification Demo](docs/speech_classification_tutorial_chn.md).
+see [Quick Tour - Speech Classification Demo](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/speech_classification_tutorial_chn.md).
 
 ### 1.5.5. Tour of Text Classification
-see [Quick Tour - Text Classification Demo](docs/text_classification_tutorial_chn.md).
+see [Quick Tour - Text Classification Demo](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/text_classification_tutorial_chn.md).
 
 ### 1.5.6. Tour of Tabular Classification
-see [Quick Tour - Tabular Classification Demo](docs/tabular_classification_tutorial_chn.md).
+see [Quick Tour - Tabular Classification Demo](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/tabular_classification_tutorial_chn.md).
 
 
 ## 1.6. Public Datasets
@@ -198,7 +199,7 @@ Feel free to dive in! [Open an issue](https://github.com/DeepWisdom/AutoDL/issue
 ## 1.10. Join the Community
 Scan QR code and join AutoDL community!
 
-<img src="./assets/WechatIMG15.png" width = "500" height = "200" alt="AutoDL Community" align=center />
+<img src="https://github.com/DeepWisdom/AutoDL/tree/pip/assets/WechatIMG15.png" width = "500" height = "200" alt="AutoDL Community" align=center />
 
 
 ## 1.11. License

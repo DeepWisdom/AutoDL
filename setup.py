@@ -8,7 +8,7 @@ readme = this_file.parent / 'README_EN.md'
 
 setup(
     name='autodl-gpu',
-    version='1.0.0',
+    version='0.1.1',
     description='Automatic Deep Learning, towards fully automated multi-label classification for image, video, text, speech, tabular data.',
     package_data={'': ['README_EN.md']},
     long_description=readme.read_text(encoding='utf-8'),

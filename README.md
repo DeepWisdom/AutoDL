@@ -15,7 +15,7 @@
 
 # 1. NeurIPS AutoDL Challenge 冠军方案
 
-![img](assets/autodl_logo_full.png)
+![img](https://github.com/DeepWisdom/AutoDL/tree/pip/assets/autodl_logo_full.png)
 
 [AutoDL Challenge@NeurIPS](https://autodl.chalearn.org/neurips2019) 冠军方案，竞赛细节参见 [AutoDL Competition](https://autodl.lri.fr/competitions/162)。
 
@@ -61,10 +61,10 @@ AutoDL聚焦于自动进行任意模态（图像、视频、语音、文本、�
 
 ## 1.3. 效果
 - **预赛榜单（DeepWisdom总分第一，平均排名1.2，在5个数据集中取得了4项第一）**
-![img](assets/feedback-lb.png)
+![img](https://github.com/DeepWisdom/AutoDL/tree/pip/assets/feedback-lb.png)
 
 - **决赛榜单（DeepWisdom总分第一，平均排名1.8，在10个数据集中取得了7项第一）**
-![img](assets/final-lb-visual.png)
+![img](https://github.com/DeepWisdom/AutoDL/tree/pip/assets/final-lb-visual.png)
 
 
 ## 1.4. AutoDL竞赛代码使用说明
@@ -110,7 +110,7 @@ AutoDL聚焦于自动进行任意模态（图像、视频、语音、文本、�
 
 ### 1.4.1. 使用效果示例（横轴为对数时间轴，纵轴为AUC）
 
-![img](assets/AutoDL-performance-example.png)
+![img](https://github.com/DeepWisdom/AutoDL/tree/pip/assets/AutoDL-performance-example.png)
 
 可以看出，在五个不同模态的数据集下，AutoDL算法流都获得了极为出色的全时期效果，可以在极短的时间内达到极高的精度。
 
@@ -134,22 +134,22 @@ pip install autodl-gpu==1.0.0
 
 ## 1.6. 快速上手
 ### 1.6.1. 快速上手之AutoDL本地效果测试
-参见 [快速上手之AutoDL本地效果测试](docs/run_local_test_tutorial_chn.md)
+参见 [快速上手之AutoDL本地效果测试](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/run_local_test_tutorial_chn.md)
 
 ### 1.6.2. 快速上手之图像分类
-参见 [快速上手之图像分类](docs/image_classification_tutorial_chn.md)
+参见 [快速上手之图像分类](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/image_classification_tutorial_chn.md)
 
 ### 1.6.3. 快速上手之视频分类
-参见 [快速上手之视频分类](docs/video_classification_tutorial_chn.md)
+参见 [快速上手之视频分类](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/video_classification_tutorial_chn.md)
 
 ### 1.6.4. 快速上手之音频分类
-参见 [快速上手之音频分类](docs/speech_classification_tutorial_chn.md)
+参见 [快速上手之音频分类](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/speech_classification_tutorial_chn.md)
 
 ### 1.6.5. 快速上手之文本分类
-参见 [快速上手之文本分类](docs/text_classification_tutorial_chn.md)
+参见 [快速上手之文本分类](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/text_classification_tutorial_chn.md)
 
 ### 1.6.6. 快速上手之表格分类
-参见 [快速上手之表格分类](docs/tabular_classification_tutorial_chn.md)
+参见 [快速上手之表格分类](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/tabular_classification_tutorial_chn.md)
 
 
 
@@ -196,7 +196,7 @@ pip install autodl-gpu==1.0.0
 
 ## 1.9. 加入社区
 
-<img src="./assets/WechatIMG15.png" width = "500" height = "200" alt="AutoDL社区" align=center />
+<img src="https://github.com/DeepWisdom/AutoDL/tree/pip/assets/WechatIMG15.png" width = "500" height = "200" alt="AutoDL社区" align=center />
 
 ## 1.10. 开源协议 
 [Apache License 2.0](https://github.com/DeepWisdom/AutoDL/blob/master/LICENSE)
