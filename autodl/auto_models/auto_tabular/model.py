@@ -80,7 +80,7 @@ class Model(object):
         self.keep_training_booster = False
 
     # @timeit
-    def train(self, dataset, remaining_time_budget=None):
+    def fit(self, dataset, remaining_time_budget=None):
         """Train this algorithm on the tensorflow |dataset|.
 
         This method will be called REPEATEDLY during the whole training/predicting
@@ -132,7 +132,7 @@ class Model(object):
             self.done_training = True
 
     # @timeit
-    def test(self, dataset, remaining_time_budget=None):
+    def predict(self, dataset, remaining_time_budget=None):
         """Make predictions on the test set `dataset` (which is different from that
         of the method `train`).
 

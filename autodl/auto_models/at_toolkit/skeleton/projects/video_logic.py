@@ -452,7 +452,7 @@ class VideoLogicModel(Model):
     def get_total_time(self):
         return sum([self.timers[key].total_time for key in self.timers.keys()])
 
-    def train(self, dataset, remaining_time_budget=None):
+    def fit(self, dataset, remaining_time_budget=None):
         if self.change_next_model == True:
             self.release_freeze = False
             self.model = self.model_space[self.ensembleconfig.MODEL_INDEX].to(device=self.device, non_blocking=True)
@@ -534,7 +534,7 @@ class VideoLogicModel(Model):
 
         self.timers['train']('outer_end')
 
-    def test(self, dataset, remaining_time_budget=None):
+    def predict(self, dataset, remaining_time_budget=None):
         if (self.ensembleconfig.MODEL_INDEX == 0) and (self.model == self.model_space[self.ensembleconfig.MODEL_INDEX]):
             rv = self.base_test(dataset, self.model, self.model.checkpoints, remaining_time_budget=None)
         else:

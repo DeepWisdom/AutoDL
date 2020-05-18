@@ -41,20 +41,20 @@ class Model:
         self.has_exception = False
         self.y_pred_last = None
 
-    def train(self, dataset, remaining_time_budget=None):
+    def fit(self, dataset, remaining_time_budget=None):
         """Train method of domain-specific model."""
         # Convert training dataset to necessary format and
         # store as self.domain_dataset_train
 
         try:
-            self.domain_model.train(dataset, remaining_time_budget)
+            self.domain_model.fit(dataset, remaining_time_budget)
             self.done_training = self.domain_model.done_training
 
         except Exception as exp:
             self.has_exception = True
             self.done_training = True
 
-    def test(self, dataset, remaining_time_budget=None):
+    def predict(self, dataset, remaining_time_budget=None):
         """Test method of domain-specific model."""
         # Convert test dataset to necessary format and
         # store as self.domain_dataset_test
@@ -64,7 +64,7 @@ class Model:
             return self.y_pred_last
 
         try:
-            Y_pred = self.domain_model.test(dataset, remaining_time_budget=remaining_time_budget)
+            Y_pred = self.domain_model.predict(dataset, remaining_time_budget=remaining_time_budget)
 
             self.y_pred_last = Y_pred
             self.done_training = self.domain_model.done_training

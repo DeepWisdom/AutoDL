@@ -109,7 +109,7 @@ class Model():
         else:
             self.nlp_sep = " "
 
-    def train(self, dataset, remaining_time_budget=None):
+    def fit(self, dataset, remaining_time_budget=None):
         """Train method of domain-specific model."""
         # Convert training dataset to necessary format and
         # store as self.domain_dataset_train
@@ -136,7 +136,7 @@ class Model():
 
         self.done_training = self.domain_model.done_training
 
-    def test(self, dataset, remaining_time_budget=None):
+    def predict(self, dataset, remaining_time_budget=None):
         """Test method of domain-specific model."""
         # Convert test dataset to necessary format and
 

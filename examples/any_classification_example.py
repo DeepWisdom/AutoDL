@@ -23,11 +23,9 @@ def do_any_classification_demo():
     M = Model(D_train.get_metadata())  # The metadata of D_train and D_test only differ in sample_count
 
     for i in range(max_loop):
-        M.train(D_train.get_dataset(),
-                remaining_time_budget=remaining_time_budget)
+        M.fit(D_train.get_dataset(), remaining_time_budget=remaining_time_budget)
 
-        Y_pred = M.test(D_test.get_dataset(),
-                        remaining_time_budget=remaining_time_budget)
+        Y_pred = M.predict(D_test.get_dataset(), remaining_time_budget=remaining_time_budget)
 
         # Evaluation.
         nauc_score = autodl_auc(solution=solution, prediction=Y_pred)

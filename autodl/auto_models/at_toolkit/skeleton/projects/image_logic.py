@@ -390,7 +390,7 @@ class ImageLogicModel(Model):
     def get_total_time(self):
         return sum([self.timers[key].total_time for key in self.timers.keys()])
 
-    def train(self, dataset, remaining_time_budget=None):
+    def fit(self, dataset, remaining_time_budget=None):
         self.timers['train']('outer_start', exclude_total=True, reset_step=True)
 
         train_dataloader = self.build_or_get_train_dataloader(dataset)
@@ -464,8 +464,7 @@ class ImageLogicModel(Model):
 
         self.timers['train']('outer_end')
 
-
-    def test(self, dataset, remaining_time_budget=None):
+    def predict(self, dataset, remaining_time_budget=None):
         self.timers['test']('start', exclude_total=True, reset_step=True)
         is_first = self.info['condition']['first']['test']
         self.info['loop']['test'] += 1

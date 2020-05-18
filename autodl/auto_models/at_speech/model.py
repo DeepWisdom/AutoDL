@@ -66,7 +66,7 @@ class Model:
         else:
             return 0
 
-    def train(self, dataset, remaining_time_budget=None):
+    def fit(self, dataset, remaining_time_budget=None):
         """Train method of domain-specific model."""
         if IF_TRAIN_BREAK_CONDITION:
             while True:
@@ -96,8 +96,7 @@ class Model:
             self.ensemble_val_record_list.append([self.cur_cls_name, cur_val_nauc])
             self.ensemble_val_nauc_list.append(cur_val_nauc)
 
-
-    def test(self, dataset, remaining_time_budget=None):
+    def predict(self, dataset, remaining_time_budget=None):
         """Test method of domain-specific model."""
         cur_y_pred = self.domain_model.test_pipeline(dataset)
 
