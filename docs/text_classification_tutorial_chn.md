@@ -10,22 +10,16 @@
 
 ## 原始数据准备
 我们以AutoNLP竞赛数据集O1为例，数据集目录结构如下所示：
-> ├── O1.data
-> │   ├── meta.json             //数据集元数据
-> │   ├── test.data              //测试集文本语料
-> │   ├── train.data             //训练集文本语料
-> │   └── train.solution        //训练集Label标签
-> └── O1.solution                 //测试集Label标签
+```shell script
+ ├── O1.data
+ │   ├── meta.json             //数据集元数据
+ │   ├── test.data              //测试集文本语料
+ │   ├── train.data             //训练集文本语料
+ │   └── train.solution        //训练集Label标签
+ └── O1.solution                 //测试集Label标签
+```
 
 元数据meta.json说明:
-> {
->    "class_num": 2,
->    "train_num": 7792,
->    "test_num": 1821,
->    "language": "EN",
->    "time_budget": 2400
-> }
-
 ```json
 {
     "class_num": 2,							# 文本分类类别数

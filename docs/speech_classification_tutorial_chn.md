@@ -11,13 +11,15 @@
 
 ### 原始数据准备
 我们以AutoSpeech竞赛说话人确认数据集data01为例，数据集目录结构如下所示：
-> data01
-> ├── data01.data
-> │   ├── meta.json             //数据集元数据
-> │   ├── test.pkl                //测试集语音语料
-> │   ├── train.pkl              //训练集语音语料
-> │   └── train.solution        //训练集Label标签
-> └── data01.solution             //测试集Label标签               
+```shell script
+ data01
+ ├── data01.data
+ │   ├── meta.json             //数据集元数据
+ │   ├── test.pkl                //测试集语音语料
+ │   ├── train.pkl              //训练集语音语料
+ │   └── train.solution        //训练集Label标签
+ └── data01.solution             //测试集Label标签               
+```
 
 ```json
 {

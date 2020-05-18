@@ -3,7 +3,7 @@
 <a name="f3da820f"></a>
 # 公共操作
 
-<br />可以用pip安装autodl的第一个稳定版本(autodl 1.0)。使用命令行环境用下面代码单元安装autodl<br />
+<br />可以用pip安装autodl的第一个稳定版本(autodl 1.0.0)。使用命令行环境用下面代码单元安装autodl<br />
 
 ```
 pip install autodl-gpu
@@ -22,6 +22,8 @@ pip install autodl-gpu
 
 <a name="9a0ca25d"></a>
 ## 数据集准备
+- Image样例数据集-monkeys.zip
+百度云盘链接:https://pan.baidu.com/s/1OAbn9p7PbIhNYMJM0UHEQA  密码:bkhs
 
 <br />新建文件夹`monkeys`，并准备两个文件`label.name`和`labels.csv`。<br />`labels.name`为分类标签列表，每行一个标签，如：<br />
 
