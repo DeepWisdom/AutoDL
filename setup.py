@@ -7,7 +7,7 @@ this_file = Path(__file__).resolve()
 readme = this_file.parent / 'README_EN.md'
 
 setup(
-    name='autodl',
+    name='autodl-gpu',
     version='1.0.0',
     description='Automatic Deep Learning, towards fully automated multi-label classification for image, video, text, speech, tabular data.',
     package_data={'': ['README_EN.md']},
@@ -16,7 +16,7 @@ setup(
     author='DeepWisdom',
     author_email='autodl@fuzhi.ai',
     url='https://github.com/DeepWisdom/AutoDL',
-    download_url='https://github.com/DeepWisdom/AutoDL/archive/v1.0.tar.gz',
+    download_url='https://github.com/DeepWisdom/AutoDL/archive/v1.0.0.tar.gz',
     keywords=["autodl", "automl", "nas", "feature-engineering", "model-selection", "full-automl", "artificial-intelligence", "lightgbm",
               "resnet", "pytorch", "tensorflow", "python", "autodl-challenge", "ai", "deeplearning", "data-science", "machine-learning",
               "big-data", "multi-label", "automated-machine-learning"],
@@ -68,7 +68,6 @@ setup(
         "Intended Audience :: Education",
         "Intended Audience :: Science/Research",
         'License :: OSI Approved :: Apache Software License',
-        "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Topic :: Software Development :: Libraries",
@@ -79,5 +78,5 @@ setup(
         "Bug Reports": "https://github.com/DeepWisdom/AutoDL/issues",
         "Source": "https://github.com/DeepWisdom/AutoDL",
     },
-    python_requires='>=3.5'
+    python_requires='>=3.6'
 )
