@@ -8,13 +8,13 @@ readme = this_file.parent / 'README_EN.md'
 
 setup(
     name='autodl',
-    version='1.0',
+    version='1.0.0',
     description='Automatic Deep Learning, towards fully automated multi-label classification for image, video, text, speech, tabular data.',
     package_data={'': ['README_EN.md']},
     long_description=readme.read_text(encoding='utf-8'),
     long_description_content_type='text/markdown',
     author='DeepWisdom',
-    author_email='csyang.zhang@gmail.com',
+    author_email='autodl@fuzhi.ai',
     url='https://github.com/DeepWisdom/AutoDL',
     download_url='https://github.com/DeepWisdom/AutoDL/archive/v1.0.tar.gz',
     keywords=["autodl", "automl", "nas", "feature-engineering", "model-selection", "full-automl", "artificial-intelligence", "lightgbm",
@@ -45,11 +45,11 @@ setup(
         "nltk==3.4.5",
         "spacy==2.1.6",
         "gensim==3.8.0",
-        "polyglot==16.7.4"
+        "polyglot==16.7.4",
         "hyperopt==0.2.3",
         "catboost==0.21",
         "fastai",
-        "kapre",
+        "kapre==0.1.4",
         "keras-radam",
     ],
     extras_require={
