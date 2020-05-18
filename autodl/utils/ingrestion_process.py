@@ -80,7 +80,7 @@ def run_ingestion(dataset_dir, output_dir, start_info_share_dict, end_info_share
 
     try:
         # pre-check Model's attribute
-        for attr in ["train", "test"]:
+        for attr in ["fit", "predict"]:
             if not hasattr(model, attr):
                 raise ModelAttrLackException("Your model object doesn't have the method `{}`. "
                                              "Please implement it in model.py.".format(attr))
@@ -100,13 +100,13 @@ def run_ingestion(dataset_dir, output_dir, start_info_share_dict, end_info_share
             # Train the model
             remaining_time_budget = start + default_time_budget - time.time()
             logger.info("Begin training the model...")
-            model.train(D_train.get_dataset(), remaining_time_budget=remaining_time_budget)
+            model.fit(D_train.get_dataset(), remaining_time_budget=remaining_time_budget)
             logger.info("Finished training the model.")
 
             # Make predictions using the trained model
             remaining_time_budget = start + default_time_budget - time.time()
             logger.info("Begin testing the model by making predictions on test set...")
-            Y_pred = model.test(D_test.get_dataset(), remaining_time_budget=remaining_time_budget)
+            Y_pred = model.predict(D_test.get_dataset(), remaining_time_budget=remaining_time_budget)
             logger.info("Finished making predictions.")
 
             if Y_pred is None:  # Stop train/predict process if Y_pred is None
