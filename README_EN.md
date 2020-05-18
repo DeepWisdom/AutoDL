@@ -11,43 +11,52 @@ English | [简体中文](./README.md)
 [![img](https://img.shields.io/badge/chat-wechat-green)](https://github.com/DeepWisdom/AutoDL#%E5%8A%A0%E5%85%A5%E7%A4%BE%E5%8C%BA)
 </p>
 
-# NeurIPS AutoDL Challenge 1'st Solution
+# 1. NeurIPS AutoDL Challenge 1'st Solution
 
 ![img](assets/autodl_logo_full.png)
 
 **1st** solution for [AutoDL Challenge@NeurIPS](https://autodl.chalearn.org/neurips2019), competition rules can be found at [AutoDL Competition](https://autodl.lri.fr/competitions/162).
 
-### Motivation 
+### 1.0.1. Motivation 
 There exists a series of common and tough problems in the real world, such as limited resources (CPU/ memory), skewed data, hand-craft features, model selection, network architecture details tuning, sensitivity of pre-trained models, sensitivity of hyperparameters and so on. How to solve them wholly and efficiently?
 
 
-### Solution 
+### 1.0.2. Solution 
 AutoDL concentrates on developing generic algorithms for multi-label classification problems in ANY modalities: image, video, speech, text and tabular data without ANY human intervention.  **Ten seconds** at the soonest, our solution achieved SOTA performances on all the 24 offline datasets and 15 online datasets, beating a number of top players in the world.
 
 
-## Table of Contents
+## 1.1. Table of Contents
 <!-- TOC -->
 
-- [NeurIPS AutoDL Challenge 1'st Solution](#neurips-autodl-challenge-1st-solution)
-    - [Motivation](#motivation)
-    - [Solution](#solution)
-  - [Table of Contents](#table-of-contents)
-  - [Features](#features)
-  - [Evaluation](#evaluation)
-  - [Public Datasets](#public-datasets)
-    - [Optional: Download public datasets](#optional-download-public-datasets)
-    - [Public datasets sample info](#public-datasets-sample-info)
-  - [Usage for local development and testing](#usage-for-local-development-and-testing)
-  - [Contributing](#contributing)
-  - [Contact us](#contact-us)
-  - [Join the Community](#join-the-community)
-  - [License](#license)
+- [1. NeurIPS AutoDL Challenge 1'st Solution](#1-neurips-autodl-challenge-1st-solution)
+    - [1.0.1. Motivation](#101-motivation)
+    - [1.0.2. Solution](#102-solution)
+  - [1.1. Table of Contents](#11-table-of-contents)
+  - [1.2. Features](#12-features)
+  - [1.3. Evaluation](#13-evaluation)
+  - [1.4. Installation](#14-installation)
+    - [1.4.1. With pip](#141-with-pip)
+  - [1.5. Quick Tour](#15-quick-tour)
+    - [1.5.1. Run local test tour](#151-run-local-test-tour)
+    - [1.5.2. Tour of Image Classification](#152-tour-of-image-classification)
+    - [1.5.3. Tour of Video Classification](#153-tour-of-video-classification)
+    - [1.5.4. Tour of Speech Classification](#154-tour-of-speech-classification)
+    - [1.5.5. Tour of Text Classification](#155-tour-of-text-classification)
+    - [1.5.6. Tour of Tabular Classification](#156-tour-of-tabular-classification)
+  - [1.6. Public Datasets](#16-public-datasets)
+    - [1.6.1. Optional: Download public datasets](#161-optional-download-public-datasets)
+    - [1.6.2. Public datasets sample info](#162-public-datasets-sample-info)
+  - [1.7. Usage for AutoDL local development and testing](#17-usage-for-autodl-local-development-and-testing)
+  - [1.8. Contributing](#18-contributing)
+  - [1.9. Contact us](#19-contact-us)
+  - [1.10. Join the Community](#110-join-the-community)
+  - [1.11. License](#111-license)
 
 <!-- /TOC -->
 
 
 
-## Features
+## 1.2. Features
 - **Full-AutoML/AutoDL**: Fully automated Deep Learning without ANY human intervention covering the whole pipelines.
 - **Generic & Universal**: Supporting ANY modality(image, video, speech, text, tabular) data, and **ANY** classification problems including binary-class, multi-class and multi-label problems.
 - **SOTA**: Winner solution of AutoDL challenge, involving both tranditional machine learning models and deep learning model backbones. 
@@ -57,7 +66,7 @@ AutoDL concentrates on developing generic algorithms for multi-label classificat
 
 
 
-## Evaluation
+## 1.3. Evaluation
 
 
 - **Feedback-phase leaderboard: DeepWisdom Top 1, average rank 1.2, won 4 out of 5 datasets.**
@@ -66,13 +75,53 @@ AutoDL concentrates on developing generic algorithms for multi-label classificat
 - **Final-phase leaderboard visualization: DeepWisdom Top 1, average rank 1.2, won 7 out of 10 datasets.**
 ![img](assets/final-lb-visual.png)
 
-## Public Datasets
-### Optional: Download public datasets
+
+## 1.4. Installation
+
+This repo is tested on Python 3.6+, PyTorch 1.0.0+ and TensorFlow 2.0.
+
+You should install AutoDL in a [virtual environment](https://docs.python.org/3/library/venv.html). If you're unfamiliar with Python virtual environments, check out the [user guide](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/).
+
+Create a virtual environment with the version of Python you're going to use and activate it.
+
+Now, if you want to use AutoDL, you can install it with pip.
+
+### 1.4.1. With pip
+
+AutoDL can be installed using pip as follows:
+
+```bash
+pip install autodl-gpu 
+pip install autodl-gpu=1.0.0 
+```
+
+## 1.5. Quick Tour
+### 1.5.1. Run local test tour
+see [Quick Tour - Run local test tour](docs/run_local_test_tutorial_chn.md).
+
+### 1.5.2. Tour of Image Classification
+see [Quick Tour - Image Classification Demo](docs/image_classification_tutorial_chn.md).
+
+### 1.5.3. Tour of Video Classification
+see [Quick Tour - Video Classification Demo](docs/video_classification_tutorial_chn.md).
+
+### 1.5.4. Tour of Speech Classification
+see [Quick Tour - Speech Classification Demo](docs/speech_classification_tutorial_chn.md).
+
+### 1.5.5. Tour of Text Classification
+see [Quick Tour - Text Classification Demo](docs/text_classification_tutorial_chn.md).
+
+### 1.5.6. Tour of Tabular Classification
+see [Quick Tour - Tabular Classification Demo](docs/tabular_classification_tutorial_chn.md).
+
+
+## 1.6. Public Datasets
+### 1.6.1. Optional: Download public datasets
 ```bash
 python download_public_datasets.py
 ```
 
-### Public datasets sample info 
+### 1.6.2. Public datasets sample info 
 | #   | Name     | Type    | Domain   | Size   | Source      | Data (w/o test labels) | Test labels       |
 | --- | -------- | ------- | -------- | ------ | ----------- | ---------------------- | ----------------- |
 | 1   | Munster  | Image   | HWR      | 18 MB  | MNIST       | munster.data           | munster.solution  |
@@ -102,8 +151,8 @@ python download_public_datasets.py
 
 
 
-## Usage for local development and testing
-1. Git clone the repo
+## 1.7. Usage for AutoDL local development and testing
+w1. Git clone the repo
 ```
 cd <path_to_your_directory>
 git clone https://github.com/DeepWisdom/AutoDL.git
@@ -138,19 +187,19 @@ HTML page in `AutoDL_scoring_output/`.
 Details can be seen in [AutoDL Challenge official starting_kit](https://github.com/zhengying-liu/autodl_starting_kit_stable).
 
 
-## Contributing
+## 1.8. Contributing
 
 Feel free to dive in! [Open an issue](https://github.com/DeepWisdom/AutoDL/issues/new) or submit PRs.
 
-## Contact us
+## 1.9. Contact us
 [![img](https://github.com/DeepWisdom/AutoDL/blob/master/assets/deepwisdom-logo-white.svg "title")](http://fuzhi.ai/)
 
 
-## Join the Community
+## 1.10. Join the Community
 Scan QR code and join AutoDL community!
 
 <img src="./assets/WechatIMG15.png" width = "500" height = "200" alt="AutoDL Community" align=center />
 
 
-## License
+## 1.11. License
 [Apache License 2.0](https://github.com/DeepWisdom/AutoDL/blob/master/LICENSE)
