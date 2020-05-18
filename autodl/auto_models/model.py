@@ -100,4 +100,5 @@ def infer_domain(metadata):
                 domain = "speech"
         else:
             domain = "video"
+    logger.info(f"dataset domain: {domain}")
     return domain

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 # @Date    : 2020/1/17 14:32
-# @Author  : stellahong (stellahong@fuzhi.ai)
 # @Desc    :
 import os
 import re

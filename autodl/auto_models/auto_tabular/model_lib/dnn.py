@@ -51,7 +51,7 @@ class DnnModel(MetaModel):
         for i in range(3):
             x = self.fc(x, 500, weight_decay)
 
-        if self.is_multi_label:
+        if not self.is_multi_label:
             logits = Dense(num_classes,
                            #activation="softmax",
                            #kernel_initializer="orthogonal",
