@@ -2,6 +2,8 @@
 AutoNLP and AutoSpeech).
 """
 
+from autodl.utils.log_utils import logger
+
 
 def meta_domain_2_model(domain):
     if domain in ["image"]:

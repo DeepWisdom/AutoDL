@@ -141,11 +141,11 @@ class VideoLogicModel(Model):
         if not self.model.info['condition']['first']['train']:
             return self.build_or_get_dataloader('train')
 
-        num_images = self.base_info['dataset']['size']
+        num_videos = self.base_info['dataset']['size']
 
-        num_valids = int(min(num_images * self.model.hyper_params['dataset']['cv_valid_ratio'],
+        num_valids = int(min(num_videos * self.model.hyper_params['dataset']['cv_valid_ratio'] + 1,
                              self.model.hyper_params['dataset']['max_valid_count']))
-        num_trains = num_images - num_valids
+        num_trains = num_videos - num_valids
 
         num_samples = self.model.hyper_params['dataset']['train_info_sample']
         sample = dataset.take(num_samples).prefetch(buffer_size=num_samples)
@@ -202,8 +202,8 @@ class VideoLogicModel(Model):
             'num_class'] >= 0.5
         enough_count = self.model.hyper_params['dataset']['enough_count']['video'] if self.is_video() else \
         self.model.hyper_params['dataset']['enough_count']['image']
-        if must_shuffle or num_images < enough_count:
-            dataset = dataset.shuffle(buffer_size=min(enough_count, num_images), reshuffle_each_iteration=False)
+        if must_shuffle or num_videos < enough_count:
+            dataset = dataset.shuffle(buffer_size=min(enough_count, num_videos), reshuffle_each_iteration=False)
 
         train = dataset.skip(num_valids)
         valid = dataset.take(num_valids)

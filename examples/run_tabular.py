@@ -9,11 +9,10 @@ import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 
 from autodl.auto_ingestion import data_io
-from autodl.utils.util import get_solution
-from autodl.metrics import autodl_auc
 from autodl.auto_ingestion.dataset import AutoDLDataset
 from autodl.convertor.tabular_to_tfrecords import autotabular_2_autodl_format
 from autodl.auto_models.auto_tabular.model import Model as TabularModel
+from autodl.auto_ingestion.pure_model_run import run_single_model
 
 
 if __name__ == "__main__":
@@ -43,14 +42,8 @@ if __name__ == "__main__":
     D_train = AutoDLDataset(os.path.join(new_dataset_dir, basename, "train"))
     D_test = AutoDLDataset(os.path.join(new_dataset_dir, basename, "test"))
 
-    max_epoch = 100
+    max_epoch = 50
+    time_budget = 1200
     model = TabularModel(D_train.get_metadata())
 
-    for i in range(max_epoch):
-        model.train(D_train.get_dataset())
-        y_pred = model.test(D_test.get_dataset())
-
-        solution = get_solution(new_dataset_dir)
-
-        nauc = autodl_auc(solution, y_pred)
-        print(f"epoch: {i}, nauc: {nauc}")
+    run_single_model(model, new_dataset_dir, basename, time_budget, max_epoch)

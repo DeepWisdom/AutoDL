@@ -195,8 +195,8 @@ class PlotAlc(PlotBaseMetric):
 
         plt.pause(1)
 
-        if save_final:
-            self.save_figure()
+        # to save figure always
+        self.save_figure()
 
         return alc
 
