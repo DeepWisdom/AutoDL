@@ -15,7 +15,7 @@
 
 # 1. NeurIPS AutoDL Challenge 冠军方案
 
-![img](https://github.com/DeepWisdom/AutoDL/tree/pip/assets/autodl_logo_full.png)
+![img](https://raw.githubusercontent.com/DeepWisdom/AutoDL/pip/assets/autodl_logo_full.png)
 
 [AutoDL Challenge@NeurIPS](https://autodl.chalearn.org/neurips2019) 冠军方案，竞赛细节参见 [AutoDL Competition](https://autodl.lri.fr/competitions/162)。
 
@@ -61,10 +61,10 @@ AutoDL聚焦于自动进行任意模态（图像、视频、语音、文本、�
 
 ## 1.3. 效果
 - **预赛榜单（DeepWisdom总分第一，平均排名1.2，在5个数据集中取得了4项第一）**
-![img](https://github.com/DeepWisdom/AutoDL/tree/pip/assets/feedback-lb.png)
+![img](https://raw.githubusercontent.com/DeepWisdom/AutoDL/pip/assets/feedback-lb.png)
 
 - **决赛榜单（DeepWisdom总分第一，平均排名1.8，在10个数据集中取得了7项第一）**
-![img](https://github.com/DeepWisdom/AutoDL/tree/pip/assets/final-lb-visual.png)
+![img](https://raw.githubusercontent.com/DeepWisdom/AutoDL/pip/assets/final-lb-visual.png)
 
 
 ## 1.4. AutoDL竞赛代码使用说明
@@ -195,8 +195,7 @@ pip install autodl-gpu==1.0.0
 ❤️ 请毫不犹豫参加贡献 [Open an issue](https://github.com/DeepWisdom/AutoDL/issues/new) 或提交 PRs。
 
 ## 1.9. 加入社区
-
-<img src="https://github.com/DeepWisdom/AutoDL/tree/pip/assets/WechatIMG15.png" width = "500" height = "200" alt="AutoDL社区" align=center />
+<img src="https://raw.githubusercontent.com/DeepWisdom/AutoDL/pip/assets/WechatIMG15.png" width = "500" height = "200" alt="AutoDL Community" align=center />
 
 ## 1.10. 开源协议 
 [Apache License 2.0](https://github.com/DeepWisdom/AutoDL/blob/master/LICENSE)

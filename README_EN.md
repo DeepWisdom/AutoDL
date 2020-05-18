@@ -14,6 +14,8 @@ English | [简体中文](./README.md)
 # 1. NeurIPS AutoDL Challenge 1'st Solution
 
 ![img](https://github.com/DeepWisdom/AutoDL/tree/pip/assets/autodl_logo_full.png)
+![img](https://raw.githubusercontent.com/DeepWisdom/AutoDL/pip/assets/autodl_logo_full.png)
+
 
 **1st** solution for [AutoDL Challenge@NeurIPS](https://autodl.chalearn.org/neurips2019), competition rules can be found at [AutoDL Competition](https://autodl.lri.fr/competitions/162).
 
@@ -70,10 +72,10 @@ AutoDL concentrates on developing generic algorithms for multi-label classificat
 
 
 - **Feedback-phase leaderboard: DeepWisdom Top 1, average rank 1.2, won 4 out of 5 datasets.**
-![img](https://github.com/DeepWisdom/AutoDL/tree/pip/assets/feedback-lb.png)
+![img](https://raw.githubusercontent.com/DeepWisdom/AutoDL/pip/assets/feedback-lb.png)
 
 - **Final-phase leaderboard visualization: DeepWisdom Top 1, average rank 1.2, won 7 out of 10 datasets.**
-![img](https://github.com/DeepWisdom/AutoDL/tree/pip/assets/final-lb-visual.png)
+![img](https://raw.githubusercontent.com/DeepWisdom/AutoDL/pip/assets/final-lb-visual.png)
 
 
 ## 1.4. Installation
@@ -104,16 +106,16 @@ see [Quick Tour - Run local test tour](https://github.com/DeepWisdom/AutoDL/tree
 see [Quick Tour - Image Classification Demo](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/image_classification_tutorial_chn.md).
 
 ### 1.5.3. Tour of Video Classification
-see [Quick Tour - Video Classification Demo](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/video_classification_tutorial_chn.md).
+see [Quick Tour - Video Classification Demo](https://github.com/DeepWisdom/AutoDL/pip/docs/video_classification_tutorial_chn.md).
 
 ### 1.5.4. Tour of Speech Classification
-see [Quick Tour - Speech Classification Demo](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/speech_classification_tutorial_chn.md).
+see [Quick Tour - Speech Classification Demo](https://github.com/DeepWisdom/AutoDL/pip/docs/speech_classification_tutorial_chn.md).
 
 ### 1.5.5. Tour of Text Classification
-see [Quick Tour - Text Classification Demo](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/text_classification_tutorial_chn.md).
+see [Quick Tour - Text Classification Demo](https://github.com/DeepWisdom/AutoDL/pip/docs/text_classification_tutorial_chn.md).
 
 ### 1.5.6. Tour of Tabular Classification
-see [Quick Tour - Tabular Classification Demo](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/tabular_classification_tutorial_chn.md).
+see [Quick Tour - Tabular Classification Demo](https://github.com/DeepWisdom/AutoDL/pip/docs/tabular_classification_tutorial_chn.md).
 
 
 ## 1.6. Public Datasets
@@ -136,7 +138,7 @@ python download_public_datasets.py
 | 9   | Kraut    | Video   | Action   | 1.9 GB | KTH         | kraut.data             | kraut.solution    |
 | 10  | Katze    | Video   | Action   | 1.9 GB | KTH         | katze.data             | katze.solution    |
 | 11  | data01   | Speech  | Speaker  | 1.8 GB | --          | data01.data            | data01.solution   |
-| 12  | data02   | Speech  | Emotion  | 53 MB  | --          | data02.data            | data02.solution   |
+| 12  | data02   | Speech  | Emotion  | 53 MB  | --          | data02.data            | dat02.solution    |
 | 13  | data03   | Speech  | Accent   | 1.8 GB | --          | data03.data            | data03.solution   |
 | 14  | data04   | Speech  | Genre    | 469 MB | --          | data04.data            | data04.solution   |
 | 15  | data05   | Speech  | Language | 208 MB | --          | data05.data            | data05.solution   |
@@ -193,13 +195,13 @@ Details can be seen in [AutoDL Challenge official starting_kit](https://github.c
 Feel free to dive in! [Open an issue](https://github.com/DeepWisdom/AutoDL/issues/new) or submit PRs.
 
 ## 1.9. Contact us
-[![img](https://github.com/DeepWisdom/AutoDL/blob/master/assets/deepwisdom-logo-white.svg "title")](http://fuzhi.ai/)
+[![img](https://raw.githubusercontent.com/DeepWisdom/AutoDL/pip/assets/deepwisdom-logo-white.svg "title")](http://fuzhi.ai/)
 
 
 ## 1.10. Join the Community
 Scan QR code and join AutoDL community!
 
-<img src="https://github.com/DeepWisdom/AutoDL/tree/pip/assets/WechatIMG15.png" width = "500" height = "200" alt="AutoDL Community" align=center />
+<img src="https://raw.githubusercontent.com/DeepWisdom/AutoDL/pip/assets/WechatIMG15.png" width = "500" height = "200" alt="AutoDL Community" align=center />
 
 
 ## 1.11. License
