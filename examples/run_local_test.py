@@ -8,7 +8,7 @@ from multiprocessing import Process, Manager
 
 from autodl.utils.log_utils import logger
 from autodl.auto_ingestion import data_io
-from autodl.utils.ingrestion_process import run_ingestion
+from autodl.utils.ingestion_process import run_ingestion
 from autodl.utils.scoring_process import run_scoring
 
 
