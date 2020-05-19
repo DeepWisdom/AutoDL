@@ -97,23 +97,23 @@ pip install autodl-gpu
 
 # 7. Quick Tour
 ## 7.1. Run local test tour
-see [Quick Tour - Run local test tour](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/run_local_test_tutorial_chn.md).
+see [Quick Tour - Run local test tour](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/run_local_test_tutorial_chn.md), see sample code [examples/run_local_test.py](https://github.com/DeepWisdom/AutoDL/blob/pip/examples/run_local_test.py).
 
 
 ## 7.2. Tour of Image Classification
-see [Quick Tour - Image Classification Demo](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/image_classification_tutorial_chn.md).
+see [Quick Tour - Image Classification Demo](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/image_classification_tutorial_chn.md), see sample code [examples/run_image_classification_example.py](https://github.com/DeepWisdom/AutoDL/blob/pip/examples/run_image_classification_example.py)
 
 ## 7.3. Tour of Video Classification
-see [Quick Tour - Video Classification Demo](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/video_classification_tutorial_chn.md).
+see [Quick Tour - Video Classification Demo](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/video_classification_tutorial_chn.md), see sample code [examples/run_video_classification_example.py](https://github.com/DeepWisdom/AutoDL/blob/pip/examples/run_video_classification_example.py).
 
 ## 7.4. Tour of Speech Classification
-see [Quick Tour - Speech Classification Demo](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/speech_classification_tutorial_chn.md).
+see [Quick Tour - Speech Classification Demo](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/speech_classification_tutorial_chn.md), see sample code [examples/run_speech_classification_example.py](https://github.com/DeepWisdom/AutoDL/blob/pip/examples/run_speech_classification_example.py).
 
 ## 7.5. Tour of Text Classification
-see [Quick Tour - Text Classification Demo](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/text_classification_tutorial_chn.md).
+see [Quick Tour - Text Classification Demo](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/text_classification_tutorial_chn.md), see sample code [examples/run_text_classification_example.py](https://github.com/DeepWisdom/AutoDL/blob/pip/examples/run_text_classification_example.py).
 
 ## 7.6. Tour of Tabular Classification
-see [Quick Tour - Tabular Classification Demo](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/tabular_classification_tutorial_chn.md).
+see [Quick Tour - Tabular Classification Demo](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/tabular_classification_tutorial_chn.md), see sample code [examples/run_tabular_classification_example.py](https://github.com/DeepWisdom/AutoDL/blob/pip/examples/run_tabular_classification_example.py).
 
 
 # 8. Public Datasets

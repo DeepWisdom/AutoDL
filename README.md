@@ -109,7 +109,7 @@ AutoDL聚焦于自动进行任意模态（图像、视频、语音、文本、�
 
 ## 4.1. 使用效果示例（横轴为对数时间轴，纵轴为AUC）
 
-![img](https://github.com/DeepWisdom/AutoDL/tree/pip/assets/AutoDL-performance-example.png)
+![img](https://raw.githubusercontent.com/DeepWisdom/AutoDL/pip/assets/AutoDL-performance-example.png)
 
 可以看出，在五个不同模态的数据集下，AutoDL算法流都获得了极为出色的全时期效果，可以在极短的时间内达到极高的精度。
 
@@ -132,23 +132,22 @@ pip install autodl-gpu
 
 # 6. 快速上手
 ## 6.1. 快速上手之AutoDL本地效果测试
-参见 [快速上手之AutoDL本地效果测试](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/run_local_test_tutorial_chn.md)
+指导参见 [快速上手之AutoDL本地效果测试](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/run_local_test_tutorial_chn.md)，样例代码参见 [examples/run_local_test.py](https://github.com/DeepWisdom/AutoDL/blob/pip/examples/run_local_test.py)
 
 ## 6.2. 快速上手之图像分类
-参见 [快速上手之图像分类](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/image_classification_tutorial_chn.md)
+参见 [快速上手之图像分类](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/image_classification_tutorial_chn.md)，样例代码参见 [examples/run_image_classification_example.py](https://github.com/DeepWisdom/AutoDL/blob/pip/examples/run_image_classification_example.py)
 
 ## 6.3. 快速上手之视频分类
-参见 [快速上手之视频分类](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/video_classification_tutorial_chn.md)
+指导参见 [快速上手之视频分类](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/video_classification_tutorial_chn.md)，样例代码参见[examples/run_video_classification_example.py](https://github.com/DeepWisdom/AutoDL/blob/pip/examples/run_video_classification_example.py)
 
 ## 6.4. 快速上手之音频分类
-参见 [快速上手之音频分类](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/speech_classification_tutorial_chn.md)
+指导参见 [快速上手之音频分类](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/speech_classification_tutorial_chn.md)，样例代码参见[examples/run_speech_classification_example.py](https://github.com/DeepWisdom/AutoDL/blob/pip/examples/run_speech_classification_example.py)
 
 ## 6.5. 快速上手之文本分类
-参见 [快速上手之文本分类](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/text_classification_tutorial_chn.md)
+指导参见 [快速上手之文本分类](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/text_classification_tutorial_chn.md)，样例代码参见[examples/run_text_classification_example.py](https://github.com/DeepWisdom/AutoDL/blob/pip/examples/run_text_classification_example.py)。
 
 ## 6.6. 快速上手之表格分类
-参见 [快速上手之表格分类](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/tabular_classification_tutorial_chn.md)
-
+指导参见 [快速上手之表格分类](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/tabular_classification_tutorial_chn.md)，样例代码参见[examples/run_tabular_classification_example.py](https://github.com/DeepWisdom/AutoDL/blob/pip/examples/run_tabular_classification_example.py).
 
 # 7. 可用数据集
 ## 7.1. (可选) 下载数据集

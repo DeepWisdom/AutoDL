@@ -3,13 +3,13 @@
 <a name="f3da820f"></a>
 # 公共操作
 
-<br />可以用pip安装autodl的第一个稳定版本(autodl 1.0.0)。使用命令行环境用下面代码单元安装autodl<br />
+<br />可以用pip安装autodl的第一个稳定版本。使用命令行环境用下面代码单元安装autodl<br />
 
 ```
 pip install autodl-gpu
 ```
 
-<br />pip安装会自动安装所有依赖项，完整依赖项列表参照下方链接：<br />`[https://github.com/DeepWisdom/AutoDL/blob/pip/requirements.txt](https://github.com/DeepWisdom/AutoDL/blob/pip/requirements.txt)`<br />
+<br />pip安装会自动安装所有依赖项，完整依赖项列表参照下方链接：[https://github.com/DeepWisdom/AutoDL/blob/pip/requirements.txt](https://github.com/DeepWisdom/AutoDL/blob/pip/requirements.txt)
 
 <a name="3f54a3bd"></a>
 # 使用AutoDL进行monkeys种类图像分类问题
@@ -23,6 +23,7 @@ pip install autodl-gpu
 <a name="9a0ca25d"></a>
 ## 数据集准备
 - Image样例数据集-monkeys.zip
+
 百度云盘链接:https://pan.baidu.com/s/1OAbn9p7PbIhNYMJM0UHEQA  密码:bkhs
 
 <br />新建文件夹`monkeys`，并准备两个文件`label.name`和`labels.csv`。<br />`labels.name`为分类标签列表，每行一个标签，如：<br />
@@ -48,7 +49,7 @@ n0159.jpg,0
 
 <br />使用`autodl`自带的数据转换器将原始图片格式转为训练需要的`tfrecords`格式，示例代码如下：<br />
 
-```
+```python
 from autodl.convertor.image_to_tfrecords import autoimage_2_autodl_format
 
 def convertor_image_demo():
@@ -60,7 +61,7 @@ convertor_image_demo()
 
 <br />执行后得到的`image`的`tfrecords`的数据集格式如下：<br />
 
-```
+```json
 .../monkeys_formatted/
 └── monkeys
     ├── monkeys.data
@@ -79,7 +80,7 @@ convertor_image_demo()
 
 <br />使用下述代码进行训练和评估<br />
 
-```
+```python
 import os
 import time
 import argparse

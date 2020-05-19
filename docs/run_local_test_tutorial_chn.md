@@ -3,7 +3,7 @@
 
 ## 公共操作
 ```shell script
-pip install autodl-gpu==1.0.0
+pip install autodl-gpu
 ```
 
 ## 数据集准备
@@ -49,5 +49,5 @@ accuracy: [0.5391453066252385, 0.6131523846229572, 0.6815605409256198, 0.7021845
 - 查看实时可视化效果
 
 ![img](../assets/learning-curve-madeline.png)
-可见只需3秒NAUC即可超过0.85，此时AUC达到0.92，十分钟可达到NAUC=0.89的最优效果，即最优AUC接近0.95。
 
+可见只需3秒NAUC即可超过0.85，此时AUC达到0.92，十分钟可达到NAUC=0.89的最优效果，即最优AUC接近0.95。
