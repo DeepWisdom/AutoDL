@@ -106,16 +106,16 @@ see [Quick Tour - Run local test tour](https://github.com/DeepWisdom/AutoDL/tree
 see [Quick Tour - Image Classification Demo](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/image_classification_tutorial_chn.md).
 
 ### 1.5.3. Tour of Video Classification
-see [Quick Tour - Video Classification Demo](https://github.com/DeepWisdom/AutoDL/pip/docs/video_classification_tutorial_chn.md).
+see [Quick Tour - Video Classification Demo](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/video_classification_tutorial_chn.md).
 
 ### 1.5.4. Tour of Speech Classification
-see [Quick Tour - Speech Classification Demo](https://github.com/DeepWisdom/AutoDL/pip/docs/speech_classification_tutorial_chn.md).
+see [Quick Tour - Speech Classification Demo](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/speech_classification_tutorial_chn.md).
 
 ### 1.5.5. Tour of Text Classification
-see [Quick Tour - Text Classification Demo](https://github.com/DeepWisdom/AutoDL/pip/docs/text_classification_tutorial_chn.md).
+see [Quick Tour - Text Classification Demo](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/text_classification_tutorial_chn.md).
 
 ### 1.5.6. Tour of Tabular Classification
-see [Quick Tour - Tabular Classification Demo](https://github.com/DeepWisdom/AutoDL/pip/docs/tabular_classification_tutorial_chn.md).
+see [Quick Tour - Tabular Classification Demo](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/tabular_classification_tutorial_chn.md).
 
 
 ## 1.6. Public Datasets
