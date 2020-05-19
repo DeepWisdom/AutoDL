@@ -16,13 +16,13 @@
 
 
 
-# NeurIPS AutoDL Challenge 冠军方案
+<!-- # NeurIPS AutoDL Challenge 冠军方案 -->
 
 ![img](assets/autodl_logo_full.png)
 
 [AutoDL Challenge@NeurIPS](https://autodl.chalearn.org/neurips2019) 冠军方案，竞赛细节参见 [AutoDL Competition](https://autodl.lri.fr/competitions/162)。
 
-## AutoDL是什么？
+# 1. AutoDL是什么？
 
 AutoDL聚焦于自动进行任意模态（图像、视频、语音、文本、表格数据）多标签分类的通用算法，可以用一套标准算法流解决现实世界的复杂分类问题，解决调数据、特征、模型、超参等烦恼，最短10秒就可以做出性能优异的分类器。本工程在**不同领域的24个离线数据集、15个线上数据集都获得了极为优异的成绩**。AutoDL拥有以下特性：
 
@@ -34,20 +34,34 @@ AutoDL聚焦于自动进行任意模态（图像、视频、语音、文本、�
 
 ⚡ **极速/实时**：最快只需十秒即可获得极具竞争力的模型性能。结果实时刷新（秒级），无需等待即可获得模型实时效果反馈。
 
-## 目录
+# 2. 目录
 <!-- TOC -->
 
-- [效果](#效果)
-- [使用说明](#使用说明)
-- [可用数据集](#可用数据集)
-- [贡献代码](#贡献代码)
-- [加入社区](#加入社区)
-- [开源协议](#开源协议)
+- [1. AutoDL是什么？](#1-autodl是什么)
+- [2. 目录](#2-目录)
+- [3. 效果](#3-效果)
+- [4. AutoDL竞赛使用说明](#4-autodl竞赛使用说明)
+    - [4.1. 使用效果示例（横轴为对数时间轴，纵轴为AUC）](#41-使用效果示例横轴为对数时间轴纵轴为auc)
+- [5. 安装](#5-安装)
+    - [5.1. pip 安装](#51-pip-安装)
+- [6. 快速上手](#6-快速上手)
+    - [6.1. 快速上手之AutoDL本地效果测试](#61-快速上手之autodl本地效果测试)
+    - [6.2. 快速上手之图像分类](#62-快速上手之图像分类)
+    - [6.3. 快速上手之视频分类](#63-快速上手之视频分类)
+    - [6.4. 快速上手之音频分类](#64-快速上手之音频分类)
+    - [6.5. 快速上手之文本分类](#65-快速上手之文本分类)
+    - [6.6. 快速上手之表格分类](#66-快速上手之表格分类)
+- [7. 可用数据集](#7-可用数据集)
+    - [7.1. (可选) 下载数据集](#71-可选-下载数据集)
+    - [7.2. 公共数据集信息](#72-公共数据集信息)
+- [8. 贡献代码](#8-贡献代码)
+- [9. 加入社区](#9-加入社区)
+- [10. 开源协议](#10-开源协议)
 
 <!-- /TOC -->
 
 
-## 效果
+# 3. 效果
 - **预赛榜单（DeepWisdom总分第一，平均排名1.2，在5个数据集中取得了4项第一）**
 ![img](assets/feedback-lb.png)
 
@@ -55,7 +69,7 @@ AutoDL聚焦于自动进行任意模态（图像、视频、语音、文本、�
 ![img](assets/final-lb-visual.png)
 
 
-## 使用说明
+# 4. AutoDL竞赛使用说明
 
 1. 基础环境
     ```shell script
@@ -96,19 +110,56 @@ AutoDL聚焦于自动进行任意模态（图像、视频、语音、文本、�
 
 细节可参考 [AutoDL Challenge official starting_kit](https://github.com/zhengying-liu/autodl_starting_kit_stable).
 
-### 使用效果示例（横轴为对数时间轴，纵轴为AUC）
+## 4.1. 使用效果示例（横轴为对数时间轴，纵轴为AUC）
 
 ![img](assets/AutoDL-performance-example.png)
 
 可以看出，在五个不同模态的数据集下，AutoDL算法流都获得了极为出色的全时期效果，可以在极短的时间内达到极高的精度。
 
-## 可用数据集
-### (可选) 下载数据集
-    ```bash
-    python download_public_datasets.py
-    ```
+# 5. 安装 
 
-### 公共数据集信息
+本仓库在 Python 3.6+, PyTorch 1.3.1 和 TensorFlow 1.15上测试.
+
+你应该在[虚拟环境](https://docs.python.org/3/library/venv.html) 中安装autodl。
+如果对虚拟环境不熟悉，请看 [用户指导](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/).
+
+用合适的Python版本创建虚拟环境，然后激活它。
+
+## 5.1. pip 安装
+
+AutoDL 能用以下方式安装:
+
+```bash
+pip install autodl-gpu
+```
+
+# 6. 快速上手
+## 6.1. 快速上手之AutoDL本地效果测试
+指导参见 [快速上手之AutoDL本地效果测试](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/run_local_test_tutorial_chn.md)，样例代码参见 [examples/run_local_test.py](https://github.com/DeepWisdom/AutoDL/blob/pip/examples/run_local_test.py)
+
+## 6.2. 快速上手之图像分类
+参见 [快速上手之图像分类](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/image_classification_tutorial_chn.md)，样例代码参见 [examples/run_image_classification_example.py](https://github.com/DeepWisdom/AutoDL/blob/pip/examples/run_image_classification_example.py)
+
+## 6.3. 快速上手之视频分类
+指导参见 [快速上手之视频分类](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/video_classification_tutorial_chn.md)，样例代码参见[examples/run_video_classification_example.py](https://github.com/DeepWisdom/AutoDL/blob/pip/examples/run_video_classification_example.py)
+
+## 6.4. 快速上手之音频分类
+指导参见 [快速上手之音频分类](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/speech_classification_tutorial_chn.md)，样例代码参见[examples/run_speech_classification_example.py](https://github.com/DeepWisdom/AutoDL/blob/pip/examples/run_speech_classification_example.py)
+
+## 6.5. 快速上手之文本分类
+指导参见 [快速上手之文本分类](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/text_classification_tutorial_chn.md)，样例代码参见[examples/run_text_classification_example.py](https://github.com/DeepWisdom/AutoDL/blob/pip/examples/run_text_classification_example.py)。
+
+## 6.6. 快速上手之表格分类
+指导参见 [快速上手之表格分类](https://github.com/DeepWisdom/AutoDL/tree/pip/docs/tabular_classification_tutorial_chn.md)，样例代码参见[examples/run_tabular_classification_example.py](https://github.com/DeepWisdom/AutoDL/blob/pip/examples/run_tabular_classification_example.py).
+
+
+# 7. 可用数据集
+## 7.1. (可选) 下载数据集
+```bash
+python download_public_datasets.py
+```
+
+## 7.2. 公共数据集信息
 | #   | Name     | Type    | Domain   | Size   | Source      | Data (w/o test labels) | Test labels       |
 | --- | -------- | ------- | -------- | ------ | ----------- | ---------------------- | ----------------- |
 | 1   | Munster  | Image   | HWR      | 18 MB  | MNIST       | munster.data           | munster.solution  |
@@ -137,13 +188,13 @@ AutoDL聚焦于自动进行任意模态（图像、视频、语音、文本、�
 | 24  | Madeline | Tabular | --       | 2.6 MB | --          | madeline.data          | madeline.solution |
 
 
-## 贡献代码 
+# 8. 贡献代码 
 
 ❤️ 请毫不犹豫参加贡献 [Open an issue](https://github.com/DeepWisdom/AutoDL/issues/new) 或提交 PRs。
 
-## 加入社区
+# 9. 加入社区
 
 <img src="./assets/WechatIMG15.png" width = "500" height = "200" alt="AutoDL社区" align=center />
 
-## 开源协议 
+# 10. 开源协议 
 [Apache License 2.0](https://github.com/DeepWisdom/AutoDL/blob/master/LICENSE)
