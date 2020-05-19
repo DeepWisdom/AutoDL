@@ -1,7 +1,7 @@
 # 使用AutoDL-表格分类-进行银行定期存储表格分类
 
 ## 安装
-```
+```bash
 pip install autodl-gpu
 ```
 
@@ -10,14 +10,14 @@ autodl安装见上述公共操作。
 
 ## 数据集准备
 
-数据集上使用kaggle上的`[https://www.kaggle.com/henriqueyamahata/bank-marketing](https://www.kaggle.com/henriqueyamahata/bank-marketing)`的`bank-additional-full.csv`数据表，并进行随机切分为训练和测试集。
+数据集上使用kaggle上的 [https://www.kaggle.com/henriqueyamahata/bank-marketing](https://www.kaggle.com/henriqueyamahata/bank-marketing)的`bank-additional-full.csv`数据表，并进行随机切分为训练和测试集。
 对于数据集中的类型特征，先使用`LabelEncoder`进行预处理下。
 
 ## 标准数据集转换
 
 使用`autodl`自带的数据转换器将原始表格数据转为训练需要的`tfrecords`格式，示例代码如下：
 
-```@python
+```python
 from autodl.convertor.tabular_to_tfrecords import autotabular_2_autodl_format
 
 def convertor_tabular_demo():
@@ -46,7 +46,7 @@ convertor_tabular_demo()
 
 使用下述代码进行训练和评估
 
-```@python
+```python
 
 import os
 import argparse
