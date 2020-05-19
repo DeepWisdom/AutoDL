@@ -37,7 +37,7 @@ def get_features_labels_pairs(data, solution):
     return features_labels_pairs
 
 
-def autotabular_2_autodl_format(input_dir, data: pd.DataFrame, label: pd.Series):
+def autotabular_2_autodl_format(input_dir, data: pd.DataFrame, label: pd.Series, gen_tfrecords=True, gen_dataset=False):
     """
     Args:
         input_dir: dir of original tabular csv file
@@ -92,7 +92,9 @@ def autotabular_2_autodl_format(input_dir, data: pd.DataFrame, label: pd.Series)
                                                  sequence_size_func=None,
                                                  new_dataset_name=new_dataset_name,
                                                  classes_list=classes_list,
-                                                 channels_list=channels_list)
+                                                 channels_list=channels_list,
+                                                 gen_dataset=gen_dataset,
+                                                 gen_tfrecords=gen_tfrecords)
 
     dataset_formatter.press_a_button_and_give_me_an_AutoDL_dataset()
 

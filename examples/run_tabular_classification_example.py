@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # @Desc   : run single tabular classification model with kaggle bank-additional dataset
-# run example: python3 run_tabular.py --input_data_path=../sample_data/bank/bank-additional-full.csv
+# run example: python3 run_tabular_classification_example.py --input_data_path=../sample_data/bank/bank-additional-full.csv
 
 import os
 import argparse

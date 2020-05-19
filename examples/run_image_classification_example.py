@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # @Desc   : run single image classification model with mnist dataset
-# run example: python3 run_image.py --input_data_path=../sample_data/monkeys/
+# run example: python3 run_image_classification_example.py --input_data_path=../sample_data/monkeys/
 
 import os
 import argparse

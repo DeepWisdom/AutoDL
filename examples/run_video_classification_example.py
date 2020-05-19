@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # @Desc   : run single video classification model with mini-kth dataset
-# run example: python3 run_image.py --input_data_path=../sample_data/mini-kth/
+# run example: python3 run_video_classification_example.py --input_data_path=../sample_data/mini-kth/
 
 import os
 import argparse

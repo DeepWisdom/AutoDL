@@ -39,7 +39,11 @@ class Model:
         self.metadata = metadata
         self.domain = "speech"
         test_metadata_filename = self.metadata.get_dataset_name().replace('train', 'test') + '/metadata.textproto'
-        self.test_num = [int(line.split(':')[1]) for line in open(test_metadata_filename, 'r').readlines()[:3] if 'sample_count' in line][0]
+        if os.path.exists(test_metadata_filename):
+            self.test_num = [int(line.split(':')[1]) for line in open(test_metadata_filename, 'r').readlines()[:3]
+                             if 'sample_count' in line][0]
+        else:
+            self.test_num = metadata.get_test_sample_count()
 
         self.domain_metadata = get_domain_metadata(metadata, self.domain)
         self.domain_metadata["test_num"] = self.test_num

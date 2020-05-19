@@ -7,6 +7,10 @@ import numpy as np
 import logging
 import os
 import tensorflow as tf
+from google.protobuf import text_format
+
+from autodl.auto_ingestion.dataset import AutoDLDataset, AutoDLMetadata
+
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -157,7 +161,9 @@ class UniMediaDatasetFormatter():
                  classes_list=None,
                  channels_dict=None,
                  channels_list=None,
-                 is_label_array=False):
+                 is_label_array=False,
+                 gen_dataset=False,
+                 gen_tfrecords=True):
         # Dataset basename, e.g. `adult`
         self.dataset_name = dataset_name
         if new_dataset_name:
@@ -226,6 +232,39 @@ class UniMediaDatasetFormatter():
         # Indicate whether the label is an array (otherwise the label is a list of
         # integers)
         self.is_label_array = is_label_array
+
+        # generate AutoDLDataset
+        self.gen_dataset = gen_dataset
+        self.gen_tfrecords = gen_tfrecords
+
+        self.dataset_ctx = {
+            "train": {
+                "metadata": None,
+                "data": [],
+            },
+            "test": {
+                "metadata": None,
+                "data": []
+            }
+        }
+        self.dataset_train = None
+        self.dataset_test = None
+        self.test_solution = None
+
+    def get_dataset_train(self):
+        if self.dataset_train is None:
+            raise ValueError("You should set gen_dataset=True to generate AutoDLDataset")
+        return self.dataset_train
+
+    def get_dataset_test(self):
+        if self.dataset_test is None:
+            raise ValueError("You should set gen_dataset=True to generate AutoDLDataset")
+        return self.dataset_test
+
+    def get_test_solution(self):
+        if self.test_solution is None:
+            raise ValueError("You should set gen_dataset=True to generate test_solution")
+        return self.test_solution
 
     def get_dataset_dir(self):
         dataset_dir = os.path.join(self.output_dir, self.new_dataset_name)
@@ -311,21 +350,26 @@ matrix_spec {
 
     def write_tfrecord_and_metadata(self, subset='train'):
         # Make directories if necessary
-        if not os.path.isdir(self.output_dir):
-            os.mkdir(self.output_dir)
-        if not os.path.isdir(self.dataset_dir):
-            os.mkdir(self.dataset_dir)
-        if not os.path.isdir(self.dataset_data_dir):
-            os.mkdir(self.dataset_data_dir)
-        subset_dir = os.path.join(self.dataset_data_dir, subset)
-        if not os.path.isdir(subset_dir):
-            os.mkdir(subset_dir)
+        if self.gen_tfrecords:
+            if not os.path.isdir(self.output_dir):
+                os.mkdir(self.output_dir)
+            if not os.path.isdir(self.dataset_dir):
+                os.mkdir(self.dataset_dir)
+            if not os.path.isdir(self.dataset_data_dir):
+                os.mkdir(self.dataset_data_dir)
+            subset_dir = os.path.join(self.dataset_data_dir, subset)
+            if not os.path.isdir(subset_dir):
+                os.mkdir(subset_dir)
 
         # Write metadata
-        path_to_metadata = self.get_metadata_filename(subset=subset)
         metadata = self.get_metadata(subset=subset)
-        with open(path_to_metadata, 'w') as f:
-            f.write(metadata)
+
+        if self.gen_tfrecords:
+            path_to_metadata = self.get_metadata_filename(subset=subset)
+            with open(path_to_metadata, 'w') as f:
+                f.write(metadata)
+        if self.gen_dataset:
+            self.dataset_ctx[subset]["metadata"] = AutoDLMetadata(None).serialize_from_raw_str(metadata)
 
         # Write TFRecords
         path_to_tfrecord = self.get_data_filename(subset=subset)
@@ -346,81 +390,104 @@ matrix_spec {
         counter = 0
         labels_array = np.zeros((num_examples, self.output_dim))
         has_confidences = False
-        with tf.python_io.TFRecordWriter(path_to_tfrecord) as writer:
-            for features, labels in data:
-                if self.is_label_array or (self.label_format == 'DENSE'):
-                    # labels are stored in sparse format in TFRecords
-                    labels = label_dense_to_sparse(labels)
-                # in the case where `labels` is actually (labels, confidences)
-                if has_confidences or isinstance(labels, tuple):
-                    assert (len(labels) == 2)
-                    confidences = labels[1]
-                    labels = labels[0]
-                    has_confidences = True
-                else:
-                    confidences = [1] * len(labels)  # If not detailed, all confidence will be set to 1
-                if verbose and counter % 100 == 0:
-                    print("Formatting dataset: {},".format(self.dataset_name),
-                          "subset: {},".format(subset),
-                          "index: {},".format(counter + id_translation),
-                          "example {}".format(counter),
-                          "of {}...".format(num_examples))
-                if is_test_set:
-                    label_index = _int64_feature([])
-                    label_score = _float_feature([])
-                    # labels are stored in dense format in solution file
-                    labels_array[counter] = label_sparse_to_dense(labels, self.output_dim)
-                else:
-                    label_index = _int64_feature(labels)
-                    label_score = _float_feature(confidences)
-                context_dict = {
-                    'id': _int64_feature([counter + id_translation]),
-                    'label_index': label_index,
-                    'label_score': label_score
+
+        sequence_example_list = []
+        for features, labels in data:
+            if self.is_label_array or (self.label_format == 'DENSE'):
+                # labels are stored in sparse format in TFRecords
+                labels = label_dense_to_sparse(labels)
+            # in the case where `labels` is actually (labels, confidences)
+            if has_confidences or isinstance(labels, tuple):
+                assert (len(labels) == 2)
+                confidences = labels[1]
+                labels = labels[0]
+                has_confidences = True
+            else:
+                confidences = [1] * len(labels)  # If not detailed, all confidence will be set to 1
+            if verbose and counter % 100 == 0:
+                print("Formatting dataset: {},".format(self.dataset_name),
+                      "subset: {},".format(subset),
+                      "index: {},".format(counter + id_translation),
+                      "example {}".format(counter),
+                      "of {}...".format(num_examples))
+            if is_test_set:
+                label_index = _int64_feature([])
+                label_score = _float_feature([])
+                # labels are stored in dense format in solution file
+                labels_array[counter] = label_sparse_to_dense(labels, self.output_dim)
+            else:
+                label_index = _int64_feature(labels)
+                label_score = _float_feature(confidences)
+            context_dict = {
+                'id': _int64_feature([counter + id_translation]),
+                'label_index': label_index,
+                'label_score': label_score
+            }
+
+            # For SPARSE format, `features` should be a list of 4-tuples. Each
+            # tuple has shape (row_index, col_index, channel_index, value)
+            if self.format == 'SPARSE':
+                sparse_row_index, sparse_col_index, sparse_channel_index, sparse_value = \
+                    feature_sparse_to_dense(features)
+                feature_list_dict = {
+                    '0_sparse_row_index': _feature_list([_int64_feature(sparse_row_index)]),
+                    '0_sparse_col_index': _feature_list([_int64_feature(sparse_col_index)]),
+                    '0_sparse_channel_index': _feature_list([_int64_feature(sparse_channel_index)]),
+                    '0_sparse_value': _feature_list([_float_feature(sparse_value)])
                 }
+            elif self.format == 'DENSE':
+                feature_list = [_float_feature(x) for x in features]
+                feature_list_dict = {
+                    '0_dense_input': _feature_list(feature_list)
+                }
+            elif self.format == 'COMPRESSED':
+                feature_list = [_bytes_feature(x) for x in features]
+                feature_list_dict = {
+                    '0_compressed': _feature_list(feature_list)
+                }
+            else:
+                raise ValueError("Wrong format key: {}.".format(self.format) + \
+                                 "Should be one of " + \
+                                 "`DENSE`, `SPARSE`, `COMPRESSED`.")
 
-                # For SPARSE format, `features` should be a list of 4-tuples. Each
-                # tuple has shape (row_index, col_index, channel_index, value)
-                if self.format == 'SPARSE':
-                    sparse_row_index, sparse_col_index, sparse_channel_index, sparse_value = \
-                        feature_sparse_to_dense(features)
-                    feature_list_dict = {
-                        '0_sparse_row_index': _feature_list([_int64_feature(sparse_row_index)]),
-                        '0_sparse_col_index': _feature_list([_int64_feature(sparse_col_index)]),
-                        '0_sparse_channel_index': _feature_list([_int64_feature(sparse_channel_index)]),
-                        '0_sparse_value': _feature_list([_float_feature(sparse_value)])
-                    }
-                elif self.format == 'DENSE':
-                    feature_list = [_float_feature(x) for x in features]
-                    feature_list_dict = {
-                        '0_dense_input': _feature_list(feature_list)
-                    }
-                elif self.format == 'COMPRESSED':
-                    feature_list = [_bytes_feature(x) for x in features]
-                    feature_list_dict = {
-                        '0_compressed': _feature_list(feature_list)
-                    }
-                else:
-                    raise ValueError("Wrong format key: {}.".format(self.format) + \
-                                     "Should be one of " + \
-                                     "`DENSE`, `SPARSE`, `COMPRESSED`.")
+            context = tf.train.Features(feature=context_dict)
+            feature_lists = tf.train.FeatureLists(feature_list=feature_list_dict)
+            sequence_example = tf.train.SequenceExample(
+                context=context,
+                feature_lists=feature_lists)
+            sequence_example_list.append(sequence_example.SerializeToString())
 
-                context = tf.train.Features(feature=context_dict)
-                feature_lists = tf.train.FeatureLists(feature_list=feature_list_dict)
-                sequence_example = tf.train.SequenceExample(
-                    context=context,
-                    feature_lists=feature_lists)
-                writer.write(sequence_example.SerializeToString())
-                counter += 1
-                if is_test_set:
-                    self.num_examples_test += 1
-                else:
-                    self.num_examples_train += 1
+            counter += 1
+            if is_test_set:
+                self.num_examples_test += 1
+            else:
+                self.num_examples_train += 1
+
+        if self.gen_tfrecords:
+            with tf.python_io.TFRecordWriter(path_to_tfrecord) as writer:
+                for row in sequence_example_list:
+                    writer.write(row)
+
+        if self.gen_dataset:
+            self.dataset_ctx[subset]["data"] = sequence_example_list
 
         # Write solution file
         if is_test_set:
             path_to_solution = self.get_solution_filename()
-            np.savetxt(path_to_solution, labels_array, fmt='%.0f')
+            if self.gen_tfrecords:
+                np.savetxt(path_to_solution, labels_array, fmt='%.0f')
+
+            if self.gen_dataset:
+                self.test_solution = labels_array
+
+        # generate DataSet
+        if self.gen_dataset:
+            if subset == "test":
+                self.dataset_test = AutoDLDataset(dataset_name=self.dataset_name, dataset_ser=self.dataset_ctx[subset])
+            elif subset == "train":
+                self.dataset_train = AutoDLDataset(dataset_name=self.dataset_name, dataset_ser=self.dataset_ctx[subset])
+                # set test sample_count in train's metadata
+                self.dataset_train.set_test_sample_count(self.dataset_test.get_test_sample_count())
 
     def press_a_button_and_give_me_an_AutoDL_dataset(self):
         print("Begin formatting dataset: {}.".format(self.dataset_name))
@@ -430,5 +497,7 @@ matrix_spec {
         # dataset_info.pop('label_to_index_map', None)
         print("Basic dataset info:")
         pprint(dataset_info)
+        # you shold first write test data and then write train data
+        # in order to set test_sample_count with gen_dataset=True
         self.write_tfrecord_and_metadata(subset='test')
         self.write_tfrecord_and_metadata(subset='train')

@@ -97,7 +97,7 @@ def get_features_labels_pairs(merged_df, dataset_dir, subset="train", num_channe
     return features_labels_pairs
 
 
-def autovideo_2_autodl_format(input_dir, num_channels=3):
+def autovideo_2_autodl_format(input_dir, num_channels=3, gen_tfrecords=True, gen_dataset=False):
     """
     there should be `labels.name`, `labels.csv`, and videos under the input_dir.
     And the videos should be better have same shape.
@@ -151,7 +151,9 @@ def autovideo_2_autodl_format(input_dir, num_channels=3):
                                               format="COMPRESSED",
                                               sequence_size_func=None,
                                               new_dataset_name=new_dataset_name,
-                                              classes_list=None)
+                                              classes_list=None,
+                                              gen_dataset=gen_dataset,
+                                              gen_tfrecords=gen_tfrecords)
 
     data_formatter.press_a_button_and_give_me_an_AutoDL_dataset()
 

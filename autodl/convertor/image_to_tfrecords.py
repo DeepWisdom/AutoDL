@@ -63,7 +63,7 @@ def im_size(input_dir, filenames):
     return row_count, col_count, num_channels
 
 
-def autoimage_2_autodl_format(input_dir):
+def autoimage_2_autodl_format(input_dir, gen_tfrecords=True, gen_dataset=False):
     """
     there should be `labels.name`, `labels.csv`, and images under the input_dir.
     And the images should be better have same shape.
@@ -117,8 +117,11 @@ def autoimage_2_autodl_format(input_dir):
                                               format="COMPRESSED",
                                               sequence_size_func=None,
                                               new_dataset_name=new_dataset_name,
-                                              classes_list=None)
+                                              classes_list=None,
+                                              gen_dataset=gen_dataset,
+                                              gen_tfrecords=gen_tfrecords)
     data_formatter.press_a_button_and_give_me_an_AutoDL_dataset()
+    return data_formatter
 
 
 if __name__ == "__main__":

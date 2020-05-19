@@ -15,8 +15,11 @@ class ImageLogicModel(Model):
         super(ImageLogicModel, self).__init__(metadata)
 
         test_metadata_filename = self.metadata.get_dataset_name().replace('train', 'test') + '/metadata.textproto'
-        self.num_test = [int(line.split(':')[1]) for line in open(test_metadata_filename, 'r').readlines()[:3] if
-                         'sample_count' in line][0]
+        if os.path.exists(test_metadata_filename):
+            self.num_test = [int(line.split(':')[1]) for line in open(test_metadata_filename, 'r').readlines()[:3] if
+                             'sample_count' in line][0]
+        else:
+            self.num_test = metadata.get_test_sample_count()
 
         self.timers = {
             'train': skeleton.utils.Timer(),

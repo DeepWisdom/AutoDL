@@ -16,6 +16,8 @@
 
 Reads data in the Tensorflow AutoDL standard format.
 """
+
+from typing import List
 import os
 import tensorflow as tf
 import numpy as np
@@ -25,6 +27,7 @@ from tensorflow import flags
 from tensorflow import gfile
 from tensorflow import logging
 from google.protobuf import text_format
+from google.protobuf.json_format import ParseError
 from . import dataset_utils
 from .data_pb2 import DataSpecification
 from .data_pb2 import MatrixSpec
@@ -41,11 +44,45 @@ def dataset_file_pattern(dataset_name):
 class AutoDLMetadata(object):
     """AutoDL data specification."""
 
-    def __init__(self, dataset_name):
+    def __init__(self, dataset_name, metadata_ser=None):
         self.dataset_name_ = dataset_name
-        self.metadata_ = DataSpecification()
-        with gfile.GFile(metadata_filename(dataset_name), "r") as f:
-            text_format.Merge(f.read(), self.metadata_)
+        self.test_sample_count = 0
+        if metadata_ser is not None:
+            self.metadata_ = self.serialize_from_serialized(serialized=metadata_ser)
+        elif dataset_name is not None:
+            self.metadata_ = DataSpecification()
+            with gfile.GFile(metadata_filename(dataset_name), "r") as f:
+                text_format.Merge(f.read(), self.metadata_)
+
+    def parse_from_string(self, metastr):
+        try:
+            meta_spec = DataSpecification()
+            text_format.Parse(metastr, meta_spec)
+        except ParseError as exp:
+            meta_spec = None
+        return meta_spec
+
+    def parse_from_file(self, dataset_name):
+        try:
+            meta_spec = DataSpecification()
+            with gfile.GFile(metadata_filename(dataset_name), "r") as f:
+                text_format.Merge(f.read(), meta_spec)
+        except ParseError as exp:
+            meta_spec = None
+        return meta_spec
+
+    def serialize_from_serialized(self, serialized):
+        meta_spec = DataSpecification()
+        meta_spec.ParseFromString(serialized)
+        return meta_spec
+
+    def serialize_from_raw_str(self, metastr):
+        meta_spec = self.parse_from_string(metastr)
+        if meta_spec is not None:
+            seri_str = meta_spec.SerializeToString()
+        else:
+            seri_str = None
+        return seri_str
 
     def get_dataset_name(self):
         return self.dataset_name_
@@ -94,6 +131,16 @@ class AutoDLMetadata(object):
     def get_output_size(self):
         return self.metadata_.output_dim
 
+    def set_test_sample_count(self, sample_count):
+        self.test_sample_count = sample_count
+
+    def get_test_sample_count(self):
+        if hasattr(self, "test_sample_count"):
+            return self.test_sample_count
+        else:
+            logging.error("AutoDLMetadata has no atrr test_sample_count.")
+            return self.size()
+
     def size(self):
         return self.metadata_.sample_count
 
@@ -114,17 +161,24 @@ class AutoDLDataset(object):
        on the features and labels.
     """
 
-    def __init__(self, dataset_name, num_parallel_readers=3):
+    def __init__(self, dataset_name, dataset_ser=None, num_parallel_readers=3):
         """Construct an AutoDL Dataset.
 
         Args:
           dataset_name: name of the dataset under the 'dataset_dir' flag.
+          dataset_ser: raw serialized dataset
         """
         self.dataset_name_ = dataset_name
         self.num_parallel_readers = num_parallel_readers
-        self.metadata_ = AutoDLMetadata(dataset_name)
-        self._create_dataset()
-        self.dataset_ = self.dataset_.map(self._parse_function, num_parallel_calls=tf.data.experimental.AUTOTUNE)
+
+        if dataset_ser is not None:
+            self.metadata_ = AutoDLMetadata(dataset_name, dataset_ser["metadata"])
+            self._create_dataset_from_ser(dataset_ser["data"])
+        elif dataset_name is not None:
+            self.metadata_ = AutoDLMetadata(dataset_name)
+            self._create_dataset_from_file()
+        else:
+            raise ValueError("dataset_name and dataset_ser can't both be None")
 
     def get_dataset(self):
         """Returns a tf.data.dataset object."""
@@ -136,6 +190,12 @@ class AutoDLDataset(object):
 
     def _feature_key(self, index, feature_name):
         return str(index) + "_" + feature_name
+
+    def set_test_sample_count(self, sample_count):
+        self.metadata_.set_test_sample_count(sample_count)
+
+    def get_test_sample_count(self):
+        return self.metadata_.size()
 
     def _parse_function(self, sequence_example_proto):
         """Parse a SequenceExample in the AutoDL/TensorFlow format.
@@ -258,7 +318,7 @@ class AutoDLDataset(object):
         sample.append(labels)
         return sample
 
-    def _create_dataset(self):
+    def _create_dataset_from_file(self):
         if not hasattr(self, "dataset_"):
             files = gfile.Glob(dataset_file_pattern(self.dataset_name_))
             if not files:
@@ -275,6 +335,14 @@ class AutoDLDataset(object):
                 # Only a single tfrecord was given
                 dataset = tf.data.TFRecordDataset(files, num_parallel_reads=self.num_parallel_readers)
             self.dataset_ = dataset
+
+        self.dataset_ = self.dataset_.map(self._parse_function, num_parallel_calls=tf.data.experimental.AUTOTUNE)
+
+    def _create_dataset_from_ser(self, dataset_ser: List):
+        if not hasattr(self, "dataset_"):
+            self.dataset_ = tf.data.Dataset.from_tensor_slices(tf.constant(dataset_ser))
+
+        self.dataset_ = self.dataset_.map(self._parse_function, num_parallel_calls=tf.data.experimental.AUTOTUNE)
 
     def get_class_labels(self):
         """Get all class labels"""
