@@ -76,28 +76,7 @@ def seq_size(input_dir, filenames):
     return sequence_size
 
 
-def get_features_labels_pairs(merged_df, dataset_dir, subset="train", num_channels=3):
-    def func(x):
-        index, row = x
-        filename = row["FileName"]
-        if "LabelConfidencePairs" in row:
-            labels = row["LabelConfidencePairs"]
-            confidence_pairs = True
-        elif "Labels" in row:
-            labels = row["Labels"]
-            confidence_pairs = False
-        else:
-            raise Exception("No labels found, please check labels.csv file.")
-        features = get_features(dataset_dir, filename, num_channels=num_channels)  # read file
-        labels = get_labels(labels, confidence_pairs=confidence_pairs)  # read labels
-        return features, labels
-
-    g = merged_df[merged_df["subset"] == subset].iterrows
-    features_labels_pairs = lambda: map(func, g())
-    return features_labels_pairs
-
-
-def autovideo_2_autodl_format(input_dir, num_channels=3, gen_tfrecords=True, gen_dataset=False):
+def autovideo_2_autodl_format(input_dir, num_channels=3, gen_tfrecords=True, gen_dataset=False, train_size=0.7):
     """
     there should be `labels.name`, `labels.csv`, and videos under the input_dir.
     And the videos should be better have same shape.
@@ -115,13 +94,17 @@ def autovideo_2_autodl_format(input_dir, num_channels=3, gen_tfrecords=True, gen
     output_dir = input_dir + "_formatted"
 
     labels_df = get_labels_df(input_dir)
-    merged_df = get_merged_df(labels_df, train_size=0.7)
-    all_classes = get_all_classes(merged_df)
+    merged_df = get_merged_df(labels_df, train_size=train_size)
+    all_classes = list(get_labels_map(merged_df).keys())
 
-    features_labels_pairs_train = get_features_labels_pairs(merged_df, input_dir, subset="train",
-                                                            num_channels=num_channels)
-    features_labels_pairs_test = get_features_labels_pairs(merged_df, input_dir, subset="test",
-                                                           num_channels=num_channels)
+    features_labels_pairs_train = get_features_labels_pairs_from_rawdata(merged_df, input_dir,
+                                                                         get_feature_func=get_features,
+                                                                         subset="train",
+                                                                         num_channels=num_channels)
+    features_labels_pairs_test = get_features_labels_pairs_from_rawdata(merged_df, input_dir,
+                                                                        get_feature_func=get_features,
+                                                                        subset="test",
+                                                                        num_channels=num_channels)
 
     output_dim = len(all_classes)
     num_examples_train = merged_df[merged_df["subset"] == "train"].shape[0]
@@ -156,6 +139,7 @@ def autovideo_2_autodl_format(input_dir, num_channels=3, gen_tfrecords=True, gen
                                               gen_tfrecords=gen_tfrecords)
 
     data_formatter.press_a_button_and_give_me_an_AutoDL_dataset()
+    return data_formatter
 
 
 if __name__ == "__main__":

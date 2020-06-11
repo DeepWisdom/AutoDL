@@ -1,4 +1,4 @@
-#!/usr/bin/env python  
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # @Desc   : transform tabular format to tfrecords
 

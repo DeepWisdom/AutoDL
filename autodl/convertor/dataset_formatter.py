@@ -92,7 +92,7 @@ def list_to_text_format(classes, map_name='label_to_index_map'):
 
 
 def label_sparse_to_dense(li_label_nums, output_dim):
-    dense_label = np.zeros(output_dim)
+    dense_label = np.zeros(output_dim, dtype=np.int8)
     for label_num in li_label_nums:
         dense_label[label_num] = 1
     return dense_label
@@ -396,6 +396,7 @@ matrix_spec {
             if self.is_label_array or (self.label_format == 'DENSE'):
                 # labels are stored in sparse format in TFRecords
                 labels = label_dense_to_sparse(labels)
+
             # in the case where `labels` is actually (labels, confidences)
             if has_confidences or isinstance(labels, tuple):
                 assert (len(labels) == 2)
@@ -446,8 +447,7 @@ matrix_spec {
                     '0_compressed': _feature_list(feature_list)
                 }
             else:
-                raise ValueError("Wrong format key: {}.".format(self.format) + \
-                                 "Should be one of " + \
+                raise ValueError("Wrong format key: {}.".format(self.format) + "Should be one of " +
                                  "`DENSE`, `SPARSE`, `COMPRESSED`.")
 
             context = tf.train.Features(feature=context_dict)

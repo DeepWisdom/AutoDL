@@ -96,7 +96,7 @@ def get_features_labels_pairs(data, solution, vocabulary, language, format='DENS
         labels = get_labels(solution[i])
         return features, labels
     g = iter(range(len(data)))
-    features_labels_pairs = lambda:map(func, g)
+    features_labels_pairs = lambda: map(func, g)
     return features_labels_pairs
 
 
@@ -141,7 +141,7 @@ def autonlp_2_autodl_format(input_dir: str):
                                                  output_dim,
                                                  col_count,
                                                  row_count,
-                                                 sequence_size=sequence_size, # for strides=2
+                                                 sequence_size=sequence_size,  # for strides=2
                                                  num_channels=num_channels,
                                                  num_examples_train=num_examples_train,
                                                  num_examples_test=num_examples_test,
