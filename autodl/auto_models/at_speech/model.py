@@ -8,7 +8,6 @@ import os
 import sys
 import tensorflow as tf
 
-os.environ["CUDA_VISIBLE_DEVICES"] = '1'
 
 config = tf.ConfigProto(log_device_placement=True, allow_soft_placement=True)
 config.gpu_options.allow_growth = True

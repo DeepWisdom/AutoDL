@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Desc   : transform image format to tfrecords
+# @Desc: transform image format to tfrecords
 
 import os
 import argparse

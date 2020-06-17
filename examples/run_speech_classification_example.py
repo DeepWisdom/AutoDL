@@ -14,7 +14,7 @@ from autodl.auto_ingestion.pure_model_run import run_single_model
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="image example arguments")
+    parser = argparse.ArgumentParser(description="speech example arguments")
     parser.add_argument("--input_data_path", type=str, help="path of input data")
     args = parser.parse_args()
 

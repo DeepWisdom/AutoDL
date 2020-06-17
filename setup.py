@@ -51,6 +51,7 @@ setup(
         "fastai",
         "kapre==0.1.4",
         "keras-radam",
+        "langdetect",
     ],
     extras_require={
         'tests': ['pytest>=4.4.0',
