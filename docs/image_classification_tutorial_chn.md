@@ -26,7 +26,7 @@ pip install autodl-gpu
 
 百度云盘链接:https://pan.baidu.com/s/1OAbn9p7PbIhNYMJM0UHEQA  密码:bkhs
 
-<br />新建文件夹`monkeys`，并准备两个文件`label.name`和`labels.csv`。<br />`labels.name`为分类标签列表，每行一个标签，如：<br />
+<br />新建文件夹`monkeys`，并准备两个文件`labels.name`和`labels.csv`，并将图像文件放于该目录下。<br />`labels.name`为分类标签列表，每行一个标签，如：<br />
 
 ```
 Baboon

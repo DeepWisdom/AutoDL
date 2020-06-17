@@ -9,25 +9,25 @@
 - **GoogleDrive**: [https://drive.google.com/open?id=1X6N-1a5h78G9M6OErPELRX2nIE8vZltH](https://drive.google.com/open?id=1X6N-1a5h78G9M6OErPELRX2nIE8vZltH)
 
 ## 原始数据准备
-我们以AutoNLP竞赛数据集O1为例，数据集目录结构如下所示：
-```shell script
- ├── O1.data
- │   ├── meta.json             //数据集元数据
- │   ├── test.data              //测试集文本语料
- │   ├── train.data             //训练集文本语料
- │   └── train.solution        //训练集Label标签
- └── O1.solution                 //测试集Label标签
+我们以AutoNLP竞赛数据集O1的原始数据为例,  
+
+新建文件夹`O1`，并准备两个文件`labels.name`、`labels.csv`及原始训练数据`O1.data`（每行一条文本，每行单词间的间隔为空格）。<br />`labels.name`为分类标签列表，每行一个标签，如：<br />
+
+```
+class1
+class2
 ```
 
-元数据meta.json说明:
-```json
-{
-    "class_num": 2,							# 文本分类类别数
-    "train_num": 7792,					    # 训练集样本数
-    "test_num": 1821,						# 测试集样本数
-    "language": "EN",						# 文本语言类型
-    "time_budget": 2400				        # 训练及测试时长限制，单位秒
-}
+<br />`labels.csv`为原始数据每行对应的label，列名为`Labels`，如：<br />
+
+```
+Labels
+1
+0
+0
+1
+1
+1
 ```
 
 ## 标准数据集转换

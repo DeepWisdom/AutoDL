@@ -28,7 +28,7 @@ pip install autodl-gpu
 
 
 
-<br />新建文件夹`mini-kth`，并准备两个文件`label.name`和`labels.csv`。<br />`labels.name`为分类标签列表，每行一个标签，如：<br />
+<br />新建文件夹`mini-kth`，并准备两个文件`labels.name`和`labels.csv`，并将视频文件放于该目录下。<br />`labels.name`为分类标签列表，每行一个标签，如：<br />
 
 ```
 running

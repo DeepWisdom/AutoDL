@@ -10,24 +10,25 @@
   - (practice dataset) [https://drive.google.com/drive/folders/1jrxX9tlRx7WPYxLjSN7Vqnn0V1QE6bj6?usp=sharing](https://drive.google.com/drive/folders/1jrxX9tlRx7WPYxLjSN7Vqnn0V1QE6bj6?usp=sharing)
 
 ### 原始数据准备
-我们以AutoSpeech竞赛说话人确认数据集data01为例，数据集目录结构如下所示：
-```shell script
- data01
- ├── data01.data
- │   ├── meta.json             //数据集元数据
- │   ├── test.pkl                //测试集语音语料
- │   ├── train.pkl              //训练集语音语料
- │   └── train.solution        //训练集Label标签
- └── data01.solution             //测试集Label标签               
+下载`Ryerson Autdio-Visual`数据集中的Audio_Song_Actors[https://zenodo.org/record/1188976/files/Audio_Song_Actors_01-24.zip?download=1](https://zenodo.org/record/1188976/files/Audio_Song_Actors_01-24.zip?download=1)  
+按下述方法准备数据：  
+
+新建文件夹`SongActors`，并准备两个文件`labels.name`和`labels.csv`，并将音频文件放于该目录下。<br />`labels.name`为分类标签列表，每行一个标签，如：<br />
+
+```
+actor_00
+actor_01
+actor_02
 ```
 
-```json
-{
-  	"class_num": 100, 					# 音频分类类别数
-  	"train_num": 3000, 					# 训练集样本数
-  	"test_num": 3000, 					# 测试样本数
-  	"time_budget": 1800					# 训练及测试时长限制，单位秒
-}
+<br />`labels.csv`为原始音频名与标签索引的对应表，分隔符为：`,`，两个列名为：`FileName`和`Labels`，如：<br />
+
+```
+FileName,Labels
+03-02-01-01-01-01-01.wav,0
+03-02-02-02-02-02-01.wav,0
+03-02-04-01-02-01-01.wav,0
+03-02-05-02-01-02-01.wav,0
 ```
 
 
@@ -38,68 +39,83 @@
 from autodl.convertor import autospeech_2_autodl_format
 
 def convertor_speech_demo():
-    raw_autospeech_datadir = "~/AutoSpeech/AutoDL_sample_data/data01"
+    raw_autospeech_datadir = "~/AutoSpeech/AutoDL_sample_data/SongActors/"
     autospeech_2_autodl_format(input_dir=raw_autospeech_datadir)
 
 convertor_speech_demo()    
 ```
 
-执行后得到autodl tfrecords的数据集data01_formatted如下：
-```json
-├── data01_formatted
-│   ├── data01_formatted.data
+执行后得到autodl tfrecords的数据集SongActors_formatted如下：
+```
+├── SongActors_formatted
+│   ├── SongActors_formatted.data
 │   │   ├── test
 │   │   │   ├── metadata.textproto												# 测试集元数据
-│   │   │   └── sample-data01_formatted-test.tfrecord			                # 测试集数据
+│   │   │   └── sample-SongActors_formatted-test.tfrecord			            # 测试集数据
 │   │   └── train
 │   │       ├── metadata.textproto												# 训练集元数据
-│   │       └── sample-data01_formatted-train.tfrecord		                    # 训练集数据及标签
-│   └── data01_formatted.solution												# 测试集Label
+│   │       └── sample-SongActors_formatted-train.tfrecord		                # 训练集数据及标签
+│   └── SongActors_formatted.solution											# 测试集Label
 ```
 
 ### 自动训练预测和评估
 ```python
 import os
+import argparse
+import time
 
-from autodl import Model, AutoDLDataset
-from autodl.auto_ingestion import dataset_utils_v2
-from autodl.auto_scoring.score import get_solution
+from autodl.convertor.speech_to_tfrecords import autospeech_2_autodl_format
+from autodl.auto_ingestion import data_io
+from autodl.auto_ingestion.dataset import AutoDLDataset
+from autodl.auto_models.at_speech.model import Model as SpeechModel
+from autodl.utils.util import get_solution
 from autodl.metrics import autodl_auc, accuracy
 
-def do_speech_classification_demo():
-    remaining_time_budget = 1200
-    max_epoch = 100
 
-    # Speech autodl format tfrecords
-    dataset_dir = "ADL_sample_data/data01_formatted"
-
-    basename = dataset_utils_v2.get_dataset_basename(dataset_dir)
+def run_single_model(model, dataset_dir, basename, time_budget=1200, max_epoch=50):
     D_train = AutoDLDataset(os.path.join(dataset_dir, basename, "train"))
     D_test = AutoDLDataset(os.path.join(dataset_dir, basename, "test"))
     solution = get_solution(solution_dir=dataset_dir)
 
-    M = Model(D_train.get_metadata())  # The metadata of D_train and D_test only differ in sample_count
-
+    start_time = int(time.time())
     for i in range(max_epoch):
-        M.fit(D_train.get_dataset(), remaining_time_budget)
-		
-        # Y_pred shape=(test_num, class_num), probability of labels
-        Y_pred = M.predict(D_test.get_dataset(), remaining_time_budget)
+        remaining_time_budget = start_time + time_budget - int(time.time())
+        model.fit(D_train.get_dataset(), remaining_time_budget=remaining_time_budget)
+
+        remaining_time_budget = start_time + time_budget - int(time.time())
+        y_pred = model.predict(D_test.get_dataset(), remaining_time_budget=remaining_time_budget)
 
         # Evaluation.
-        nauc_score = autodl_auc(solution=solution, prediction=Y_pred)
-        acc_score = accuracy(solution=solution, prediction=Y_pred)
+        nauc_score = autodl_auc(solution=solution, prediction=y_pred)
+        acc_score = accuracy(solution=solution, prediction=y_pred)
 
-        print(Y_pred)
         print("Epoch={}, evaluation: nauc_score={}, acc_score={}".format(i, nauc_score, acc_score))
 
 
-def main():
-    do_speech_classification_demo()
 
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="speech example arguments")
+    parser.add_argument("--input_data_path", type=str, help="path of input data")
+    args = parser.parse_args()
 
-if __name__ == '__main__':
-    main()
+    input_dir = os.path.dirname(args.input_data_path)
+
+    autospeech_2_autodl_format(input_dir=input_dir)
+
+    new_dataset_dir = input_dir + "_formatted" + "/" + os.path.basename(input_dir)
+    datanames = data_io.inventory_data(new_dataset_dir)
+    basename = datanames[0]
+    print("train_path: ", os.path.join(new_dataset_dir, basename, "train"))
+
+    D_train = AutoDLDataset(os.path.join(new_dataset_dir, basename, "train"))
+
+    max_epoch = 50
+    time_budget = 1200
+
+    model = SpeechModel(D_train.get_metadata())
+
+    run_single_model(model, new_dataset_dir, basename, time_budget, max_epoch)
+
 ```
 上述代码中 `y_pred` 对测试数据集的预测结果，输出样本对应每个label的概率。<br />评估方式中 nauc_score 为正则化后auc分数 2*auc - 1，acc_score 为准确率。<br />
 
