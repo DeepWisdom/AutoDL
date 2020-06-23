@@ -52,6 +52,7 @@ def autotabular_2_autodl_format(input_dir, data: pd.DataFrame, label: pd.Series,
     if label.name in data:
         del data[label.name]
 
+    output_dim = int(np.max(label)) + 1
     label = OneHotEncoder().fit_transform([[ele] for ele in label]).toarray()
     train_data, test_data, train_label, test_label = train_test_split(data, label, test_size=0.3, random_state=1024)
 
@@ -60,7 +61,6 @@ def autotabular_2_autodl_format(input_dir, data: pd.DataFrame, label: pd.Series,
     features_labels_pairs_test = get_features_labels_pairs(test_data, test_label)
 
     # write data into TFRecords format
-    output_dim = int(np.max(label)) + 1
     col_count = data.shape[1]
     row_count = 1
     sequence_size = 1
