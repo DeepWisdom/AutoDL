@@ -99,7 +99,28 @@ class Model:
             self.ensemble_val_record_list.append([self.cur_cls_name, cur_val_nauc])
             self.ensemble_val_nauc_list.append(cur_val_nauc)
 
-    def predict(self, dataset, remaining_time_budget=None):
+    def save_model(self, modal_type):
+
+        model_obj = self.domain_model
+
+        config_obj = {
+            "cur_cls_name": self.cur_cls_name,
+            "g_train_loss_list": self.g_train_loss_list,
+            "cur_train_his_report": self.cur_train_his_report,
+            "metadata_ser": self.metadata.serialize_to_string(),  # required
+            "modal_type": modal_type,  # required
+        }
+
+        return model_obj, config_obj
+
+    def load_model(self, model_obj, config_obj):
+        self.domain_model = model_obj
+
+        self.cur_cls_name = config_obj["cur_cls_name"]
+        self.g_train_loss_list = config_obj["g_train_loss_list"]
+        self.cur_train_his_report = config_obj["cur_train_his_report"]
+
+    def predict(self, dataset, remaining_time_budget=None, test=False):
         """Test method of domain-specific model."""
         cur_y_pred = self.domain_model.test_pipeline(dataset)
 

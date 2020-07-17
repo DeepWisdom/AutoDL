@@ -41,6 +41,17 @@ class Model:
         self.has_exception = False
         self.y_pred_last = None
 
+    def save_model(self):
+        """
+        :return (model_obj, config_obj)
+        """
+        logger.info("start to save model")
+        return self.domain_model.save_model(modal_type=self.domain)
+
+    def load_model(self, model_obj, config_obj):
+        logger.info("start to load model")
+        self.domain_model.load_model(model_obj, config_obj)
+
     def fit(self, dataset, remaining_time_budget=None):
         """Train method of domain-specific model."""
         # Convert training dataset to necessary format and
@@ -51,10 +62,11 @@ class Model:
             self.done_training = self.domain_model.done_training
 
         except Exception as exp:
+            logger.exception("exception in fit: {}".format(exp))
             self.has_exception = True
             self.done_training = True
 
-    def predict(self, dataset, remaining_time_budget=None):
+    def predict(self, dataset, remaining_time_budget=None, test=False):
         """Test method of domain-specific model."""
         # Convert test dataset to necessary format and
         # store as self.domain_dataset_test
@@ -64,15 +76,17 @@ class Model:
             return self.y_pred_last
 
         try:
-            Y_pred = self.domain_model.predict(dataset, remaining_time_budget=remaining_time_budget)
+            Y_pred = self.domain_model.predict(dataset, remaining_time_budget=remaining_time_budget, test=test)
 
             self.y_pred_last = Y_pred
             self.done_training = self.domain_model.done_training
 
         except MemoryError as mem_error:
+            logger.exception("exception in predict: {}".format(mem_error))
             self.has_exception = True
             self.done_training = True
         except Exception as exp:
+            logger.exception("exception in predict: {}".format(exp))
             self.has_exception = True
             self.done_training = True
 

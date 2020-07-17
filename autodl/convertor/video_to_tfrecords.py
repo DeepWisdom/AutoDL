@@ -95,7 +95,8 @@ def autovideo_2_autodl_format(input_dir, num_channels=3, gen_tfrecords=True, gen
 
     labels_df = get_labels_df(input_dir)
     merged_df = get_merged_df(labels_df, train_size=train_size)
-    all_classes = list(get_labels_map(merged_df).keys())
+    labels_map = get_labels_map(merged_df)
+    all_classes = list(labels_map.keys())
 
     features_labels_pairs_train = get_features_labels_pairs_from_rawdata(merged_df, input_dir,
                                                                          get_feature_func=get_features,
@@ -135,6 +136,7 @@ def autovideo_2_autodl_format(input_dir, num_channels=3, gen_tfrecords=True, gen
                                               sequence_size_func=None,
                                               new_dataset_name=new_dataset_name,
                                               classes_list=None,
+                                              classes_dict=labels_map,
                                               gen_dataset=gen_dataset,
                                               gen_tfrecords=gen_tfrecords)
 

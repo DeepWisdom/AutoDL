@@ -112,13 +112,14 @@ def autonlp_2_autodl_format(input_dir: str, gen_tfrecords=True, gen_dataset=Fals
 
     usually, text language is important for model, here, we use langdetect to autodetect text language
     """
-    input_dir = os.path.normpath(input_dir)
+    input_dir = os.path.abspath(input_dir)
     name = os.path.basename(input_dir)
     output_dir = input_dir + "_formatted"
 
     labels_df = get_labels_df(input_dir, shuffling=False)  # Here shuffling should be False
     merged_df = get_merged_df(labels_df, train_size=train_size)
-    all_classes = list(get_labels_map(merged_df).keys())
+    labels_map = get_labels_map(merged_df)
+    all_classes = list(labels_map.keys())
 
     # Read data
     all_data = read_file(os.path.join(input_dir, name + ".data"))
@@ -148,7 +149,7 @@ def autonlp_2_autodl_format(input_dir: str, gen_tfrecords=True, gen_dataset=Fals
     num_examples_train = merged_df[merged_df["subset"] == "train"].shape[0]
     num_examples_test = merged_df[merged_df["subset"] == "test"].shape[0]
     new_dataset_name = name  # same name
-    classes_list = None
+
     dataset_formatter = UniMediaDatasetFormatter(name,
                                                  output_dir,
                                                  features_labels_pairs_train,
@@ -169,7 +170,7 @@ def autonlp_2_autodl_format(input_dir: str, gen_tfrecords=True, gen_dataset=Fals
                                                  is_sequence="false",
                                                  sequence_size_func=None,
                                                  new_dataset_name=new_dataset_name,
-                                                 classes_list=classes_list,
+                                                 classes_dict=labels_map,
                                                  channels_dict=vocabulary,
                                                  gen_tfrecords=gen_tfrecords,
                                                  gen_dataset=gen_dataset)

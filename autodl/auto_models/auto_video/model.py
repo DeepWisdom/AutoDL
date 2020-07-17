@@ -329,6 +329,45 @@ class Model(VideoLogicModel):
             'score': model.info['loop']['epoch'] * 1e-4,
         }
 
+    def save_model(self, modal_type):
+        best_idx = np.argmax(np.array([c['valid']['score'] for c in self.model.checkpoints]))
+        best_checkpoints = [self.model.checkpoints[best_idx]]
+
+        self.model.checkpoints = best_checkpoints
+        self.model.optimizer_fc = None
+        self.model.optimizer = None
+        self.model.ensemble_test_index = 0
+        model_obj = self.model
+
+        for model in self.model_space:
+            model.optimizer_fc = None
+            model.optimizer = None
+
+        config_obj = {
+            # "model_space": self.model_space,
+            "tau": self.tau,
+            "base_info": self.base_info,
+            "ensembleconfig": self.ensembleconfig,
+            "best_score": self.best_score,
+            "epoch_metrics": self.epoch_metrics,
+            "is_half": self.is_half,
+            "metadata_ser": self.metadata.serialize_to_string(),  # required
+            "modal_type": modal_type  # required
+        }
+        return model_obj, config_obj
+
+    def load_model(self, model_obj, config_obj):
+        self.model = model_obj
+
+        self.tau = config_obj["tau"]
+        self.base_info = config_obj["base_info"]
+        self.ensembleconfig = config_obj["ensembleconfig"]
+        self.best_score = config_obj["best_score"]
+        self.epoch_metrics = config_obj["epoch_metrics"]
+        # self.model_space = config_obj["model_space"]
+        self.model_space[self.ensembleconfig.MODEL_INDEX] = self.model
+        self.is_half = config_obj["is_half"]
+
     @timeit
     def prediction(self, dataloader, model, checkpoints,test_time_augmentation=True, detach=True, num_step=None):
         tau = self.tau

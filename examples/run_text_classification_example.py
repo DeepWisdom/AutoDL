@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # @Desc   : run single text classification model with O1 dataset
-# run example: python3 run_text_classification_example.py --input_data_path=../sample_data/O1
+# run example: python3 run_text_classification_example.py --input_data_path=../sample_data/O1/
 
 import os
 import argparse

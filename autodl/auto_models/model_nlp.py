@@ -3,9 +3,6 @@ AutoNLP and AutoSpeech).
 """
 
 import numpy as np
-import os
-import sys
-import tensorflow as tf
 from scipy import stats
 import multiprocessing
 
@@ -22,25 +19,11 @@ feature_dict = {'avg_upper_cnt': 0.13243329407894736, 'check_len': 224.195714285
                 'first_detect_normal_std': 0.00025, 'test_num': 10000, 'max_length': 1830, 'avg_length': 230,
                 'class_num': 2, 'min_length': 1}
 
-# model_dirs = ['',  # current directory
-#               'AutoCV/{}'.format(META_SOLUS.cv_solution),  # AutoCV/AutoCV2 winner model
-#               'AutoNLP/{}'.format(META_SOLUS.nlp_solution),  # AutoNLP 2nd place winner
-#               # 'AutoSpeech/PASA_NJU',    # AutoSpeech winner
-#               'AutoSpeech/{}'.format(META_SOLUS.speech_solution),  # AutoSpeech winner
-#               'tabular_Meysam']  # simple NN model
-# for model_dir in model_dirs:
-#     sys.path.append(os.path.join(here, model_dir))
-
 seq_len = []
 
 
 def meta_domain_2_model(domain):
     return AutoNLPModel
-
-config = tf.ConfigProto()
-config.gpu_options.allow_growth = True  #
-config.log_device_placement = False  #
-config.gpu_options.per_process_gpu_memory_fraction = 0.9
 
 FIRST_SNOOP_DATA_NUM = 700
 
@@ -80,12 +63,12 @@ class Model():
         self.nlp_index_to_token = None
         self.nlp_sep = None
         self.init_nlp()
-        self.domain_model.vocab = self.vocabulary
+        # self.domain_model.vocab = self.vocabulary
         self.shuffle = False
         self.check_len = 0
         self.imbalance_level = -1
 
-        self.tf_dataset_trainsformer = TfDatasetTransformer(if_train_shuffle=False, config=config)
+        self.tf_dataset_trainsformer = TfDatasetTransformer(if_train_shuffle=False)
         self.tf_dataset_trainsformer.init_nlp_data(self.nlp_index_to_token, self.nlp_sep)
         self.time_record = {}
         self.seq_len = []
@@ -102,12 +85,38 @@ class Model():
             index = self.vocabulary[token]
             self.index_to_token[index] = token
 
-
         if self.domain_metadata["language"] == "ZH":
             self.nlp_sep = ""
 
         else:
             self.nlp_sep = " "
+
+    def save_model(self, modal_type):
+        self.domain_model.fasttext_embeddings_index = None
+        self.domain_model.second_stage_model.fasttext_emb = None
+        if hasattr(self.domain_model, "model_manager"):
+            self.domain_model.model_manager.fasttext_embeddings_index = None
+        model_obj = self.domain_model
+
+        # self.tf_dataset_trainsformer.reset()
+
+        config_obj = {
+            # "tf_dataset_trainsformer": self.tf_dataset_trainsformer,
+            "call_num": self.call_num,
+            "metadata_ser": self.metadata.serialize_to_string(),  # required
+            "modal_type": modal_type,  # required
+        }
+        return model_obj, config_obj
+
+    def load_model(self, model_obj, config_obj):
+        self.domain_model = model_obj
+        self.domain_model.test_result_list = [0] * 30
+        self.domain_model.cur_model_test_res = []
+        self.domain_model.svm_test_result = []
+        self.domain_model.hist_test = [[]] * 20
+        self.domain_model.call_num = 0
+        # self.tf_dataset_trainsformer = config_obj["tf_dataset_trainsformer"]
+        self.call_num = config_obj["call_num"]
 
     def fit(self, dataset, remaining_time_budget=None):
         """Train method of domain-specific model."""
@@ -123,7 +132,6 @@ class Model():
 
         self.set_domain_dataset(dataset, is_training=True)
 
-
         if self.call_num == -1:
             self.domain_model.train(self.domain_dataset_train_dict["x"], self.domain_dataset_train_dict["y"],
                                     remaining_time_budget=remaining_time_budget)
@@ -136,10 +144,9 @@ class Model():
 
         self.done_training = self.domain_model.done_training
 
-    def predict(self, dataset, remaining_time_budget=None):
+    def predict(self, dataset, remaining_time_budget=None, test=False):
         """Test method of domain-specific model."""
         # Convert test dataset to necessary format and
-
         self.tf_dataset_trainsformer.init_test_tfds(dataset)
 
         self.set_domain_dataset(dataset, is_training=False)
@@ -150,11 +157,11 @@ class Model():
 
         if self.call_num == -1:
             Y_pred = self.domain_model.test(self.domain_dataset_test,
-                                            remaining_time_budget=remaining_time_budget)
+                                            remaining_time_budget=remaining_time_budget, test=test)
             self.call_num += 1
         else:
             Y_pred = self.domain_model.test(self.domain_dataset_test,
-                                            remaining_time_budget=remaining_time_budget)
+                                            remaining_time_budget=remaining_time_budget, test=test)
         if "test_num" not in self.domain_model.feature_dict:
             self.domain_model.feature_dict["test_num"] = self.domain_metadata['test_num']
 
@@ -262,6 +269,7 @@ class Model():
         attr_dataset = 'domain_dataset_{}'.format(subset)
 
         if not hasattr(self, attr_dataset):
+            print("modal text doesn't have attr: {}".format(attr_dataset))
             if self.domain == 'text':
                 if DM_DS_PARAS.text.if_sample and is_training:
 
@@ -310,7 +318,7 @@ class Model():
                     if self.shuffle:
 
                         del self.tf_dataset_trainsformer
-                        self.tf_dataset_trainsformer = TfDatasetTransformer(if_train_shuffle=True, config=config)
+                        self.tf_dataset_trainsformer = TfDatasetTransformer(if_train_shuffle=True)
 
                         shuffle_size = max(int(0.5 * (self.train_num)), 10000)
 
@@ -387,17 +395,11 @@ class Model():
                     self.X_test = corpus
 
                 setattr(self, attr_dataset, domain_dataset)
-
-            elif self.domain == 'speech':
-
-                setattr(self, attr_dataset, dataset)
-
-            elif self.domain in ['image', 'video', 'tabular']:
-                setattr(self, attr_dataset, dataset)
             else:
                 raise ValueError("The domain {} doesn't exist.".format(self.domain))
 
         else:
+            print("modal text has attr: {}".format(attr_dataset))
             if subset == 'test':
                 if self.X_test_raw:
                     self.domain_dataset_test, test_seq_len = to_corpus(self.X_test_raw, self.index_to_token,
@@ -465,7 +467,6 @@ class Model():
 
                     self.domain_model.seq_len_std = int(np.std(self.seq_len))
 
-
                 if is_training:
                     labels = np.array(Y)
                     domain_dataset = corpus, labels
@@ -487,32 +488,6 @@ def to_corpus(x, index_to_token=INDEX_TO_TOKENS, nlp_sep=NLP_SEP):
     return corpus, seq_len
 
 
-def infer_domain(metadata):
-    """Infer the domain from the shape of the 4-D tensor.
-
-    Args:
-      metadata: an AutoDLMetadata object.
-    """
-    row_count, col_count = metadata.get_matrix_size(0)
-    sequence_size = metadata.get_sequence_size()
-    channel_to_index_map = metadata.get_channel_to_index_map()
-    domain = None
-    if sequence_size == 1:
-        if row_count == 1 or col_count == 1:
-            domain = "tabular"
-        else:
-            domain = "image"
-    else:
-        if row_count == 1 and col_count == 1:
-            if len(channel_to_index_map) > 0:
-                domain = "text"
-            else:
-                domain = "speech"
-        else:
-            domain = "video"
-    return domain
-
-
 def is_chinese(tokens):
     """Judge if the tokens are in Chinese. The current criterion is if each token
     contains one single character, because when the documents are in Chinese,
@@ -525,7 +500,6 @@ def is_chinese(tokens):
         return True
     else:
         return False
-
 
 
 def get_domain_metadata(metadata, domain, is_training=True):

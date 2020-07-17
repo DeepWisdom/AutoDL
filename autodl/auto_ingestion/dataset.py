@@ -84,6 +84,9 @@ class AutoDLMetadata(object):
             seri_str = None
         return seri_str
 
+    def serialize_to_string(self):
+        return self.metadata_.SerializeToString()
+
     def get_dataset_name(self):
         return self.dataset_name_
 
@@ -93,6 +96,7 @@ class AutoDLMetadata(object):
 
     def is_sparse(self, bundle_index=0):
         return self.metadata_.matrix_spec[bundle_index].format == MatrixSpec.SPARSE
+
 
     def get_bundle_size(self):
         return len(self.metadata_.matrix_spec)

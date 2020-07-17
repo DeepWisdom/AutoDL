@@ -361,14 +361,37 @@ class Model(ImageLogicModel):
             'score': epoch * 1e-4,
         }
 
+    def save_model(self, modal_type):
+        model_obj = self.model_pred
+        best_idx = np.argmax(np.array([c['valid']['score'] for c in self.checkpoints]))
+        best_checkpoints = [self.checkpoints[best_idx]]
+
+        config_obj = {
+            "tau": self.tau,
+            "checkpoints": best_checkpoints,
+            "use_test_time_augmentation": self.use_test_time_augmentation,
+            "info": self.info,
+            "hyper_params": self.hyper_params,
+            "metadata_ser": self.metadata.serialize_to_string(), # required
+            "modal_type": modal_type  # required
+        }
+        return model_obj, config_obj
+
+    def load_model(self, model_obj, config_obj):
+        self.model_pred = model_obj
+
+        self.tau = config_obj["tau"]
+        self.checkpoints = config_obj["checkpoints"]
+        self.use_test_time_augmentation = config_obj["use_test_time_augmentation"]
+        self.info = config_obj["info"]
+        self.hyper_params = config_obj["hyper_params"]
+
     def prediction(self, dataloader, model=None, test_time_augmentation=True, detach=True, num_step=None):
         tau = self.tau
         if model is None:
             model = self.model_pred
 
             best_idx = np.argmax(np.array([c['valid']['score'] for c in self.checkpoints]))
-            best_loss = self.checkpoints[best_idx]['valid']['loss']
-            best_score = self.checkpoints[best_idx]['valid']['score']
 
             states = self.checkpoints[best_idx]['model']
             model.load_state_dict(states)
@@ -380,8 +403,6 @@ class Model(ImageLogicModel):
             predictions = []
             for step, (examples, labels) in zip(range(num_step), dataloader):
                 batch_size = examples.size(0)
-                height = int(examples.size(2) * 3 / 4)
-                width = int(examples.size(3) * 3 / 4)
                 if self.use_test_time_augmentation and test_time_augmentation:
                     examples1 = torch.cat([examples, torch.flip(examples, dims=[-1])], dim=0)
                     logits_1 = model(examples1, tau=tau)

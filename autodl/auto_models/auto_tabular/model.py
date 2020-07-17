@@ -132,7 +132,7 @@ class Model(object):
             self.done_training = True
 
     # @timeit
-    def predict(self, dataset, remaining_time_budget=None):
+    def predict(self, dataset, remaining_time_budget=None, test=False):
         """Make predictions on the test set `dataset` (which is different from that
         of the method `train`).
 
@@ -315,29 +315,6 @@ class Model(object):
         else:
             self.imp_cols = [int(col) for col in importances['features'].values]
         self.lgb_info['imp_cols'] = self.imp_cols
-
-    def infer_domain(self):
-        """Infer the domain from the shape of the 4-D tensor."""
-        row_count, col_count = self.metadata.get_matrix_size(0)
-        sequence_size = self.metadata.get_sequence_size()
-        channel_to_index_map = dict(self.metadata.get_channel_to_index_map())
-        domain = None
-        if sequence_size == 1:
-            if row_count == 1 or col_count == 1:
-                domain = "tabular"
-            else:
-                domain = "image"
-        else:
-            if row_count == 1 and col_count == 1:
-                if channel_to_index_map:
-                    domain = "text"
-                else:
-                    domain = "speech"
-            else:
-                domain = "video"
-        self.domain = domain
-        tf.logging.info("The inferred domain of the dataset is: {}.".format(domain))
-        return domain
 
 
 def has_regular_shape(dataset):

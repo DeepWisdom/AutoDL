@@ -467,7 +467,7 @@ class ImageLogicModel(Model):
 
         self.timers['train']('outer_end')
 
-    def predict(self, dataset, remaining_time_budget=None):
+    def predict(self, dataset, remaining_time_budget=None, test=False):
         self.timers['test']('start', exclude_total=True, reset_step=True)
         is_first = self.info['condition']['first']['test']
         self.info['loop']['test'] += 1

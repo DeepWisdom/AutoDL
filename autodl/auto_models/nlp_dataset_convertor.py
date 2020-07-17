@@ -19,9 +19,6 @@ class TfDatasetsConvertor(object):
         self.tfds_train_os_iterator = None
         self.tfds_train_iter_next = None
 
-        self.speech_train_dataset = {"x": None, "y": None}
-        self.speech_test_dataset = None
-        self.speech_x_test = None
         self.if_train_shuffle = if_train_shuffle
 
         self.tfds_convertor_sess = tf.Session(config=tf.ConfigProto(log_device_placement=False))

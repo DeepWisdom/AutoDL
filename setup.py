@@ -50,8 +50,11 @@ setup(
         "catboost==0.21",
         "fastai",
         "kapre==0.1.4",
+        "jieba_fast==0.53",
         "keras-radam",
         "langdetect",
+        "pathos",
+        "bpemb",
     ],
     extras_require={
         'tests': ['pytest>=4.4.0',

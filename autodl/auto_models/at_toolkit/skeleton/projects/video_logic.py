@@ -537,8 +537,8 @@ class VideoLogicModel(Model):
 
         self.timers['train']('outer_end')
 
-    def predict(self, dataset, remaining_time_budget=None):
-        if (self.ensembleconfig.MODEL_INDEX == 0) and (self.model == self.model_space[self.ensembleconfig.MODEL_INDEX]):
+    def predict(self, dataset, remaining_time_budget=None, test=False):
+        if (self.ensembleconfig.MODEL_INDEX == 0 or test) and (self.model == self.model_space[self.ensembleconfig.MODEL_INDEX]):
             rv = self.base_test(dataset, self.model, self.model.checkpoints, remaining_time_budget=None)
         else:
             self.base_test(dataset, self.model, self.model.checkpoints, remaining_time_budget=None)

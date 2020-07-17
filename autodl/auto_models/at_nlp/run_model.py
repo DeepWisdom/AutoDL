@@ -7,10 +7,6 @@ from keras import backend as K
 from keras.preprocessing import sequence
 from keras.callbacks import EarlyStopping, LearningRateScheduler
 
-from ..at_toolkit.at_utils import autodl_nlp_install_download
-
-autodl_nlp_install_download()
-
 from autodl.utils.log_utils import info
 from ..at_nlp.data_manager.data_sampler import DataGenerator
 from ..at_nlp.utils import color_msg, ohe2cat
@@ -257,9 +253,10 @@ class RunModel(object):
         self.evaluator._reset()
 
     def _clear_train_space(self):
-        del self.model
-        gc.collect()
-        K.clear_session()
+        print("_clear_train_space")
+        # del self.model
+        # gc.collect()
+        # K.clear_session()
 
     def _init_nn_train_process(self):
         self.feature_id += 1
@@ -653,7 +650,7 @@ class RunModel(object):
 
         return result
 
-    def test(self, x_test, remaining_time_budget):
+    def test(self, x_test, remaining_time_budget, test):
         if self.call_num == 0:
             self.x_test_raw = x_test
             self.x_test_clean = self.feature_generator.preprocess_data(self.x_test_raw)
@@ -663,6 +660,24 @@ class RunModel(object):
             self.x_test_clean = self.feature_generator.preprocess_data(self.x_test_raw)
 
         self.x_test = self.transform_test()
+
+        if test:  # inference
+            if self.first_stage_done:
+                if self.multi_label:
+                    if self.multi_label_cnt_thred<0:
+                        result = self.cur_model_test_res[-1]
+                        return result
+                    else:
+                        result = self.svm_test_result[-1]
+                elif self.use_second_stage_model:
+                    result = self.output_second_stage_result()
+                else:
+                    print("output_first_stage_result")
+                    result = self.output_first_stage_result()
+
+            else:
+                result = self.output_first_stage_result()
+            return result
 
         # 输出svm 结果
         if self.call_num < self.start_first_stage_call_num:

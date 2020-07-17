@@ -491,7 +491,7 @@ class Model(object):
             model = self.model
             del model
             gc.collect()
-            K.clear_session()
+            # K.clear_session()
 
             self.model_id += 1
 
@@ -590,7 +590,7 @@ class Model(object):
         if self.k >= self.patience or self.epoch >= self.max_epoch:
             del model
             gc.collect()
-            K.clear_session()
+            # K.clear_session()
             model = None
 
             if self.FIRSTROUND:
