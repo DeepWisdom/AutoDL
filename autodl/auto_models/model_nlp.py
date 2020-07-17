@@ -115,6 +115,7 @@ class Model():
         self.domain_model.svm_test_result = []
         self.domain_model.hist_test = [[]] * 20
         self.domain_model.call_num = 0
+        self.domain_model.tokenize_test = False
         # self.tf_dataset_trainsformer = config_obj["tf_dataset_trainsformer"]
         self.call_num = config_obj["call_num"]
 

@@ -654,6 +654,8 @@ class RunModel(object):
         if self.call_num == 0:
             self.x_test_raw = x_test
             self.x_test_clean = self.feature_generator.preprocess_data(self.x_test_raw)
+            if test:
+                self.call_num = self.start_first_stage_call_num + 1
 
         if self.metadata["language"] == "ZH" and self.call_num == 2:
             # feature.do_seg 已经更新
@@ -664,7 +666,7 @@ class RunModel(object):
         if test:  # inference
             if self.first_stage_done:
                 if self.multi_label:
-                    if self.multi_label_cnt_thred<0:
+                    if self.multi_label_cnt_thred < 0:
                         result = self.cur_model_test_res[-1]
                         return result
                     else:
