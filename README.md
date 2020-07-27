@@ -194,7 +194,7 @@ python download_public_datasets.py
 
 # 9. 加入社区
 
-<img src="./assets/QR-102.png" width = "500" height = "200" alt="AutoDL社区" align=center />
+<img src="./assets/QR-102.png" width = "500" height = "180" alt="AutoDL社区" align=center />
 
 # 10. 开源协议 
 [Apache License 2.0](https://github.com/DeepWisdom/AutoDL/blob/master/LICENSE)
