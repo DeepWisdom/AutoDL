@@ -140,7 +140,7 @@ AutoDL聚焦于自动进行任意模态（图像、视频、语音、文本、�
 
 ## 加入社区
 
-<img src="./assets/WechatIMG15.png" width = "500" height = "200" alt="AutoDL社区" align=center />
+<img src="./assets/AutoDL-QR-102-1130.png" width = "500" height = "200" alt="AutoDL社区" align=center />
 
 ## 开源协议 
 [Apache License 2.0](https://github.com/DeepWisdom/AutoDL/blob/master/LICENSE)
