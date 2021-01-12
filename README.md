@@ -139,14 +139,14 @@ AutoDL聚焦于自动进行任意模态（图像、视频、语音、文本、�
 - [visualcppbuildtools_full.exe](http://go.microsoft.com/fwlink/?LinkId=691126)
 - [百度云](https://pan.baidu.com/s/1BDP2gD7s-R0mcwXcFVe5Wg)  提取码：xb9x 
 
-## 5.2. 创建 `start_env.bat` 文件
+## 5.3. 创建 `start_env.bat` 文件
 
 - 将其移动到安装的 `Miniconda3` 同级目录下
 ```bash
 cmd.exe "/K" .\Miniconda3\Scripts\activate.bat .\Miniconda3
 ```
 
-## 5.3. 双击 `start_env.bat` 安装 autodl-gpu
+## 5.4. 双击 `start_env.bat` 安装 autodl-gpu
 ```bash
 conda install pytorch==1.3.1
 conda install torchvision -c pytorch
