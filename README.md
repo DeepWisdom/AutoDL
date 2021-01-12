@@ -129,12 +129,15 @@ AutoDL聚焦于自动进行任意模态（图像、视频、语音、文本、�
 ## 5.0. 安装 cuda 10.0 和 cudnn v7.6.2.24
 - [CUDA 10.0下载](https://developer.nvidia.com/cuda-10.0-download-archive?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exelocal)
 - [cuDNN下载](https://developer.nvidia.com/rdp/cudnn-archive)
+- [百度云](https://pan.baidu.com/s/1BDP2gD7s-R0mcwXcFVe5Wg)  提取码：xb9x 
 
 ## 5.1. 安装 Miniconda3-4.5.4-Windows-x86_64.exe
 - [Miniconda3-4.5.4-Windows-x86_64.exe](https://repo.anaconda.com/miniconda/Miniconda3-4.5.4-Windows-x86_64.exe)
+- [百度云](https://pan.baidu.com/s/1BDP2gD7s-R0mcwXcFVe5Wg)  提取码：xb9x 
 
 ## 5.2. 安装 visualcppbuildtools_full.exe
 - [visualcppbuildtools_full.exe](http://go.microsoft.com/fwlink/?LinkId=691126)
+- [百度云](https://pan.baidu.com/s/1BDP2gD7s-R0mcwXcFVe5Wg)  提取码：xb9x 
 
 ## 5.2. 创建 `start_env.bat` 文件
 
