@@ -125,31 +125,35 @@ AutoDL聚焦于自动进行任意模态（图像、视频、语音、文本、�
 
 用合适的Python版本创建虚拟环境，然后激活它。
 
-- 下面是 windows10 安装过程
-## 5.0. 安装 cuda 10.0 和 cudnn v7.6.2.24
+## 5.1 windows10 安装过程
+### 5.1.1 安装 cuda 10.0 和 cudnn v7.6.2.24
 - [CUDA 10.0下载](https://developer.nvidia.com/cuda-10.0-download-archive?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exelocal)
 - [cuDNN下载](https://developer.nvidia.com/rdp/cudnn-archive)
 - [百度云](https://pan.baidu.com/s/1BDP2gD7s-R0mcwXcFVe5Wg)  提取码：xb9x 
 
-## 5.1. 安装 Miniconda3-4.5.4-Windows-x86_64.exe
+### 5.1.2 安装 Miniconda3-4.5.4-Windows-x86_64.exe
 - [Miniconda3-4.5.4-Windows-x86_64.exe](https://repo.anaconda.com/miniconda/Miniconda3-4.5.4-Windows-x86_64.exe)
 - [百度云](https://pan.baidu.com/s/1BDP2gD7s-R0mcwXcFVe5Wg)  提取码：xb9x 
 
-## 5.2. 安装 visualcppbuildtools_full.exe
+### 5.1.3 安装 visualcppbuildtools_full.exe
 - [visualcppbuildtools_full.exe](http://go.microsoft.com/fwlink/?LinkId=691126)
 - [百度云](https://pan.baidu.com/s/1BDP2gD7s-R0mcwXcFVe5Wg)  提取码：xb9x 
 
-## 5.3. 创建 `start_env.bat` 文件
+### 5.1.4 创建 `start_env.bat` 文件
 
 - 将其移动到安装的 `Miniconda3` 同级目录下
 ```bash
 cmd.exe "/K" .\Miniconda3\Scripts\activate.bat .\Miniconda3
 ```
 
-## 5.4. 双击 `start_env.bat` 安装 autodl-gpu
+### 5.1.5 双击 `start_env.bat` 安装 autodl-gpu
 ```bash
 conda install pytorch==1.3.1
 conda install torchvision -c pytorch
+pip install autodl-gpu
+```
+## 5.2 Linux安装
+```bash
 pip install autodl-gpu
 ```
 
