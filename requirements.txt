@@ -1,5 +1,5 @@
 tensorflow-gpu>=1.13.1
-numpy==1.16.2
+numpy==1.22.0
 pandas==0.24.2
 jupyter==1.0.0
 seaborn==0.9.0
