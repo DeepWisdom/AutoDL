@@ -12,7 +12,7 @@ h5py==2.9.0
 keras==2.2.4
 playsound==1.2.2
 librosa==0.7.1
-protobuf==3.7.1
+protobuf==3.18.3
 xgboost==0.90
 pyyaml==5.1.1
 lightgbm==2.2.3
